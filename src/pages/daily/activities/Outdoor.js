@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
-import Header from "../../components/header/Header";
-import Item from "../../components/item/Item";
+import Header from "../../../components/header/Header";
+import Item from "../../../components/item/Item";
 import styled from "styled-components";
 
-class Daily extends Component {
+class Outdoor extends Component {
   render() {
     return (
       <DailyContainer>
         <Header />
-        <aside>
+        <StyledAside>
           <AsideContainer>
             <MainMenu>
-              <Link to="/daily">액티비티</Link>
-              <Link to="/daily/learn">배움</Link>
+              <Link href="/daily">액티비티</Link>
+              <Link href="/daily/learn">배움</Link>
               <a>건강&middot;뷰티</a>
               <a>모임</a>
             </MainMenu>
             <SubMenu>
-              <Link to="/daily/act/outdoor">아웃도어</Link>
+              <Link href="/daily/act/outdoor">아웃도어</Link>
               <a>스포츠</a>
               <a>수상레저</a>
               <a>테마파크</a>
@@ -29,7 +29,20 @@ class Daily extends Component {
               <a>실내체험</a>
             </SubMenu>
           </AsideContainer>
-        </aside>
+        </StyledAside>
+        <OutdoorMenu>
+          <div>
+            <Link href="/daily/act/outdoor">전체</Link>
+            <Link href="/daily/act/outdoor/mt">등산&middot;트래킹</Link>
+            <a>카약</a>
+            <a>도보여행</a>
+            <a>러닝&middot;라이딩</a>
+            <a>스키&middot;스노우보드</a>
+            <a href="/daily/act/outdoor/surf">서핑</a>
+            <a>낚시</a>
+            <a>기타</a>
+          </div>
+        </OutdoorMenu>
         <Filter>
           <FilterContainer>
             <button>언제</button>
@@ -49,7 +62,7 @@ class Daily extends Component {
   }
 }
 
-export default withRouter(Daily);
+export default withRouter(Outdoor);
 
 const DailyContainer = styled.div`
   header {
@@ -66,10 +79,11 @@ const DailyContainer = styled.div`
       }
     }
   }
+`;
 
-  aside {
-    background: linear-gradient(279deg, rgb(98, 201, 255), rgb(51, 151, 255));
-  }
+const StyledAside = styled.aside`
+  background: linear-gradient(279deg, rgb(98, 201, 255), rgb(51, 151, 255));
+  margin-bottom: 40px;
 `;
 
 const AsideContainer = styled.div`
@@ -107,12 +121,34 @@ const SubMenu = styled.div`
     font-size: 14px;
     text-decoration: none;
     color: inherit;
+    &:first-of-type {
+      font-weight: bold;
+    }
+  }
+`;
+
+const OutdoorMenu = styled.div`
+  height: 18px;
+  width: 930px;
+  margin: 0 auto 20px;
+  div {
+    width: 570px;
+    display: flex;
+    justify-content: space-between;
+    a {
+      font-size: 14px;
+      text-decoration: none;
+      color: inherit;
+      &:first-of-type {
+        color: rgb(51, 151, 255);
+      }
+    }
   }
 `;
 
 const Filter = styled.div`
   width: 930px;
-  padding: 45px 0 40px;
+  padding: 5px 0 40px;
   margin: auto;
 `;
 
