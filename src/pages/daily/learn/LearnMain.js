@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
-import Header from "../../components/header/Header";
-import Item from "../../components/item/Item";
+import Header from "../../../components/header/Header";
+import Item from "../../../components/item/Item";
 import styled from "styled-components";
 
-class Daily extends Component {
+class LearnMain extends Component {
   render() {
     return (
-      <DailyContainer>
+      <LearnContainer>
         <Header />
         <aside>
           <AsideContainer>
@@ -18,15 +18,22 @@ class Daily extends Component {
               <a>모임</a>
             </MainMenu>
             <SubMenu>
-              <Link to="/daily/act/outdoor">아웃도어</Link>
+              <Link to="/daily/learn/makediy">공예&middot;DIY</Link>
+              <a>요리</a>
+              <a>음료</a>
+              <a>음악&middot;예술</a>
               <a>스포츠</a>
-              <a>수상레저</a>
-              <a>테마파크</a>
-              <a>워터파크&middot;스파</a>
-              <a>투어&middot;관람</a>
-              <a>대회&middot;축제</a>
-              <a>공연&middot;전시</a>
-              <a>실내체험</a>
+              <a>어학</a>
+              <a>사진&middot;영상</a>
+              <a>미술&middot;드로잉</a>
+              <a>재테크</a>
+              <a>투잡</a>
+              <a>실무</a>
+              <a>온라인</a>
+              <a>취업&middot;이직</a>
+              <a>교양&middot;강좌</a>
+              <a>아웃도어</a>
+              <a>홈취미</a>
             </SubMenu>
           </AsideContainer>
         </aside>
@@ -44,14 +51,14 @@ class Daily extends Component {
         <ShowMore>
           <button>개의 액티비티 더보기</button>
         </ShowMore>
-      </DailyContainer>
+      </LearnContainer>
     );
   }
 }
 
-export default withRouter(Daily);
+export default withRouter(LearnMain);
 
-const DailyContainer = styled.div`
+const LearnContainer = styled.div`
   header {
     a:nth-of-type(2) {
       font-weight: bold;
@@ -90,7 +97,7 @@ const MainMenu = styled.div`
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     text-decoration: none;
     color: inherit;
-    &:first-of-type {
+    &:nth-of-type(2) {
       border-bottom: 2px solid white;
       font-weight: bold;
     }
@@ -98,7 +105,7 @@ const MainMenu = styled.div`
 `;
 
 const SubMenu = styled.div`
-  width: 650px;
+  width: 930px;
   height: 24px;
   margin-top: 24px;
   display: flex;
