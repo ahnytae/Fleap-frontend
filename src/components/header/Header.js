@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 
 class Header extends Component {
@@ -13,8 +13,8 @@ class Header extends Component {
       <HeaderContainer>
         <MenuTab>
           <MenuContainer>
-            <a href="/">추천</a>
-            <a href="/daily">일상</a>
+            <Link to="/">추천</Link>
+            <Link to="/daily">일상</Link>
             <a>여행</a>
           </MenuContainer>
         </MenuTab>

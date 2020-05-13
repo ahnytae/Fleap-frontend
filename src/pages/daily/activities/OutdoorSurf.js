@@ -1,11 +1,42 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import Header from "../../../components/header/Header";
-import styled from "styled-components";
 import EachItem from "../../../components/item/components/EachItem";
+import WhenModal from "../components/WhenModal";
+import WhereModal from "../components/WhereModal";
+import WhoModal from "../components/WhoModal";
+import FilterModal from "../components/FilterModal";
+import styled from "styled-components";
 
 class OutdoorSurf extends Component {
+  constructor() {
+    super();
+    this.state = {
+      when: false,
+      where: false,
+      who: false,
+      filter: false,
+    };
+  }
+
+  onClickHandler = (modal) => {
+    this.state[modal]
+      ? this.setState({ [modal]: false })
+      : this.setState({ [modal]: true });
+  };
+
+  modalClosed = () => {
+    this.setState({
+      when: false,
+      where: false,
+      who: false,
+      filter: false,
+    });
+  };
+
   render() {
+    const { when, where, who, filter } = this.state;
+
     let ItemList = Array(20)
       .fill()
       .map(() => {
@@ -13,55 +44,65 @@ class OutdoorSurf extends Component {
       });
 
     return (
-      <DailyContainer>
-        <Header />
-        <StyledAside>
-          <AsideContainer>
-            <MainMenu>
-              <Link to="/daily">액티비티</Link>
-              <Link to="/daily/learn">배움</Link>
-              <a>건강&middot;뷰티</a>
-              <a>모임</a>
-            </MainMenu>
-            <SubMenu>
-              <Link to="/daily/act/outdoor">아웃도어</Link>
-              <a>스포츠</a>
-              <a>수상레저</a>
-              <a>테마파크</a>
-              <a>워터파크&middot;스파</a>
-              <a>투어&middot;관람</a>
-              <a>대회&middot;축제</a>
-              <a>공연&middot;전시</a>
-              <a>실내체험</a>
-            </SubMenu>
-          </AsideContainer>
-        </StyledAside>
-        <OutdoorMenu>
-          <div>
-            <Link to="/daily/act/outdoor">전체</Link>
-            <Link to="/daily/act/outdoor/mt">등산&middot;트래킹</Link>
-            <a>카약</a>
-            <a>도보여행</a>
-            <a>러닝&middot;라이딩</a>
-            <a>스키&middot;스노우보드</a>
-            <Link to="/daily/act/outdoor/surf">서핑</Link>
-            <a>낚시</a>
-            <a>기타</a>
-          </div>
-        </OutdoorMenu>
-        <Filter>
-          <FilterContainer>
-            <button>언제</button>
-            <button>어디서</button>
-            <button>누구와</button>
-            <button>필터</button>
-          </FilterContainer>
-        </Filter>
-        <MainContainer>
-          <ItemListContainer>{ItemList}</ItemListContainer>
-          <footer>Pagination</footer>
-        </MainContainer>
-      </DailyContainer>
+      <>
+        <DailyContainer>
+          <Header />
+          <StyledAside>
+            <AsideContainer>
+              <MainMenu>
+                <Link to="/daily">액티비티</Link>
+                <Link to="/daily/learn">배움</Link>
+                <a>건강&middot;뷰티</a>
+                <a>모임</a>
+              </MainMenu>
+              <SubMenu>
+                <Link to="/daily/act/outdoor">아웃도어</Link>
+                <a>스포츠</a>
+                <a>수상레저</a>
+                <a>테마파크</a>
+                <a>워터파크&middot;스파</a>
+                <a>투어&middot;관람</a>
+                <a>대회&middot;축제</a>
+                <a>공연&middot;전시</a>
+                <a>실내체험</a>
+              </SubMenu>
+            </AsideContainer>
+          </StyledAside>
+          <OutdoorMenu>
+            <div>
+              <Link to="/daily/act/outdoor">전체</Link>
+              <Link to="/daily/act/outdoor/mt">등산&middot;트래킹</Link>
+              <a>카약</a>
+              <a>도보여행</a>
+              <a>러닝&middot;라이딩</a>
+              <a>스키&middot;스노우보드</a>
+              <Link to="/daily/act/outdoor/surf">서핑</Link>
+              <a>낚시</a>
+              <a>기타</a>
+            </div>
+          </OutdoorMenu>
+          <Filter>
+            <FilterContainer>
+              <button onClick={() => this.onClickHandler("when")}>언제</button>
+              <button onClick={() => this.onClickHandler("where")}>
+                어디서
+              </button>
+              <button onClick={() => this.onClickHandler("who")}>누구와</button>
+              <button onClick={() => this.onClickHandler("filter")}>
+                필터
+              </button>
+            </FilterContainer>
+          </Filter>
+          <MainContainer>
+            <ItemListContainer>{ItemList}</ItemListContainer>
+            <footer>Pagination</footer>
+          </MainContainer>
+        </DailyContainer>
+        {when && <WhenModal closed={() => this.modalClosed()} />}
+        {where && <WhereModal closed={() => this.modalClosed()} />}
+        {who && <WhoModal closed={() => this.modalClosed()} />}
+        {filter && <FilterModal closed={() => this.modalClosed()} />}
+      </>
     );
   }
 }
@@ -104,6 +145,8 @@ const MainMenu = styled.div`
   a {
     width: 100px;
     height: 35.6px;
+    font-size: 18px;
+    font-weight: 300;
     text-align: center;
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     text-decoration: none;

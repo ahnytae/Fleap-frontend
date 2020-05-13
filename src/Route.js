@@ -14,7 +14,7 @@ import MyPage from "./pages/myPage/MyPage";
 import SignInUp from "./pages/signInUp/SignInUp";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
-import GlobalStyles from "./components/GlobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 
 class Routes extends React.Component {
   render() {
