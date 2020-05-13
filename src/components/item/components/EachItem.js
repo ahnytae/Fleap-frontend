@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Heart from "../../../images/Heart";
 import styled from "styled-components";
 
@@ -6,7 +7,7 @@ class EachItem extends Component {
   render() {
     return (
       <EachItemContainer>
-        <a>
+        <Link>
           <div>
             <ItemImg>
               <ImgDesc>
@@ -21,7 +22,7 @@ class EachItem extends Component {
               <img></img>
             </div>
           </div>
-        </a>
+        </Link>
       </EachItemContainer>
     );
   }

@@ -8,7 +8,7 @@ import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
-import GlobalStyles from "./components/GlobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 
 class Routes extends React.Component {
   render() {
