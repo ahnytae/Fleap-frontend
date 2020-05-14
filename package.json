@@ -12,9 +12,14 @@
     "react-day-picker": "^7.4.8",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
+    "react-geocode": "^0.2.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-slick": "^0.26.1",
+    "react-slideshow-image": "^1.4.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0",
+    "styled-reset": "^4.1.4",
     "tig": "^0.1.43"
   },
   "scripts": {
