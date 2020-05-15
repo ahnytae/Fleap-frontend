@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import Auth, { isEmail } from "./Auth";
+// import Auth, { isEmail } from "./Auth";
 import styled from "styled-components";
 
-class SignIn extends React.Component {
+class SignIn extends Component {
   state = {
     email: "",
     password: "",
     idActive: false,
   };
 
-  onChangeHandler = (e) => {
+  onChangehandler = (e) => {
     this.setState(
       {
-        [e.target.name]: e.target.value,
         [e.target.name]: e.target.value,
         idActive: true,
       },
@@ -20,27 +19,29 @@ class SignIn extends React.Component {
     );
   };
 
-  onLoginHandler = () => {
-    console.log("HHHH");
-    fetch("http://10.58.5.40:8080/user/sign-in", {
+  loginHandler = (e) => {
+    e.preventDefault();
+    fetch("http://10.58.1.144:8080/user/sign-in", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
         password: this.state.password,
       }),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.token) {
-          alert("로긴됨");
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.token) {
+          console.log("로그인 성공");
+          localStorage.setItem("token", response.token);
+          this.props.history.push("/main");
         } else {
-          alert("nono");
+          alert("아이디 또는 비밀번호가 다릅니다.");
         }
       });
   };
 
   render() {
-    const { email, pw, idActive } = this.state;
+    const { email, password, idActive } = this.state;
     return (
       <div className="EmailLogin">
         <EmailBox>
@@ -51,23 +52,21 @@ class SignIn extends React.Component {
                 name="email"
                 type="id"
                 placeholder="이메일로 입력"
-                onChange={(e) => this.onChangeHandler(e)}
+                onChange={this.onChangehandler}
               />
             </FormBox>
             <FormBox>
               <input
-                name="pw"
+                name="password"
                 type="password"
                 placeholder="비밀번호 입력"
-                onChange={(e) => this.onChangeHandler(e)}
+                onChange={this.onChangehandler}
               />
             </FormBox>
             <LoginBtn
-              style={{
-                backgroundColor:
-                  idActive === true && email.length > 0 ? "red" : "grey",
-              }}
-              onClick={this.onLoginHandler}
+              idActive={this.state.idActive}
+              pwValueLength={this.state.pwValueLength}
+              onClick={this.loginHandler}
             >
               로그인
             </LoginBtn>
@@ -129,15 +128,14 @@ const LoginBtn = styled.button`
   width: 100%;
   height: 50px;
   line-height: 13px;
-  /* background-color: rgb(51, 151, 255); */
+  background-color: rgb(51, 151, 255);
   text-align: center;
-  cursor: pointer;
+  /* cursor: not-allowed; */
   color: white;
   font-size: 13px;
   padding: 0px 13px;
   border-radius: 5px;
   /* pointer-events: none; */
-  border: none;
 
   /* background-color: ${(props) =>
     props.idActive ? props.backgroundColor : "rgb(221, 221, 221)"}; */
