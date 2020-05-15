@@ -6,6 +6,7 @@ import Detail from "./pages/detail/Detail";
 import MyPage from "./pages/myPage/MyPage";
 import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
+import Payment from "./pages/payment/Payment";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -24,6 +25,7 @@ class Routes extends React.Component {
             <Route exact path="/mypage" component={MyPage} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/payment" component={Payment} />
           </Switch>
           <Footer />
         </Router>
