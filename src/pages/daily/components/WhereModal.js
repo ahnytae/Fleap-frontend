@@ -1,32 +1,66 @@
 import React, { Component } from "react";
+import CloseX from "../../../images/CloseX";
 import styled from "styled-components";
 
 export default class WhereModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      closeModal: false,
+      subFilterOn: false,
     };
   }
 
+  mainFilterClick = (idx) => {
+    this.setState({
+      subFilterOn: idx + 1,
+    });
+  };
+
   handleClose = () => {
-    this.setState({ closeModal: true });
+    this.setState({
+      subFilterOn: false,
+    });
   };
 
   render() {
-    const { closeModal } = this.state;
+    const { subFilterOn } = this.state;
     const { closed } = this.props;
+
+    const MainArea = [...Array(21).keys()].slice(1).map((num, idx) => {
+      return (
+        <EachMainArea
+          subFilterOn={subFilterOn}
+          onClick={() => this.mainFilterClick(idx)}
+        >
+          {num}
+        </EachMainArea>
+      );
+    });
+
+    const SubArea = [...Array(15).keys()].slice(1).map((num) => {
+      return (
+        <EachSubArea>
+          <span>{num}</span>
+          <span>{num}</span>
+        </EachSubArea>
+      );
+    });
 
     return (
       <>
-        {!closeModal && (
-          <>
-            <ModalOverlay onClick={(() => this.handleClose(), closed)} />
-            <div></div>
-            <div></div>
-            <div></div>
-          </>
-        )}
+        <ModalOverlay onClick={closed} />
+        <ModalBox>
+          <ModalHeader>
+            <span>어디서</span>
+            <div onClick={closed}>
+              <CloseX />
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <MainFilter>{MainArea}</MainFilter>
+            {subFilterOn && <SubFilter>{SubArea}</SubFilter>}
+          </ModalBody>
+        </ModalBox>
       </>
     );
   }
@@ -40,4 +74,89 @@ const ModalOverlay = styled.div`
   left: 0px;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
+`;
+
+const ModalBox = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 560px;
+  background-color: white;
+  z-index: 2;
+  border-radius: 5px;
+`;
+
+const ModalHeader = styled.div`
+  width: 100%;
+  height: 60px;
+  padding: 0 18px 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  span {
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+`;
+
+const ModalBody = styled.div`
+  width: 100%;
+  height: 500px;
+  display: flex;
+`;
+
+const MainFilter = styled.div`
+  width: 105px;
+  height: 100%;
+  background-color: rgb(247, 247, 247);
+  overflow-x: hidden;
+  overflow-y: scroll;
+`;
+
+const EachMainArea = styled.button`
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: rgb(155, 155, 155);
+  font-weight: normal;
+  justify-content: center;
+  border: none;
+  background-color: rgb(247, 247, 247);
+  &:nth-of-type(${(props) => props.subFilterOn}) {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+  }
+`;
+
+const SubFilter = styled.div`
+  width: 255px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+`;
+
+const EachSubArea = styled.button`
+  width: 255px;
+  height: 50px;
+  padding-left: 40px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+  span:first-of-type {
+    font-weight: 500;
+  }
+  span:last-of-type {
+    margin-left: 6px;
+    color: rgb(155, 155, 155);
+    font-weight: 300;
+  }
 `;

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import Header from "../../../components/header/Header";
 import EachItem from "../../../components/item/components/EachItem";
+import DoubleLArr from "../../../images/DoubleLArr";
+import LeftArr from "../../../images/LeftArr";
+import RightArr from "../../../images/RightArr";
+import DoubleRArr from "../../../images/DoubleRArr";
 import WhenModal from "../components/WhenModal";
 import WhereModal from "../components/WhereModal";
 import WhoModal from "../components/WhoModal";
@@ -42,6 +46,10 @@ class MakeDiyCandle extends Component {
       .map(() => {
         return <StyledEachItem />;
       });
+
+    let PageNo = [...Array(11).keys()].slice(1).map((num) => {
+      return <Button>{num}</Button>;
+    });
 
     return (
       <>
@@ -105,7 +113,17 @@ class MakeDiyCandle extends Component {
           </Filter>
           <MainContainer>
             <ItemListContainer>{ItemList}</ItemListContainer>
-            <footer>Pagination</footer>
+            <footer>
+              <div>
+                <DoubleLArr />
+                <LeftArr />
+              </div>
+              {PageNo}
+              <div>
+                <RightArr />
+                <DoubleRArr />
+              </div>
+            </footer>
           </MainContainer>
         </LearnContainer>
         {when && <WhenModal closed={() => this.modalClosed()} />}
@@ -244,5 +262,37 @@ const MainContainer = styled.main`
   footer {
     height: 40px;
     margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    div {
+      width: 80px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      &:first-of-type {
+        margin-right: 10px;
+      }
+      &:last-of-type {
+        margin-left: 10px;
+      }
+    }
+  }
+`;
+
+const Button = styled.button`
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: rgb(238, 238, 238);
   }
 `;

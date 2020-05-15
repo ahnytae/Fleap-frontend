@@ -4,8 +4,12 @@ const GlobalStyles = createGlobalStyle`
 * {
   box-sizing: border-box;
   /* border: 1px solid black; */
+  outline: none;
+
   button {
     outline: none;
+    text-shadow: none;
+    cursor: pointer;
   }
   a {
     text-decoration: none;
@@ -14,8 +18,8 @@ const GlobalStyles = createGlobalStyle`
 }
 
 body {
-    margin: 0;
-    font-family: "Helvetica Neue", "Noto Sans KR", Helvetica, Arial, sans-serif;
+  margin: 0;
+  font-family: "Helvetica Neue", "Noto Sans KR", Helvetica, Arial, sans-serif;
 }
 
 a {

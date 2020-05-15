@@ -19,10 +19,20 @@ class Daily extends Component {
     };
   }
 
+  noScroll = () => {
+    window.scrollTo(0, 0);
+  };
+
   onClickHandler = (name) => {
     this.state[name]
-      ? this.setState({ [name]: false })
-      : this.setState({ [name]: true });
+      ? this.setState(
+          { [name]: false },
+          window.removeEventListener("scroll", this.noScroll)
+        )
+      : this.setState(
+          { [name]: true },
+          window.addEventListener("scroll", this.noScroll)
+        );
   };
 
   modalClosed = () => {
