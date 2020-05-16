@@ -1,0 +1,54 @@
+{
+  "detail": [{
+      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1588136480024_756285",
+      "datail_img2": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1519032775252_253995",
+      "datail_img3": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1588136480024_756285",
+      "detail_subtitle": "당일 쉼표같은 여행을 떠나다",
+      "detail_title": " 프립버스 카누타고 춘천여행",
+      "detail_price": 55000,
+      "detail_discountPrice": 40000,
+      "detail_discountRate": 27,
+      "detail_region": "서울 강남/서초구",
+
+      "detail_score": 4.22,
+      "detail_time": " 11월 10일",
+      "detail_hostProfile": "카약강사입니다.",
+      "detail_Review": "좋았어요",
+      "deatil_intro": "인트로",
+      "detail_latitude": "111.222",
+      "detail_longitude": "123"
+    }, {
+      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/patrick-boucher-QVYMO-BvVSY-unsplash_wqd5nd",
+      "detail_subtitle": "위스키에 입문하고 함께 즐겨보아요!",
+      "detail_title": " [토요일] 1박2일 위스키 테이스팅 혼펜",
+      "detail_price": 159000,
+      "detail_discountPrice": "",
+      "detail_discountRate": "",
+      "detail_region": "수원시 권선구",
+      "detail_score": 3.22,
+      "detail_time": " 1월 20일",
+      "detail_hostProfile": "위스키를 사랑합니다.",
+      "detail_Review": "너무 재밌었습니다.",
+      "deatil_intro": "트트트ㅡㅌ로로로",
+      "detail_latitude": "111.222",
+      "detail_longitude": "123"
+    },
+    {
+      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/patrick-boucher-QVYMO-BvVSY-unsplash_wqd5nd",
+      "detail_subtitle": "가족, 친구, 연인과 함께",
+      "detail_title": "실내 테니스 2:1 원데이 레슨 (예약 가능)",
+      "detail_price": 77000,
+      "detail_discountPrice": "",
+      "detail_discountRate": "",
+      "detail_region": "부산시 사상구",
+      "detail_score": 4.55,
+      "detail_time": " 4월 20일",
+      "detail_hostProfile": "운동합시다 여러분.",
+      "detail_Review": "너무재미미지게 재밌었습니다.",
+      "deatil_intro": "강아아아아아아아ㅏ로",
+      "detail_latitude": "333.999",
+      "detail_longitude": "123"
+    }
+
+  ]
+}
