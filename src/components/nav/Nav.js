@@ -108,11 +108,17 @@ class Nav extends Component {
           </DisableWindow>
         </Inner>
       </Wrapper>
+
     );
   }
 }
+export default Nav;
 
-export default withRouter(Nav);
+const NavAll = styled.div`
+  position: sticky;
+  top: 0px;
+  z-index: 300;
+`;
 
 const Wrapper = styled.div`
   position: sticky;
