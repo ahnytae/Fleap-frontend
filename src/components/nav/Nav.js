@@ -108,7 +108,6 @@ class Nav extends Component {
           </DisableWindow>
         </Inner>
       </Wrapper>
-
     );
   }
 }
