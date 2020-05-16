@@ -11,7 +11,7 @@ class Detail extends Component {
     super(props);
 
     this.state = {
-      clickbutton: [false, false, false],      
+      clickbutton: [false, false, false],
       detail: false,
     };
   }
@@ -50,25 +50,28 @@ class Detail extends Component {
     fetch(`http://10.58.0.153:8000/frip/${ID}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res,'res');
+        console.log(res, "res");
         this.setState({
           detail: res.detail[0],
-             });
+        });
       });
   }
 
-pushData = () => {
-  this.props.history.push({
-  pathname: `/payment/${this.state.detail.id}`,
-  state: { id: this.state.detail.id,
-  price: this.state.detail.choices.options[1].price,
-  optionId: this.state.detail.choices.options[1].id,
-   }
-})
-}
+  pushData = () => {
+    console.log(this.state.detail);
+    this.state.detail.choice &&
+      this.props.history.push({
+        pathname: `/payment/${this.state.detail.id}`,
+        state: {
+          id: this.state.detail.id,
+          price: this.state.detail.choice.option[1].price,
+          optionId: this.state.detail.choice.option[1].id,
+        },
+      });
+  };
 
   render() {
-    console.log(this.props.match)
+    console.log(this.props.match);
     // console.log("thi", this.state.data);
     // console.log(
     //   "detail",
@@ -475,7 +478,7 @@ pushData = () => {
             </OptionTopButton>
           </OptionAll>
           <OptionAttend>
-<button onClick={()=> this.pushData()}/>
+            <button onClick={() => this.pushData()} />
           </OptionAttend>
         </Option>
       </Product>
@@ -834,7 +837,6 @@ const HostReviewName = styled.header`
 const HostReviewFlex = styled.div`
   display: flex;
   -webkit-box-align: center;
-  
 `;
 
 const HostReviewStar = styled.div`
@@ -848,7 +850,7 @@ const HostReviewDate = styled.div`
   margin-top: 10px;
   margin-left: 6px;
   line-height: 10px;
-    
+
   font-size: 10px;
 `;
 
@@ -1098,7 +1100,9 @@ const OptionClickImg = styled.div`
 `;
 
 const OptionAttend = styled.div`
-button {
-  width: 30px;
-}
+  button {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
 `;

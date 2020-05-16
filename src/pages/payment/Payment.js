@@ -3,9 +3,13 @@ import { withRouter } from "react-router-dom";
 import LeftArr from "../../images/LeftArr";
 import styled, { css } from "styled-components";
 
+const IMP = window.IMP;
+IMP.init("imp89785568");
+
 class Payment extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       select: true,
       payMethod: {
@@ -18,19 +22,98 @@ class Payment extends Component {
       },
       tncCheck: false,
       fripDetail: {},
-      fripPrice: 0,
+      fripPrice: "",
+      data: [],
+      detail: {},
+      whichPay: null,
     };
   }
 
   componentDidMount = () => {
-    fetch("http://localhost:3000/data/mockPayment.json")
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          fripDetail: res.frip_detail,
-          fripPrice: res.frip_detail.price.toLocaleString(),
-        });
-      });
+    const { detail } = this.state;
+    console.log(this.props.match.params.id);
+    console.log(this.props.location.state);
+    this.setState(
+      {
+        detail: this.props.location.state,
+      },
+      () => {
+        fetch(
+          `http://10.58.0.153:8000/frip/purchase/${this.props.match.params.id}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+            this.setState(
+              {
+                data: res.purchase[0],
+              },
+              () => {
+                console.log(res);
+              }
+            );
+          });
+      }
+    );
+  };
+
+  requestPay = () => {
+    const { data, detail, whichPay } = this.state;
+    IMP.request_pay(
+      {
+        pg: "inicis",
+        pay_method: "card",
+        merchant_uid: "merchant_" + new Date().getTime(),
+        name: `${data.title}`,
+        amount: `${detail.price}`,
+        buyer_email: "iamport@siot.do",
+        buyer_name: "구매자이름",
+        buyer_tel: "010-1234-5678",
+        buyer_addr: "서울특별시 강남구 삼성동",
+        buyer_postcode: "123-456",
+        m_redirect_url: "http://localhost:3000/myfrip",
+      },
+      function (rsp) {
+        let msg;
+        if (rsp.success) {
+          msg = "결제가 완료되었습니다.";
+          msg += "고유ID : " + rsp.imp_uid;
+          msg += "상점 거래ID : " + rsp.merchant_uid;
+          msg += "결제 금액 : " + rsp.paid_amount;
+          msg += "카드 승인번호 : " + rsp.apply_num;
+
+          fetch(`http://10.58.0.153:8000/frip/purchase/98`, {
+            method: "POST",
+            mode: "cors",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              frip: detail.id,
+              option: detail.optionID,
+              payment_method: whichPay,
+              quantity: 1,
+            }),
+          }).then((res) => {
+            setTimeout(() => {
+              this.props.history.push("/");
+              window.location.reload();
+            }, 3000);
+          });
+        } else {
+          msg = "결제에 실패하였습니다.";
+          msg += "에러내용 : " + rsp.error_msg;
+        }
+        alert(msg);
+      }
+    );
   };
 
   handleOnClick = (what) => {
@@ -55,144 +138,159 @@ class Payment extends Component {
             [which]: true,
           },
         });
+    this.setState({
+      whichPay: which,
+    });
   };
 
   render() {
-    const { select, payMethod, tncCheck, fripDetail, fripPrice } = this.state;
+    const {
+      select,
+      payMethod,
+      tncCheck,
+      fripDetail,
+      fripPrice,
+      detail,
+      data,
+    } = this.state;
 
     return (
-      <MainContainer>
-        <Auth>
-          <Header>본인인증</Header>
-          <AuthFirst>
-            <AuthTxt>
-              프립 신청을 위해서는 <span>최소 1회</span> 본인 인증이 필요합니다.
-            </AuthTxt>
-            <button>인증완료</button>
-          </AuthFirst>
-        </Auth>
-        <Price>
-          <Header>결제</Header>
-          <Frip>
-            <Select onClick={() => this.handleOnClick("select")}>
-              <span>선택한 프립</span>
-              <ArrDiv on={select}>
-                <LeftArr />
-              </ArrDiv>
-            </Select>
-            <FripDetail on={select}>
-              <FripAbout>
-                <FripImg bgImg={fripDetail.img_url} />
-                <FripDesc>
-                  <span>{fripDetail.subtitle}</span>
-                  <span>{fripDetail.title}</span>
-                </FripDesc>
-              </FripAbout>
-              <PriceDetail>
-                <span>참가비 (1인) x 1개</span>
-                <span>{fripPrice}원</span>
-              </PriceDetail>
-            </FripDetail>
-          </Frip>
-          <PriceNCoupon>
-            <ProductPrice>
-              <span>상품 금액</span>
-              <span>{fripPrice}원</span>
-            </ProductPrice>
-            <Coupon>
-              <span>쿠폰 /할인 코드</span>
-              <div>
-                <span>- 0원</span>
-                <CoupNNrgBtn>선택</CoupNNrgBtn>
-              </div>
-            </Coupon>
-            <Energy>
-              <div>
-                <span>에너지</span>
-                <span>보유 2,000</span>
-              </div>
-              <div>
-                <span>
-                  0 <span>E</span>
-                </span>
-                <CoupNNrgBtn>전체 사용</CoupNNrgBtn>
-              </div>
-            </Energy>
-            <EnergyDesc>
-              <li>
-                에너지는 1,000E부터 사용 가능하며, 결제 금액의 일부가
-                적립됩니다.
-              </li>
-              <li>
-                쿠폰/할인코드/에너지 사용하여 결제시 개별 취소를 할 수 없습니다.
-              </li>
-            </EnergyDesc>
-            <TotalPrice>
-              <div>
-                <span>할인 금액</span>
-                <span>- 0원</span>
-              </div>
-              <div>
-                <span>최종 결제 금액</span>
-                <span>{fripPrice}원</span>
-              </div>
-            </TotalPrice>
-          </PriceNCoupon>
-        </Price>
-        <PaymentMethod>
-          <Header>결제수단</Header>
-          <Methods>
-            <MethodBtn
-              on={payMethod[1]}
-              onClick={() => this.handlePaymentClick(1)}
-            >
-              신용/체크 카드
-            </MethodBtn>
-            <MethodBtn
-              on={payMethod[2]}
-              onClick={() => this.handlePaymentClick(2)}
-            >
-              핸드폰 결제
-            </MethodBtn>
-            <MethodBtn
-              on={payMethod[3]}
-              onClick={() => this.handlePaymentClick(3)}
-            >
-              무통장 입금
-            </MethodBtn>
-            <MethodBtn
-              on={payMethod[4]}
-              onClick={() => this.handlePaymentClick(4)}
-            >
-              실시간 계좌이체
-            </MethodBtn>
-            <MethodBtn
-              on={payMethod[5]}
-              onClick={() => this.handlePaymentClick(5)}
-            >
-              PAYCO
-            </MethodBtn>
-            <MethodBtn
-              on={payMethod[6]}
-              onClick={() => this.handlePaymentClick(6)}
-            >
-              TOSS
-            </MethodBtn>
-          </Methods>
-        </PaymentMethod>
-        <Tnc onClick={() => this.handleOnClick("tncCheck")}>
-          <StyledDiv checked={tncCheck} />
-          <span>
-            개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에
-            동의합니다.
-          </span>
-        </Tnc>
-        <Pay>
-          <button>
-            <span>{fripPrice}</span>원 결제하기
-          </button>
-        </Pay>
-      </MainContainer>
+      <>
+        <MainContainer>
+          <Auth>
+            <Header>본인인증</Header>
+            <AuthFirst>
+              <AuthTxt>
+                프립 신청을 위해서는 <span>최소 1회</span> 본인 인증이
+                필요합니다.
+              </AuthTxt>
+              <button>인증완료</button>
+            </AuthFirst>
+          </Auth>
+          <Price>
+            <Header>결제</Header>
+            <Frip>
+              <Select onClick={() => this.handleOnClick("select")}>
+                <span>선택한 프립</span>
+                <ArrDiv on={select}>
+                  <LeftArr />
+                </ArrDiv>
+              </Select>
+              <FripDetail on={select}>
+                <FripAbout>
+                  <FripImg bgImg={data.image} />
+                  <FripDesc>
+                    <span>{data.catch_phrase}</span>
+                    <span>{data.title}</span>
+                  </FripDesc>
+                </FripAbout>
+                <PriceDetail>
+                  <span>참가비 (1인) x 1개</span>
+                  <span>{detail.price}원</span>
+                </PriceDetail>
+              </FripDetail>
+            </Frip>
+            <PriceNCoupon>
+              <ProductPrice>
+                <span>상품 금액</span>
+                <span>{`${detail.price} 원`}</span>
+              </ProductPrice>
+              <Coupon>
+                <span>쿠폰 /할인 코드</span>
+                <div>
+                  <span>- 0원</span>
+                  <CoupNNrgBtn>선택</CoupNNrgBtn>
+                </div>
+              </Coupon>
+              <Energy>
+                <div>
+                  <span>에너지</span>
+                  <span>보유 2,000</span>
+                </div>
+                <div>
+                  <span>
+                    0 <span>E</span>
+                  </span>
+                  <CoupNNrgBtn>전체 사용</CoupNNrgBtn>
+                </div>
+              </Energy>
+              <EnergyDesc>
+                <li>
+                  에너지는 1,000E부터 사용 가능하며, 결제 금액의 일부가
+                  적립됩니다.
+                </li>
+                <li>
+                  쿠폰/할인코드/에너지 사용하여 결제시 개별 취소를 할 수
+                  없습니다.
+                </li>
+              </EnergyDesc>
+              <TotalPrice>
+                <div>
+                  <span>할인 금액</span>
+                  <span>- 0원</span>
+                </div>
+                <div>
+                  <span>최종 결제 금액</span>
+                  <span>{`${detail.price} 원`}</span>
+                </div>
+              </TotalPrice>
+            </PriceNCoupon>
+          </Price>
+          <PaymentMethod>
+            <Header>결제수단</Header>
+            <Methods>
+              <MethodBtn
+                on={payMethod[1]}
+                onClick={() => this.handlePaymentClick(1)}
+              >
+                신용/체크 카드
+              </MethodBtn>
+              <MethodBtn
+                on={payMethod[2]}
+                onClick={() => this.handlePaymentClick(2)}
+              >
+                핸드폰 결제
+              </MethodBtn>
+              <MethodBtn
+                on={payMethod[3]}
+                onClick={() => this.handlePaymentClick(3)}
+              >
+                무통장 입금
+              </MethodBtn>
+              <MethodBtn
+                on={payMethod[4]}
+                onClick={() => this.handlePaymentClick(4)}
+              >
+                실시간 계좌이체
+              </MethodBtn>
+              <MethodBtn
+                on={payMethod[5]}
+                onClick={() => this.handlePaymentClick(5)}
+              >
+                PAYCO
+              </MethodBtn>
+              <MethodBtn
+                on={payMethod[6]}
+                onClick={() => this.handlePaymentClick(6)}
+              >
+                TOSS
+              </MethodBtn>
+            </Methods>
+          </PaymentMethod>
+          <Tnc onClick={() => this.handleOnClick("tncCheck")}>
+            <StyledDiv checked={tncCheck} />
+            <span>
+              개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든
+              약관에 동의합니다.
+            </span>
+          </Tnc>
+          <Pay>
+            <button onClick={this.requestPay}>
+              <span>{detail.price}</span>원 결제하기
+            </button>
+          </Pay>
+        </MainContainer>
+      </>
     );
   }
 }
