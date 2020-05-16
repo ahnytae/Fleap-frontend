@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 class Main extends Component {
   render() {
-    return <div>hi</div>;
+    return <div></div>;
   }
 }
 

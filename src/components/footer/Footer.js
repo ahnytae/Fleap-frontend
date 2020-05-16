@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 class Footer extends Component {
   render() {
-    return <FooterContainer>this is footer</FooterContainer>;
+    return <FooterContainer></FooterContainer>;
   }
 }
 
