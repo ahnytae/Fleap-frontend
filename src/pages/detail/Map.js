@@ -5,10 +5,12 @@ import styled from "styled-components";
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      map: null,
+      markers: [],
+      infowindows: [],
+    };
   }
-  map;
-  markers = [];
-  infowindows = [];
   componentDidMount() {
     var container = document.getElementById("myMap"); //지도를 담을 영역의 DOM 레퍼런스
     var options = {

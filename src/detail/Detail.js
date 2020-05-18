@@ -3,8 +3,8 @@ import DetailSlider from "../../components/slider/components/detail/DetailSlider
 import Down from "../../images/down.png";
 import Upward from "../../images/upward.png";
 import KakaoMap from "./Map";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "./node_modules/slick-carousel/slick/slick.css";
+import "./node_modules/slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 
 class Detail extends Component {
@@ -12,12 +12,9 @@ class Detail extends Component {
     super(props);
 
     this.state = {
-      clickbutton: [false, false, false, false],
-      clickOption: [false],
+      clickbutton: [false, false, false],
       like: "11",
       detail: [],
-      amount: 1,
-      stock: 5,
     };
   }
 
@@ -28,34 +25,6 @@ class Detail extends Component {
       clickbutton: arr,
     });
   };
-
-  optionClick = (num) => {
-    let arr = this.state.clickOption;
-    arr[num] = !arr[num];
-    this.setState({
-      clickOption: arr,
-    });
-  };
-
-  //amount handler
-  handleAmountClick(e) {
-    e.preventDefault();
-    let { amount, stock } = this.state;
-
-    const content = e.target.innerHTML;
-    if (content === "-" && amount > 1) {
-      amount--;
-    } else if (content === "+" && amount < stock) {
-      amount++;
-    }
-
-    this.setState(
-      {
-        amount: amount,
-      },
-      () => console.log(this.state.amount)
-    );
-  }
 
   componentDidMount = () => {
     fetch("http://localhost:3000/data/detail.json")
@@ -382,7 +351,7 @@ class Detail extends Component {
                   <img
                     alt=""
                     src={this.state.clickbutton[2] ? Down : Upward}
-                  ></img>
+                  ></img>{" "}
                 </FrequentlyQuestion>
                 <QuestionContent
                   style={{
@@ -405,12 +374,13 @@ class Detail extends Component {
                     마감일은 무엇인가요? 호스트님들이 장소 대관, 강습, 재료 구비
                     등 프립 진행을 준비하기 위해, 프립 참여일보다 일찍 신청을
                     마감합니다. 환불은 참여일이 아닌 신청 마감일 기준으로
-                    이루어집니다.
+                    이루어집니다.{" "}
                     <p>
                       프립마다 신청 마감일이 다르니, 꼭 날짜와 시간을 확인 후
                       결제해주세요! : )
-                    </p>
+                    </p>{" "}
                     <p>
+                      {" "}
                       [환불 신청 방법] 1. 해당 프립을 결제한 계정으로 로그인 2.
                       내 프립 - 신청내역 3. 취소를 원하는 프립 상세 정보 버튼 -
                       취소 ※ 결제 수단에 따라 예금주, 은행명, 계좌번호 입력
@@ -426,74 +396,6 @@ class Detail extends Component {
           <OptionAll>
             <OptionProperty>
               <OptionName>옵션 선택</OptionName>
-              <OptionChoice
-                onClick={() => {
-                  this.handleClick(3);
-                }}
-              >
-                <p>
-                  {" "}
-                  옵션을 선택하세요{" "}
-                  <img
-                    alt=""
-                    src={this.state.clickbutton[3] ? Down : Upward}
-                  ></img>{" "}
-                </p>
-              </OptionChoice>
-              <FirstOption
-                style={{
-                  display: this.state.clickbutton[3] ? "block" : "none",
-                }}
-                onClick={() => {
-                  this.optionClick(0);
-                }}
-              >
-                <FirstOptionTop>
-                  <FirstOptionLeft>
-                    <FirstOptionName>1인이용권</FirstOptionName>
-                    <FirstOptionAmount> 남은수량 19개 </FirstOptionAmount>
-                  </FirstOptionLeft>
-                  <FirstOptionRight>
-                    <FirstOptionDiscoount>32000</FirstOptionDiscoount>
-                    <FirstOptionPrice> 20000원 </FirstOptionPrice>
-                  </FirstOptionRight>
-                </FirstOptionTop>
-              </FirstOption>
-              <OptionChecked
-                style={{
-                  display: this.state.clickOption[0] ? "block" : "none",
-                }}
-              >
-                <OptionCheckedLeft>
-                  <OptionCheckedName>1인이용권</OptionCheckedName>
-                  <OptionCheckedAmount> 바튼</OptionCheckedAmount>
-                </OptionCheckedLeft>
-                <OptionCheckedRight>
-                  <OptionCheckedDiscount> 32000원 </OptionCheckedDiscount>
-                  <OptionCheckedPrice>
-                    {" "}
-                    <OptionCheckedButton>
-                      <OptionCheckedInput
-                        type="number"
-                        value={this.state.amount}
-                        min="1"
-                      />
-                      <button
-                        className="button minus"
-                        onClick={this.handleAmountClick}
-                      >
-                        -
-                      </button>
-                      <button
-                        className="button plus"
-                        onClick={this.handleAmountClick}
-                      >
-                        +
-                      </button>
-                    </OptionCheckedButton>
-                  </OptionCheckedPrice>
-                </OptionCheckedRight>
-              </OptionChecked>
             </OptionProperty>
           </OptionAll>
         </Option>
@@ -693,107 +595,14 @@ const OptionProperty = styled.div`
 `;
 
 const OptionName = styled.div`
-  line-height: 14px;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 40px 0px 26px;
-  border-bottom: 1px solid rgb(238, 238, 238);
-`;
-
-const OptionChoice = styled.button`
-  position: relative;
-  width: 100%;
-  height: 60px;
-  line-height: 22px;
-  cursor: pointer;
-  text-align: left;
-  transition: background-color 0.4s ease 0s;
-  border-top: 1px solid rgb(238, 238, 238);
-  padding-top: 20px;
-  margin-top: 30px;
-  border: none;
-  background-color: white;
-  img {
-    width: 18px;
-    height: 18px;
-    transform: rotate(180deg);
-  }
-  p {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    user-select: none;
-    line-height: 14px;
-    color: rgb(155, 155, 155);
-  }
-`;
-
-const FirstOption = styled.button`
-  display: inline-flex;
-  line-height: 22px;
-  background-color: rgb(249, 249, 249);
-  font-size: 13px;
-  cursor: pointer;
-  border: 1px solid rgb(238, 238, 238);
-  padding: 18px 16px;
-`;
-
-const FirstOptionTop = styled.div`
   display: flex;
-  justify-content: space-between;
-`;
-const FirstOptionLeft = styled.div``;
-const FirstOptionName = styled.div``;
-
-const FirstOptionAmount = styled.div`
-  margin-top: 12px;
-  line-height: 11px;
-  font-size: 11px;
-  color: rgb(85, 85, 85);
-`;
-
-const FirstOptionRight = styled.div`
-  margin-left: 10px;
-  text-align: right;
-`;
-
-const FirstOptionDiscoount = styled.div`
-  margin-bottom: 6px;
-  color: rgb(187, 187, 187);
-  text-decoration: line-through;
-`;
-
-const FirstOptionPrice = styled.div`
-  white-space: nowrap;
-  font-weight: bold;
-`;
-
-const OptionChecked = styled.div`
-  position: relative;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(238, 238, 238);
-  border-image: initial;
-  border-radius: 5px;
-  padding: 20px;
-`;
-
-const OptionCheckedLeft = styled.div`
-  display: flex;
-  justify-content: space-between;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-`;
-const OptionCheckedName = styled.div``;
-
-const OptionCheckedAmount = styled.div`
-  line-height: 18px;
-  color: rgb(51, 151, 255);
-  font-size: 16px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 370px;
+  max-height: calc(100vh - 70px);
+  height: 100vh;
+  padding: 0px 30px;
+  overflow: hidden;
 `;
 
 const MainPrice = styled.div`
@@ -801,43 +610,6 @@ const MainPrice = styled.div`
   text-decoration: line-through;
 `;
 
-const OptionCheckedRight = styled.div`
-  display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  margin-top: 28px;
-`;
-
-const OptionCheckedDiscount = styled.div`
-  line-height: 18px;
-  color: rgb(51, 151, 255);
-  font-size: 16px;
-`;
-
-const OptionCheckedPrice = styled.div`
-  white-space: nowrap;
-  font-weight: bold;
-`;
-
-const OptionCheckedButton = styled.button`
-  flex-grow: 1;
-  flex-basis: 0;
-  max-width: 100%;
-  border: none;
-`;
-
-const OptionCheckedInput = styled.input`
-  flex-wrap: wrap;
-  width: 100px;
-  color: #000000;
-  flex-basis: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 0;
-  min-height: 1px;
-`;
 const DiscountPrice = styled.div`
   font-size: 30px;
   font-weight: 300;
