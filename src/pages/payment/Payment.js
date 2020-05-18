@@ -17,8 +17,21 @@ class Payment extends Component {
         6: false,
       },
       tncCheck: false,
+      fripDetail: {},
+      fripPrice: 0,
     };
   }
+
+  componentDidMount = () => {
+    fetch("http://localhost:3000/data/mockPayment.json")
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          fripDetail: res.frip_detail,
+          fripPrice: res.frip_detail.price.toLocaleString(),
+        });
+      });
+  };
 
   handleOnClick = (what) => {
     this.state[what]
@@ -45,7 +58,7 @@ class Payment extends Component {
   };
 
   render() {
-    const { select, payMethod, tncCheck } = this.state;
+    const { select, payMethod, tncCheck, fripDetail, fripPrice } = this.state;
 
     return (
       <MainContainer>
@@ -55,7 +68,7 @@ class Payment extends Component {
             <AuthTxt>
               프립 신청을 위해서는 <span>최소 1회</span> 본인 인증이 필요합니다.
             </AuthTxt>
-            <button>인증하기</button>
+            <button>인증완료</button>
           </AuthFirst>
         </Auth>
         <Price>
@@ -69,22 +82,22 @@ class Payment extends Component {
             </Select>
             <FripDetail on={select}>
               <FripAbout>
-                <FripImg />
+                <FripImg bgImg={fripDetail.img_url} />
                 <FripDesc>
-                  <span>부제목입니다.부제목입니다.부제목입니다.</span>
-                  <span>제목입니다.제목입니다.제목입니다.제목입니다.</span>
+                  <span>{fripDetail.subtitle}</span>
+                  <span>{fripDetail.title}</span>
                 </FripDesc>
               </FripAbout>
               <PriceDetail>
                 <span>참가비 (1인) x 1개</span>
-                <span>10,000원</span>
+                <span>{fripPrice}원</span>
               </PriceDetail>
             </FripDetail>
           </Frip>
           <PriceNCoupon>
             <ProductPrice>
               <span>상품 금액</span>
-              <span>10,000원</span>
+              <span>{fripPrice}원</span>
             </ProductPrice>
             <Coupon>
               <span>쿠폰 /할인 코드</span>
@@ -121,7 +134,7 @@ class Payment extends Component {
               </div>
               <div>
                 <span>최종 결제 금액</span>
-                <span>10,000원</span>
+                <span>{fripPrice}원</span>
               </div>
             </TotalPrice>
           </PriceNCoupon>
@@ -176,7 +189,7 @@ class Payment extends Component {
         </Tnc>
         <Pay>
           <button>
-            <span>10,000</span>원 결제하기
+            <span>{fripPrice}</span>원 결제하기
           </button>
         </Pay>
       </MainContainer>
@@ -216,7 +229,7 @@ const AuthFirst = styled.div`
   button {
     width: 210px;
     height: 50px;
-    background-color: rgb(51, 151, 255);
+    background-color: rgb(221, 221, 221);
     text-align: center;
     cursor: pointer;
     color: white;
@@ -298,7 +311,7 @@ const FripAbout = styled.div`
 const FripImg = styled.div`
   width: 130px;
   height: 97px;
-  background-image: url("https://res.cloudinary.com/frientrip/image/upload/ar_75:56,c_fill,dpr_3.0,f_auto,g_auto,q_auto,w_130/33848_banner_1521641099101");
+  background-image: url(${(props) => props.bgImg});
 `;
 
 const FripDesc = styled.div`
