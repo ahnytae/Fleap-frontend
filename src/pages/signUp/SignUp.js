@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auth, { isEmail, isPw } from "../signIn/Auth";
+import Auth, { isValidation, isPw } from "../signIn/Auth";
 import styled from "styled-components";
 
 const pwCheckText = () => {
@@ -28,7 +28,7 @@ class SignUp extends Component {
   };
 
   onChangeId = (e) => {
-    if (isEmail(e.target.value)) {
+    if (isValidation(e.target.value)) {
       this.setState(
         {
           idValueLength: e.target.value.length,
@@ -203,6 +203,7 @@ const LoginBtn = styled.button`
   padding: 0px 13px;
   border-radius: 5px;
   pointer-events: none;
+  border: none;
 
   background-color: ${(props) =>
     // props.idValueLength >= 3 &&

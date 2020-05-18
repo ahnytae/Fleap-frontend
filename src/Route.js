@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Daily from "./pages/daily/Daily";
 import Detail from "./pages/detail/Detail";
-import MyPage from "./pages/myPage/MyPage";
 import Outdoor from "./pages/daily/activities/Outdoor";
 import OutdoorMt from "./pages/daily/activities/OutdoorMt";
 import OutdoorSurf from "./pages/daily/activities/OutdoorSurf";
@@ -13,6 +12,9 @@ import MakeDiyPot from "./pages/daily/learn/MakeDiyPot";
 import MakeDiyCandle from "./pages/daily/learn/MakeDiyCandle";
 import SignIn from "./pages/signIn/SignIn";
 import SignUp from "./pages/signUp/SignUp";
+import Payment from "./pages/payment/Payment";
+import MyLikes from "./pages/myPage/MyLikes";
+import MyFrip from "./pages/myPage/MyFrip";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -47,9 +49,11 @@ class Routes extends React.Component {
               component={MakeDiyCandle}
             />
             <Route exact path="/detail" component={Detail} />
-            <Route exact path="/mypage" component={MyPage} />
+            <Route exact path="/mylikes" component={MyLikes} />
+            <Route exact path="/myfrip" component={MyFrip} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/payment" component={Payment} />
           </Switch>
           <Footer />
         </Router>
