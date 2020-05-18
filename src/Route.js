@@ -10,8 +10,9 @@ import LearnMain from "./pages/daily/learn/LearnMain";
 import MakeDiy from "./pages/daily/learn/MakeDiy";
 import MakeDiyPot from "./pages/daily/learn/MakeDiyPot";
 import MakeDiyCandle from "./pages/daily/learn/MakeDiyCandle";
-import SignIn from "./pages/signIn/SignIn";
-import SignUp from "./pages/signUp/SignUp";
+import SignIn from "./pages/login/signIn/SignIn";
+import SignUp from "./pages/login/signUp/SignUp";
+import SignUpEntry from "./pages/login/signIn/SignInEntryPage";
 import Payment from "./pages/payment/Payment";
 import MyLikes from "./pages/myPage/MyLikes";
 import MyFrip from "./pages/myPage/MyFrip";
@@ -51,14 +52,19 @@ class Routes extends React.Component {
               component={MakeDiyCandle}
             />
             <Route exact path="/detail" component={Detail} />
+            <Route exact path="/detail/:id" component={Detail}/>
             <Route exact path="/mylikes" component={MyLikes} />
             <Route exact path="/myfrip" component={MyFrip} />
             <Route exact path="/signin" component={SignInEntryPage} />
             <Route exact path="/signup" component={SignUpEntryPage} />
             <Route exact path="/payment" component={Payment} />
+<<<<<<< HEAD
             {/* <Route exact path="/mypage" component={MyPage} /> */}
             <Route exact path="/signinpage" component={SignIn} />
             <Route exact path="/signuppage" component={SignUp} />
+=======
+            <Route exact path="/singinentry" component={SignUpEntry} />
+>>>>>>> 9684006... kakao login
           </Switch>
           <Footer />
         </Router>
