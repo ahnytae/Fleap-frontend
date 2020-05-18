@@ -25,23 +25,25 @@ class Daily extends Component {
 
   onClickHandler = (name) => {
     this.state[name]
-      ? this.setState(
-          { [name]: false },
-          window.removeEventListener("scroll", this.noScroll)
-        )
+      ? this.setState({ [name]: false })
       : this.setState(
           { [name]: true },
+          console.log("hi"),
           window.addEventListener("scroll", this.noScroll)
         );
   };
 
   modalClosed = () => {
-    this.setState({
-      when: false,
-      where: false,
-      who: false,
-      filter: false,
-    });
+    this.setState(
+      {
+        when: false,
+        where: false,
+        who: false,
+        filter: false,
+      },
+      console.log("hey"),
+      window.removeEventListener("scroll", this.noScroll)
+    );
   };
 
   render() {
