@@ -4,35 +4,43 @@ import styled from "styled-components";
 
 class SignIn extends React.Component {
   state = {
-    idValueLength: 0,
-    pwValueLength: 0,
-    idValue: "",
-    pwValue: "",
+    email: "",
+    password: "",
     idActive: false,
   };
 
-  onChangeId = (e) => {
-    if (isEmail(e.target.value)) {
-      this.setState({
-        idValueLength: e.target.value.length,
-        idValue: e.target.value,
-        idActive: true,
-      });
-    }
-  };
-
-  onChangePw = (e) => {
+  onChangeHandler = (e) => {
     this.setState(
       {
-        pwValueLength: e.target.value.length,
-        pwValue: e.target.value,
+        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value,
+        idActive: true,
       },
-      () => console.log("PW:", this.state.pwValue)
+      () => console.log(this.state)
     );
   };
 
+  onLoginHandler = () => {
+    console.log("HHHH");
+    fetch("http://10.58.5.40:8080/user/sign-in", {
+      method: "POST",
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.token) {
+          alert("로긴됨");
+        } else {
+          alert("nono");
+        }
+      });
+  };
+
   render() {
-    const { idValueLength, pwValueLength, idActive } = this.state;
+    const { email, pw, idActive } = this.state;
     return (
       <div className="EmailLogin">
         <EmailBox>
@@ -40,21 +48,26 @@ class SignIn extends React.Component {
           <form>
             <FormBox>
               <input
+                name="email"
                 type="id"
                 placeholder="이메일로 입력"
-                onChange={(e) => this.onChangeId(e)}
+                onChange={(e) => this.onChangeHandler(e)}
               />
             </FormBox>
             <FormBox>
               <input
+                name="pw"
                 type="password"
                 placeholder="비밀번호 입력"
-                onChange={(e) => this.onChangePw(e)}
+                onChange={(e) => this.onChangeHandler(e)}
               />
             </FormBox>
             <LoginBtn
-              idActive={this.state.idActive}
-              pwValueLength={this.state.pwValueLength}
+              style={{
+                backgroundColor:
+                  idActive === true && email.length > 0 ? "red" : "grey",
+              }}
+              onClick={this.onLoginHandler}
             >
               로그인
             </LoginBtn>
@@ -116,19 +129,18 @@ const LoginBtn = styled.button`
   width: 100%;
   height: 50px;
   line-height: 13px;
-  background-color: rgb(51, 151, 255);
+  /* background-color: rgb(51, 151, 255); */
   text-align: center;
-  cursor: not-allowed;
+  cursor: pointer;
   color: white;
   font-size: 13px;
   padding: 0px 13px;
   border-radius: 5px;
-  pointer-events: none;
+  /* pointer-events: none; */
+  border: none;
 
-  background-color: ${(props) =>
-    props.idActive && props.pwValueLength >= 1
-      ? props.backgroundColor
-      : "rgb(221, 221, 221)"};
+  /* background-color: ${(props) =>
+    props.idActive ? props.backgroundColor : "rgb(221, 221, 221)"}; */
 `;
 
 const ForgotPw = styled.div`

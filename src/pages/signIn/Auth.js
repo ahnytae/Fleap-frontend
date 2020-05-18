@@ -1,14 +1,17 @@
 export const isEmail = (email) => {
-  const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-
-  return emailRegex.test(email);
+  const emailRule = /^[0-9a-zA-Z][0-9a-zA-Z\_\-\.\+]+[0-9a-zA-Z]@[0-9a-zA-Z][0-9a-zA-Z\_\-]*[0-9a-zA-Z](\.[a-zA-Z]{2,6}){1,2}$/i;
+  if (!emailRule.test(email)) {
+    return false; //경고
+  } else {
+    return true;
+  }
 };
 
 export const isValidation = (email) => {
   if (!isEmail(email)) {
-    return { success: false, error: "email Error!" };
+    return false;
   } else {
-    return { success: true, error: null };
+    return true;
   }
 };
 
