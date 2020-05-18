@@ -1,14 +1,17 @@
 /*global kakao*/
 
 import React, { Component } from "react";
-import "./Map.scss";
+import styled from "styled-components";
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      map: null,
+      markers: [],
+      infowindows: [],
+    };
   }
-  map;
-  markers = [];
-  infowindows = [];
   componentDidMount() {
     var container = document.getElementById("myMap"); //지도를 담을 영역의 DOM 레퍼런스
     var options = {
@@ -20,10 +23,17 @@ class Map extends React.Component {
   }
   render() {
     return (
-      <div className="popup">
+      <Popup>
         <div id="myMap" />
-      </div>
+      </Popup>
     );
   }
 }
 export default Map;
+
+const Popup = styled.div`
+  #myMap {
+    width: 400px;
+    height: 400px;
+  }
+`;
