@@ -34,7 +34,11 @@ class Nav extends Component {
     ];
 
     return (
-      <Wrapper>
+      <Wrapper
+        style={{
+          backgroundColor: disableWindow === true ? "red" : " ",
+        }}
+      >
         <Inner>
           <ActiveWindow>
             <Link to="#">
@@ -87,7 +91,9 @@ class Nav extends Component {
             </InformationBtn>
           </ActiveWindow>
           <DisableWindow
-            style={{ display: disableWindow === true ? "block" : " " }}
+            style={{
+              display: disableWindow === true ? "block" : " ",
+            }}
           >
             <div>
               <header>
@@ -108,7 +114,6 @@ class Nav extends Component {
           </DisableWindow>
         </Inner>
       </Wrapper>
-
     );
   }
 }
@@ -155,9 +160,9 @@ const DisableWindow = styled.div`
   top: 70px;
   left: 0px;
   width: 100%;
-  height: calc(100vh - 70px);
-  z-index: 1;
-
+  height: 120px;
+  z-index: 111;
+  background-color: white;
   div {
     width: 650px;
     max-width: 100%;
@@ -165,10 +170,8 @@ const DisableWindow = styled.div`
     margin: 0 auto;
     padding: 20px;
     /* border: 1px red solid; */
-
     header {
       padding-bottom: 20px;
-
       label {
         font-size: 15px;
         font-weight: bold;
@@ -189,7 +192,6 @@ const Button = styled.button`
   white-space: nowrap;
   max-width: 150px;
   overflow: hidden;
-
   width: auto;
   height: 34px;
   line-height: normal;
@@ -207,7 +209,6 @@ const Button = styled.button`
   border-radius: 5px;
   margin: 0px 12px 6px 0px;
   font-weight: bold;
-
   border: 1px #3497ff solid;
 `;
 
@@ -218,7 +219,6 @@ const SearchBox = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-
   form {
     position: relative;
     -webkit-box-flex: 0;
@@ -233,7 +233,6 @@ const SearchBox = styled.div`
     background-color: rgb(242, 249, 255);
     border-radius: 20px;
     padding: 0px 12px;
-
     input {
       -webkit-box-flex: 1;
       flex-grow: 1;
@@ -253,7 +252,6 @@ const InformationBtn = styled.div`
   line-height: 14px;
   font-size: 14px;
   font-weight: 600;
-
   span {
     width: 1px;
     height: 10px;
@@ -262,7 +260,6 @@ const InformationBtn = styled.div`
     margin-right: 14px;
     display: inline-block;
   }
-
   img {
     margin-left: 4px;
     width: 18px;
@@ -270,7 +267,6 @@ const InformationBtn = styled.div`
     vertical-align: bottom;
     transform: rotate(90deg);
   }
-
   ul {
     display: none;
     width: 124px;
@@ -285,7 +281,6 @@ const InformationBtn = styled.div`
     border-image: initial;
     border-radius: 5px;
     padding: 10px;
-
     li {
       font-size: 12px;
       font-weight: bold;

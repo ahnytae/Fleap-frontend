@@ -5,6 +5,7 @@
 // import SecondSlider from "./SecondSlider";
 // import ThirdSlider from "./ThirdSlider";
 
+// dddd.g
 // class Main extends Component {
 //   state = {
 //     category: [],
