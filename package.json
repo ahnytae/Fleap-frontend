@@ -20,13 +20,14 @@
     "react-slick": "^0.26.1",
 
     "react-slideshow-image": "^1.4.2",
-
     "request": "^2.88.2",
-
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0",
     "styled-reset": "^4.1.4",
     "tig": "^0.1.43"
+  },
+  "resolutions": {
+    "@babel/runtime": "7.0.0-beta.46"
   },
   "scripts": {
     "start": "react-scripts start",
