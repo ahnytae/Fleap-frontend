@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import Auth, { isEmail } from "./Auth";
+import Auth, { isEmail } from "./Auth";
 import styled from "styled-components";
 
 class SignIn extends Component {
@@ -21,7 +21,7 @@ class SignIn extends Component {
 
   loginHandler = (e) => {
     e.preventDefault();
-    fetch("http://10.58.1.144:8080/user/sign-in", {
+    fetch("http://10.58.3.84:8080/user/sign-in", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
@@ -63,13 +63,7 @@ class SignIn extends Component {
                 onChange={this.onChangehandler}
               />
             </FormBox>
-            <LoginBtn
-              idActive={this.state.idActive}
-              pwValueLength={this.state.pwValueLength}
-              onClick={this.loginHandler}
-            >
-              로그인
-            </LoginBtn>
+            <LoginBtn onClick={this.loginHandler}>로그인</LoginBtn>
           </form>
           <ForgotPw>
             <a href="/ #">비밀번호를 잊어버렸나요?</a>
