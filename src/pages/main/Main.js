@@ -4,6 +4,8 @@ import styled from "styled-components";
 import MainSlider from "./MainSlider";
 import SecondSlider from "./SecondSlider";
 import ThirdSlider from "./ThirdSlider";
+import Items from "../../components/item/Items";
+import SecondItems from "../../components/item/SecondItems";
 
 class Main extends Component {
   state = {
@@ -365,4 +367,3 @@ const SubTitle = styled.p`
   line-height: 14px;
   color: rgb(155, 155, 155);
 `;
-//주석
