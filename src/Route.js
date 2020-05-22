@@ -58,10 +58,15 @@ class Routes extends React.Component {
             <Route exact path="/signin" component={SignInEntryPage} />
             <Route exact path="/signup" component={SignUpEntryPage} />
             <Route exact path="/payment" component={Payment} />
+
             {/* <Route exact path="/mypage" component={MyPage} /> */}
             <Route exact path="/signinpage" component={SignIn} />
             <Route exact path="/signuppage" component={SignUp} />
             <Route exact path="/singinentry" component={SignUpEntry} />
+
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/payment/:id" component={Payment} />
           </Switch>
           <Footer />
         </Router>
