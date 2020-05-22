@@ -23,43 +23,23 @@ export default class WhenModal extends Component {
     }
   };
 
-  // Weekday = ({ weekday, className, localeUtils, locale }) => {
-  //   const weekdayName = localeUtils.formatWeekdayLong(weekday, locale);
-  //   return (
-  //     <div className={className} title={weekdayName}>
-  //       {weekday} {weekdayName.slice(0, 1)}
-  //     </div>
-  //   );
-  // }
-
-  // Navbar = ({
-  //   nextMonth,
-  //   previousMonth,
-  //   onPreviousClick,
-  //   onNextClick,
-  //   className,
-  //   localeUtils,
-  // }) => {
-  //   const months = localeUtils.getMonths();
-  //   const prev = months[previousMonth.getMonth()];
-  //   const next = months[nextMonth.getMonth()];
-  //   const styleLeft = {
-  //     float: 'left',
-  //   };
-  //   const styleRight = {
-  //     float: 'right',
-  //   };
-  //   return (
-  //     <div className={className}>
-  //       <button style={styleLeft} onClick={() => onPreviousClick()}>
-  //         ← {prev.slice(0, 3)}
-  //       </button>
-  //       <button style={styleRight} onClick={() => onNextClick()}>
-  //         {next.slice(0, 3)} →
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  sendDate = (from, to) => {
+    const realFrom = from
+      .toLocaleDateString()
+      .slice(0, -1)
+      .replace(". ", "-")
+      .replace(". ", "-");
+    let realTo;
+    if (to) {
+      realTo = to
+        .toLocaleDateString()
+        .slice(0, -1)
+        .replace(". ", "-")
+        .replace(". ", "-");
+    }
+    this.props.getDate(realFrom, realTo);
+    this.props.closed();
+  };
 
   render() {
     const { from, to } = this.state;
@@ -108,15 +88,13 @@ export default class WhenModal extends Component {
               selectedDays={[from, { from, to }]}
               modifiers={modifiers}
               onDayClick={this.handleDayClick}
-              // weekdayElement={<Weekday />}
-              // navbarElement={<Navbar />}
               months={MONTHS}
               weekdaysLong={WEEKDAYS_LONG}
               weekdaysShort={WEEKDAYS_SHORT}
               disabledDays={[
-                new Date(2020, 4, 13),
+                new Date(2020, 4, 21),
                 {
-                  before: new Date(2020, 4, 13),
+                  before: new Date(2020, 4, 21),
                 },
               ]}
             />
@@ -145,13 +123,23 @@ export default class WhenModal extends Component {
               </button>
             )}
             {from && !to && (
-              <button className="active" onClick={this.handleResetClick}>
+              <button
+                className="active"
+                onClick={() => {
+                  this.sendDate(from, null);
+                }}
+              >
                 {from.toLocaleDateString().split(".")[1]}월{" "}
                 {from.toLocaleDateString().split(".")[2]}일 - 종료일 선택
               </button>
             )}
             {from && to && (
-              <button className="active" onClick={this.handleResetClick}>
+              <button
+                className="active"
+                onClick={() => {
+                  this.sendDate(from, to);
+                }}
+              >
                 {from.toLocaleDateString().split(".")[1]}월{" "}
                 {from.toLocaleDateString().split(".")[2]}일 -{" "}
                 {to.toLocaleDateString().split(".")[1]}월{" "}

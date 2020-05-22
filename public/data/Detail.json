@@ -1,54 +1,111 @@
 {
   "detail": [{
-      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1588136480024_756285",
-      "datail_img2": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1519032775252_253995",
-      "datail_img3": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1588136480024_756285",
-      "detail_subtitle": "당일 쉼표같은 여행을 떠나다",
-      "detail_title": " 프립버스 카누타고 춘천여행",
-      "detail_price": 55000,
-      "detail_discountPrice": 40000,
-      "detail_discountRate": 27,
-      "detail_region": "서울 강남/서초구",
-
-      "detail_score": 4.22,
-      "detail_time": " 11월 10일",
-      "detail_hostProfile": "카약강사입니다.",
-      "detail_Review": "좋았어요",
-      "deatil_intro": "인트로",
-      "detail_latitude": "111.222",
-      "detail_longitude": "123"
-    }, {
-      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/patrick-boucher-QVYMO-BvVSY-unsplash_wqd5nd",
-      "detail_subtitle": "위스키에 입문하고 함께 즐겨보아요!",
-      "detail_title": " [토요일] 1박2일 위스키 테이스팅 혼펜",
-      "detail_price": 159000,
-      "detail_discountPrice": "",
-      "detail_discountRate": "",
-      "detail_region": "수원시 권선구",
-      "detail_score": 3.22,
-      "detail_time": " 1월 20일",
-      "detail_hostProfile": "위스키를 사랑합니다.",
-      "detail_Review": "너무 재밌었습니다.",
-      "deatil_intro": "트트트ㅡㅌ로로로",
-      "detail_latitude": "111.222",
-      "detail_longitude": "123"
+    "id": 1,
+    "ticket": false,
+    "image_url": [
+      "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/1587565721153-5_bvfknn"
+    ],
+    "catch_phrase": "서울의 밤은 낮보다 아름답다!",
+    "title": "#아차산#용마산#알쓸신잡#야간하이킹",
+    "price": 15000,
+    "faked_price": null,
+    "discount_percentage": null,
+    "liked": 5,
+    "duedate": null,
+    "location": "서울 성동/광진구",
+    "review_average": [
+      null
+    ],
+    "host": {
+      "host_image": "https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2.0,f_auto,g_auto,h_48,q_auto,w_48/BandPhoto_2018_05_14_12_16_49-01_1527158383169_vo2i3h",
+      "host_name": "outdoorcurator⛰",
+      "description": "🏆슈퍼호스트 29개월 연속 선정('19년 참여자수 프립 전체 1위)\n⛰프립 370회 이상 진행/7,400명 이상 참여/평점 4.9점 이상 \n⛰한국의 100대 명산 완등(총 900회 이상 등정)\n※ 산림청/블랙야크/한국의산하 130여개 기준\n⛰200대 명산 포함 한국의 인기명산 1,000회 이상 등정\n⛰등산 공인기록 6,500km 이상 ※ 비공인 8,500km 이상 \n⛰아웃도어 전문 인스타그램 운영(ID : outdoorcurator) \n※ 현재 팔로워 12,000여명\n📺tvN,JTBC,E채널 등산예능 '정상회담' 및 매스컴 다수 노출\n⛑대한적십자사 산악안전법&응급처치 강사 라이센스 보유\n🇰🇷한국관광공사 코리아둘레길 외 프로그램 다수 진행\n🎖한국관광공사 및 서울시 도보관광 자문위원 \n🎖국내 주요 대기업(기업/우리은행/금호아시아나/오렌지라이프) \n및 연세대, 한국경총, 블랙야크, 트레바리 단체산행 다수 진행\n🎖고어텍스/커먼타운 앰버서더 및 호카오네오네 브랜드 테스터",
+      "super_host": true
     },
-    {
-      "datail_img": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/patrick-boucher-QVYMO-BvVSY-unsplash_wqd5nd",
-      "detail_subtitle": "가족, 친구, 연인과 함께",
-      "detail_title": "실내 테니스 2:1 원데이 레슨 (예약 가능)",
-      "detail_price": 77000,
-      "detail_discountPrice": "",
-      "detail_discountRate": "",
-      "detail_region": "부산시 사상구",
-      "detail_score": 4.55,
-      "detail_time": " 4월 20일",
-      "detail_hostProfile": "운동합시다 여러분.",
-      "detail_Review": "너무재미미지게 재밌었습니다.",
-      "deatil_intro": "강아아아아아아아ㅏ로",
-      "detail_latitude": "333.999",
-      "detail_longitude": "123"
+    "review": [],
+    "content": "<p><strong>[코로나19 관련 유의사항]</strong></p><p><br/></p><p>1. 프립은 다수의 인원이 참여하는 프로그램이므로, 발열/호흡기 관련 증상, 감기 등의 질병이 발생한 대원님은 참여를 지양해주세요.</p><p>2. 프립 참가 시에는 마스크 착용, 손 소독제 활용 등으로 안전에 특히 유의해주세요.</p><p>3. 일정 변동 없이 진행되는 프립은 하단의 환불 규정을 따릅니다. 참여가 우려되시는 분들은 구매 시 신중한 선택 부탁드리며, 환불 규정을 숙지하여 기한 내 환불 신청 바랍니다.</p><p><br/></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>본 프립의 프로그램 상세 소개는</u></strong></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>페이지 하단부에 있습니다. </u></strong></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>콘텐츠 홍보 내용이 많기 때문에</u></strong></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>바쁘신 대원님은</u></strong></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>상단, 중앙을 Skip 하시고</u></strong></p><p style=\"text-align:center\"><strong style=\"color:black\"><u>소개 페이지 하단을 읽어 주세요!</u></strong></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/t9qiplqpinh5hh0e2rql.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/gyolowoxgs3muvrkcgd7.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/l6auvirvdsuhdopmcm3z.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/dpwgfrldsgqf2o1xteup.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/f1ou89xnolnckyrplzou.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qcq3htaevmiyuacmazk6.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/uv9ypv45696a8jx51njq.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/jcuikavbkn23mavg1khj.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ey44hf0vbfahknzxzzcq.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/jyvafy3tcwfdwuitnhsh.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qx4rmjkhbxb3tiz9kpin.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/tf0oibliogg9u01qhdc1.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/eraorqs39b7yjlj5ozbl.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/bi2ww1cq6l1scqlpafmh.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/yvbzfakahwnoysbyyoau.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/r24khgk3pm63kc8nftph.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/jkl9bxdbmntmrlqldwyt.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/lhusr2wuxv8eojxp6bam.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/myahposawbubrdz8h3dt.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/pbcsyh81hc1y7arln0x8.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ty5ervibyuuxs9uwt0wo.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/vyxqtsiqg3f2kbxm7mme.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/f0y6gqaxf2eoixmav9hx.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/o9saq7sefgothbyvkzd6.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qcaprh9zsyvia2hxh8a5.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/uqpafoq9mfgkrpxp1ybg.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/bskf7sdep2tu5bmou58j.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/hwavivx6ohau2jccbeka.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/j7nmv8nw4wbxxavdwmuz.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/hwxp3qddxcl11251utpp.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ofdpo22yc7gfermgzxzj.jpg\"/></p><p style=\"text-align:center\">서울시 광진구와 경기도 구리시에 걸쳐 있는</p><p style=\"text-align:center\"><strong>아차산(해발 287m)</strong>과 <strong>용마산(해발 348m)</strong>.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685169464\"/><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/hgfdowsqgi0rlhczmtfj.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685205606\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685224305\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/sotpyfglyyosqzonccwy.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/e5yidbjfwlqjhplylsjp.jpg\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/vuq2q4w55vzflpepnueo.jpg\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/mlagofocgjvt9vfvtdg1.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qszminnbesdtfx4tuavp.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qg4cuyvmlnajrv74li1z.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">아차산과 용마산은 야트막한 산으로 산세가 험하지 않아</p><p style=\"text-align:center\">인근 시민들이 가벼운 산행을 위해 자주 찾는 곳입니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">아차산생태공원 초입에서 30분 정도만 올라도</p><p style=\"text-align:center\">한강과 인구 천만 도시 서울의</p><p style=\"text-align:center\">아름다운 야경이 한눈에 들어오죠.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685304371\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685334690\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685354297\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/urub74uyagvzrpbc2zdn.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ljqynaxjmiaphax0ht22.jpg\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/y4ex7taj0seub6s0nbh0.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/qvvlncsblgcoyno0bxxg.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">삼국시대에는 고구려/백제/신라가</p><p style=\"text-align:center\">한강 유역을 점령하기 위해</p><p style=\"text-align:center\">아차산성과 보루를 쌓고 서로를 감시하며</p><p style=\"text-align:center\">치열한 전투를 벌였던 곳입니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">때문에 높이에 비해 조망 범위가 꽤 넓죠!</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/jmec4ptj7qqgfa3prbsm.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/smritwekfcijohs1v5cq.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685936808\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530685995871\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686068011\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/dwa6zamui0pl8h48gpr5.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/bnvgw8h9r8mgv6uclyyu.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/bvzc4sl6sdponsjvf2rm.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">아차산에서 용마산으로 이어지는 능선 길을 걸을 때면...</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">가까이 잠실(제2롯데월드 일대), 강남(코엑스 일대),</p><p style=\"text-align:center\">광진구/중랑구, 구리시(구리암사대교),</p><p style=\"text-align:center\">강동구/하남시(암사동/미사리 일대)...</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">멀리는 남산(N서울타워)/종로/을지로,</p><p style=\"text-align:center\">인왕산/북악산, 여의도(IFC몰/63빌딩),</p><p style=\"text-align:center\">청계산, 관악산, 북한산, 도봉산, 수락산,</p><p style=\"text-align:center\">남한산성까지 조망됩니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686416522\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/w7zdaiu7dmwtoml1bizi.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686456438\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">비슷해 보이는 광경도 걸음을 옮길 때마다...</p><p style=\"text-align:center\">(혹은) 걸음을 멈추면 색다르게 변신하곤 하죠.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">특히, 위 마지막 사진 위치에서는</p><p style=\"text-align:center\">많은 대원님들이 \"와~~~\"라는</p><p style=\"text-align:center\">탄성을 절로 내뱉으십니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">외국의 그 어느 곳보다</p><p style=\"text-align:center\">야경이 아름답다고 극찬을 아끼지 않은</p><p style=\"text-align:center\">대원님도 많이 계시죠.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/b3nnykznpkbnejskcsea.jpg\"/><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/jfjhrxlgrjeompapkood.jpg\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686798233\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686813067\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686823014\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530686837525\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">아차산~용마산 연계 산행(1일 2산)이라고</p><p style=\"text-align:center\">크게 걱정할 필요는 없습니다. :)</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">한 개의 산을 완전하게 넘고</p><p style=\"text-align:center\">다음 산으로 이동하는 것이 아니라,</p><p style=\"text-align:center\">능선길(서울둘레길)을 따라</p><p style=\"text-align:center\">2개의 산을 타는 것이기 때문이죠.</p><p style=\"text-align:center\">(아래 이미지 참고)</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530687284413\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530688043715\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530689139072\"/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/70200_product_1530689164519\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/fpecypyj5hpenvcuxhwr.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/kt1rqfmqggtmsegpdgcn.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/e3foqhbavt5jl9uxf9em.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong><em><u>★ 체력적인 부담이 있는 대원님과</u></em></strong></p><p style=\"text-align:center\"><strong><em><u>대중교통 막차 시간에 대한</u></em></strong></p><p style=\"text-align:center\"><strong><em><u>부담이 있는 대원님을 고려하여</u></em></strong></p><p style=\"text-align:center\"><strong><em><u>단축 프로그램도 운영합니다. ★</u></em></strong></p><p style=\"text-align:center\"><strong><em><u>(참가비는 동일함)</u></em></strong></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>(프립 신청 시, 종료 시간 확인 후 신청해주세요.)</strong></p><p style=\"text-align:center\">① 표준 프로그램 : 23시 종료</p><p style=\"text-align:center\">② 단축 프로그램 : 22시 종료</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>[ 표준 프로그램 ]</strong></p><p style=\"text-align:center\"><strong>·</strong> 산행 코스 : 5호선 아차산역~아차산 생태공원~</p><p style=\"text-align:center\">해맞이광장~아차산 정상~용마산 정상</p><p style=\"text-align:center\">~7호선 중곡역(귀가)</p><p style=\"text-align:center\"><strong>·</strong> 산행 길이 / 시간 : 약 6km 내외(휴식 포함 3시간 20분)</p><p style=\"text-align:center\"><strong>·</strong> 산행 난이도 : <strong style=\"color:black\">초급Ⅰ</strong></p><p style=\"text-align:center\">- 전체적으로 어렵지 않은 편이나,</p><p style=\"text-align:center\">암반 구간이 꽤 있으므로 주의 필요함.</p><p style=\"text-align:center\">- 초반부 200m 정도의 암반 구간과</p><p style=\"text-align:center\">후반부 내리막 암반 구간이 조금 어렵습니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>[ 단축 프로그램 ]</strong></p><p style=\"text-align:center\"><strong>·</strong> 산행 코스 : 5호선 아차산역~아차산 생태공원~</p><p style=\"text-align:center\">해맞이광장~아차산 1보루~아차산생태공원</p><p style=\"text-align:center\">~5호선 광나루역(귀가)</p><p style=\"text-align:center\"><strong>·</strong> 산행 길이 / 시간 : 약 4.6km 내외(휴식 포함 2시간 20분)</p><p style=\"text-align:center\"><strong>·</strong> 산행 난이도 : <strong style=\"color:black\">입문</strong></p><p style=\"text-align:center\">- 초반부 200m 정도의 암반 구간이 조금 어렵습니다.</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ndmhckngy9macf2bs6ev.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ifmgnxci5im553n98qwv.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>&lt;지하철 물품보관함 위치 안내&gt;</strong></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">◆ 출발 시</p><p style=\"text-align:center\">- 5호선 아차산역 : B1층 화장실 입구 맞은 편</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\">◆ 귀가 시</p><p style=\"text-align:center\">- 7호선 중곡역 역사 내</p><p style=\"text-align:center\">- 5호선 광나루역 역사 내</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>&lt; 다이소 위치 안내 &gt;</strong></p><p style=\"text-align:center\">5호선 아치산역 1번, 2번 출구 중간</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"http://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/otapdjbafwawtiybpu4j.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><strong>&lt; 모이는 위치 안내 &gt;</strong></p><p style=\"text-align:center\">5호선 아치산역 지하1층 화장실 옆 벤치</p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/1583215081058_wtygdz.jpg\"/></p><p style=\"text-align:center\"><br/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/nd0kwwojnpbm0pjz72ev.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/xvvkfci1qpppclcbxf6s.jpg\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ded6yfhbbqwjotj5kwvn.jpg\"/><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/siodtxwxbfgtpbykmntg.jpg\"/></p><p style=\"text-align:center\"><img src=\"https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:good,w_500/ckuxjumudb9inxuwxcnw.jpg\"/></p><p style=\"text-align:center\"><br/></p><p><strong style=\"color:black\">[신청 시 유의사항]</strong><br/><strong style=\"color:black\">· </strong><span style=\"color:black\">최소 인원 미달로 인한 취소 시 프립 마감 시간 24시간 전에 안내를 드리며 참가비는 전액 환불해 드립니다.</span><br/><strong style=\"color:black\">· </strong><span style=\"color:black\">프립 집결 시간보다 지각하실 경우, 프립에 참여하실 수 없습니다.</span><br/><strong style=\"color:black\">· </strong><span style=\"color:black\">참여자 본인의 과실로 발생한 안전사고는 참여자 본인의 책임이며, 예상된 위험을 용인하고 참여하여 발생한 안전사고에 대해 (주)프렌트립과 호스트는 책임지지 않습니다.</span><br/><strong style=\"color:black\">· </strong><span style=\"color:black\">산행 중 안전사고 발생이 우려되는 분은 여행자보험 또는 산악보험 개별 가입을 권장합니다.</span><br/><strong style=\"color:black\">· </strong><span style=\"color:black\">비 예보 시에도 그대로 진행합니다. (우산 또는 우비 준비 요망) 단, 강수량이 많아 안전에 문제가 있을 것으로 예상될 경우 취소될 수 있습니다.</span></p>",
+    "include": "<p style=\"text-align: justify;\">&#xAC00;&#xC774;&#xB4DC;&#xBE44; (&#xCF58;&#xD150;&#xCE20; &#xAE30;&#xD68D; / &#xC790;&#xB8CC; &#xC870;&#xC0AC; / &#xC0B0;&#xD589; &#xC9C4;&#xD589; / &#xC548;&#xC804; &#xAD00;&#xB9AC; &#xB4F1;)</p>",
+    "exclude": "<p style=\"text-align: justify;\">&#xC5EC;&#xD589;&#xC790; &#xBCF4;&#xD5D8; (&#xC0B0;&#xC545; &#xBCF4;&#xD5D8;)</p>",
+    "schedule": "<div><table class=\"sc-fIIFii isGwpF\"><tbody><tr class=\"sc-grYksN iyKIVQ\"><td class=\"sc-cBXKeB erpJdM\">19:30</td><td>아차산역 집결 및 인원 파악</td></tr><tr class=\"sc-grYksN iyKIVQ\"><td class=\"sc-cBXKeB erpJdM\">19:40</td><td>산행지로 이동(도심 구간 약 1km)</td></tr><tr class=\"sc-grYksN iyKIVQ\"><td class=\"sc-cBXKeB erpJdM\">23:00</td><td>산행 종료 및 귀가(7호선 중곡역)</td></tr></tbody></table><div class=\"sc-frudsx kxUELW\">· 참가자 체력 수준에 따라 산행 종료 시각이 지연될 수 있음.\n· 원거리에 사시는 대원님은 '대중교통 막차 시간'을 고려하여 신중하게 신청해주세요.</div></div>",
+    "material": "랜턴(헤드랜턴 권장, 손전등 가능, 스마트폰 플래쉬 불가), 걷기 편한 신발(등산화/트레킹화 권장), 식수 500ml 1개 이상, 우산/우비(우천 시)",
+    "notice": "<strong>[신청 시 유의사항]</strong></p><p style=\"text-align:justify\"><strong>· </strong>최소 인원 미달로 인한 취소 시 프립 마감 시간 24시간 전에 안내를 드리며 참가비는 전액 환불해 드립니다.</p><p style=\"text-align:justify\"><strong>· </strong>참여자 본인의 과실로 발생한 안전사고는 참여자 본인의 책임입니다.</p><p style=\"text-align:justify\"><strong>· </strong>참여자 본인이 예상된 위험을 용인하고 참여하여 발생한 안전사고에 대해 프립과 호스트는 어떠한 책임도 지지 않습니다.</p><p style=\"text-align:justify\"><strong>· </strong>산행 중 안전사고 발생이 우려되는 분은 여행자 보험 또는 산악보험 개별 가입을 권장합니다.</p><p style=\"text-align:justify\"><strong>· </strong>다량의 우천 예보 시, 안전을 고려하여 산행을 취소하거나 연기할 수도 있습니다. (단, 산행 전후 시간대에 예보 시 or 소량 예보 시 그대로 진행)</p><p><strong>·</strong> 등산 &#x2F; 트레킹은 강도 높은 유산소 운동입니다. 따라서, 안전 관리 및 원활한 프립 진행을 위해 아래 조건에 해당되는 분의 참여를 제한합니다.<br/>- 호흡 곤란, 심혈관계 질환, 폐 질환, 빈혈, 어지럼증, 가슴 통증, 우울증이 있으신 분<br/>- 운동 부족 (평소 운동을 잘 하지 않는 분)이신 분</p>",
+    "venue": {
+      "location": "서울 광진구 천호대로 지하 657(5호선 아차산역 지하1층 화장실 옆 벤치)",
+      "venue_lng": "127.103623",
+      "venue_lat": "37.545339"
+    },
+    "gathering_place": {
+      "location": "서울 광진구 천호대로 지하 657(5호선 아차산역 지하1층 화장실 옆 벤치)",
+      "geopoint_lng": "127.103623",
+      "geopoint_lat": "37.545339"
+    },
+    "choice": {
+      "itinerary": [{
+          "start_date": "2020-05-22T10:30:00",
+          "end_date": "2020-05-22T14:00:00",
+          "max_quantity": 15
+        },
+        {
+          "start_date": "2020-06-19T10:30:00",
+          "end_date": "2020-06-19T13:00:00",
+          "max_quantity": 25
+        },
+        {
+          "start_date": "2020-07-03T10:30:00",
+          "end_date": "2020-07-03T14:00:00",
+          "max_quantity": 20
+        }
+      ],
+      "option": [{
+          "title": "기본 옵션",
+          "content": null,
+          "max_quantity": 9999,
+          "price": null,
+          "base_price": null,
+          "option_type": "optionGroup"
+        },
+        {
+          "title": "참가비 (1인)",
+          "content": null,
+          "max_quantity": 999,
+          "price": 15000,
+          "base_price": null,
+          "option_type": "option"
+        },
+        {
+          "title": "기본 옵션",
+          "content": null,
+          "max_quantity": 9999,
+          "price": null,
+          "base_price": null,
+          "option_type": "optionGroup"
+        },
+        {
+          "title": "참가비 (1인)",
+          "content": null,
+          "max_quantity": 999,
+          "price": 15000,
+          "base_price": null,
+          "option_type": "option"
+        },
+        {
+          "title": "기본 옵션",
+          "content": null,
+          "max_quantity": 9999,
+          "price": null,
+          "base_price": null,
+          "option_type": "optionGroup"
+        },
+        {
+          "title": "참가비 (1인)",
+          "content": null,
+          "max_quantity": 999,
+          "price": 15000,
+          "base_price": null,
+          "option_type": "option"
+        }
+      ],
+      "child_option": []
     }
-
-  ]
+  }]
 }

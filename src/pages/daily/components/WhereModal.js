@@ -22,29 +22,13 @@ export default class WhereModal extends Component {
     });
   };
 
+  closeThisPlz = () => {
+    this.props.closed();
+  };
+
   render() {
     const { subFilterOn } = this.state;
-    const { closed } = this.props;
-
-    const MainArea = [...Array(21).keys()].slice(1).map((num, idx) => {
-      return (
-        <EachMainArea
-          subFilterOn={subFilterOn}
-          onClick={() => this.mainFilterClick(idx)}
-        >
-          {num}
-        </EachMainArea>
-      );
-    });
-
-    const SubArea = [...Array(15).keys()].slice(1).map((num) => {
-      return (
-        <EachSubArea>
-          <span>{num}</span>
-          <span>{num}</span>
-        </EachSubArea>
-      );
-    });
+    const { closed, region, getLocation } = this.props;
 
     return (
       <>
@@ -57,8 +41,54 @@ export default class WhereModal extends Component {
             </div>
           </ModalHeader>
           <ModalBody>
-            <MainFilter>{MainArea}</MainFilter>
-            {subFilterOn && <SubFilter>{SubArea}</SubFilter>}
+            <MainFilter>
+              {region &&
+                region.map((region, idx) => {
+                  return (
+                    <EachMainArea
+                      subFilterOn={subFilterOn}
+                      onClick={() => {
+                        this.mainFilterClick(idx);
+                      }}
+                    >
+                      {region.name}
+                    </EachMainArea>
+                  );
+                })}
+            </MainFilter>
+            {subFilterOn && (
+              <SubFilter>
+                <EachSubArea
+                  onClick={() => {
+                    getLocation(
+                      "main",
+                      region[subFilterOn - 1].id,
+                      region[subFilterOn - 1].name
+                    );
+                    this.closeThisPlz();
+                  }}
+                >
+                  <span>전체</span>
+                  <span>
+                    {region[subFilterOn - 1].sub_region_date[0].total_count}
+                  </span>
+                </EachSubArea>
+                {region &&
+                  region[subFilterOn - 1].sub_region_date.map((region) => {
+                    return (
+                      <EachSubArea
+                        onClick={() => {
+                          getLocation("sub", region.id, region.name);
+                          this.closeThisPlz();
+                        }}
+                      >
+                        <span>{region.name}</span>
+                        <span>{region.total}</span>
+                      </EachSubArea>
+                    );
+                  })}
+              </SubFilter>
+            )}
           </ModalBody>
         </ModalBox>
       </>
@@ -152,7 +182,7 @@ const EachSubArea = styled.button`
   background-color: white;
   border: none;
   span:first-of-type {
-    font-weight: 500;
+    font-weight: 600;
   }
   span:last-of-type {
     margin-left: 6px;
