@@ -35,19 +35,17 @@ class Payment extends Component {
     this.setState(
       {
         detail: this.props.location.state,
+        fripPrice: this.props.location.state.price.toLocaleString(),
       },
       () => {
-        fetch(
-          `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
+        fetch(`http://13.59.219.151:8000/frip/purchase/23`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res);
+            console.log(res, "res");
             this.setState(
               {
                 data: res.purchase[0],
@@ -62,14 +60,14 @@ class Payment extends Component {
   };
 
   requestPay = () => {
-    const { data, detail, whichPay } = this.state;
+    const { data, detail, whichPay, fripPrice } = this.state;
     IMP.request_pay(
       {
         pg: "inicis",
         pay_method: "card",
         merchant_uid: "merchant_" + new Date().getTime(),
         name: `${data.title}`,
-        amount: `${detail.price}`,
+        amount: `${fripPrice}`,
         buyer_email: "iamport@siot.do",
         buyer_name: "구매자이름",
         buyer_tel: "010-1234-5678",
@@ -143,7 +141,7 @@ class Payment extends Component {
   };
 
   render() {
-    const { select, payMethod, tncCheck, detail, data } = this.state;
+    const { fripPrice, select, payMethod, tncCheck, detail, data } = this.state;
 
     return (
       <>
@@ -177,14 +175,14 @@ class Payment extends Component {
                 </FripAbout>
                 <PriceDetail>
                   <span>참가비 (1인) x 1개</span>
-                  <span>{detail.price}원</span>
+                  <span>{fripPrice}원</span>
                 </PriceDetail>
               </FripDetail>
             </Frip>
             <PriceNCoupon>
               <ProductPrice>
                 <span>상품 금액</span>
-                <span>{`${detail.price} 원`}</span>
+                <span>{`${fripPrice} 원`}</span>
               </ProductPrice>
               <Coupon>
                 <span>쿠폰 /할인 코드</span>
@@ -222,7 +220,7 @@ class Payment extends Component {
                 </div>
                 <div>
                   <span>최종 결제 금액</span>
-                  <span>{`${detail.price} 원`}</span>
+                  <span>{`${fripPrice} 원`}</span>
                 </div>
               </TotalPrice>
             </PriceNCoupon>
@@ -277,7 +275,7 @@ class Payment extends Component {
           </Tnc>
           <Pay>
             <button onClick={this.requestPay}>
-              <span>{detail.price}</span>원 결제하기
+              <span>{fripPrice}</span>원 결제하기
             </button>
           </Pay>
         </MainContainer>

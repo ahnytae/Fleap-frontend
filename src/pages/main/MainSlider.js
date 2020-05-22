@@ -44,25 +44,26 @@ function SamplePrevArrow(props) {
 
 class MainSlider extends Component {
   state = {
-    imgSrc: [],
+    slider: {
+      firstSlider: [],
+    },
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/data/MainData.json")
+    fetch("http://13.59.219.151:8000/frip?slider=True")
       .then((res) => res.json())
       .then((res) => {
-        this.setState(
-          {
-            imgSrc: res.firstSlider,
+        this.setState({
+          slider: {
+            firstSlider: res.slider.firstSlider,
           },
-          () => console.log("hotffff", res.hotFrip)
-        );
+        });
       });
   }
 
   render() {
-    console.log("src list: ", this.state.imgSrc[0]);
-    const { imgSrc } = this.state;
+    console.log("first: ", this.state.slider.firstSlider);
+    const { slider } = this.state;
 
     const settings = {
       dots: true,
@@ -83,12 +84,14 @@ class MainSlider extends Component {
     return (
       <div>
         <Slider {...settings}>
+          {slider.firstSlider.map((item, idx) => {
+            return (
+              <Link to={idx === 1 ? "/surfing" : ""} key={"item" + idx}>
+                <img src={item} alt="" />
+              </Link>
+            );
+          })}
           {/* <Link to="#">
-            {imgSrc.map((item, idx) => {
-              return <img src={item.imgSrc} alt="" />;
-            })}
-          </Link> */}
-          <Link to="#">
             <img src={imgSrc[0]} alt="" />
           </Link>
           <Link to="#">
@@ -105,7 +108,7 @@ class MainSlider extends Component {
           </Link>
           <Link to="#">
             <img src={imgSrc[5]} alt="" />
-          </Link>
+          </Link> */}
         </Slider>
       </div>
     );

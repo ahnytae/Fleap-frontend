@@ -1,0 +1,14 @@
+{
+  "slider": {
+    "firstSlider": [
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EB%A9%94%EC%9D%B8%EB%B0%B0%EB%84%88_1860x744_01_1589796972304",
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EB%A9%94%EC%9D%B8%EB%B0%B0%EB%84%88_1860x744_01_1589352925017",
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EB%A9%94%EC%9D%B8%EB%B0%B0%EB%84%88_1860x744_01_1589869242482",
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EB%A9%94%EC%9D%B8%EB%B0%B0%EB%84%88_1860x744_01_1588917516753"
+    ],
+    "secondSlider": [
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EA%B8%B0%ED%9A%8D%EC%A0%84%EC%99%B8%EB%B6%80%EB%B0%B0%EB%84%88_1860x744_1588146262451",
+      "https://res.cloudinary.com/frientrip/image/upload/ar_5:2,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/%EC%9B%B9_%EA%B8%B0%ED%9A%8D%EC%A0%84%EC%99%B8%EB%B6%80%EB%B0%B0%EB%84%88_1860x744_1587971690929"
+    ]
+  }
+}

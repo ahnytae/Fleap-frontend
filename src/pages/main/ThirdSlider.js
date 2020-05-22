@@ -48,23 +48,28 @@ function SamplePrevArrow(props) {
 
 class ThirdSlider extends Component {
   state = {
-    imgSrc: [],
+    slider: {
+      secondSlider: [],
+    },
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/data/MainData.json")
+    fetch("http://13.59.219.151:8000/frip?slider=True")
       .then((res) => res.json())
       .then((res) => {
         this.setState(
           {
-            imgSrc: res.thirdSlider,
+            slider: {
+              secondSlider: res.slider.secondSlider,
+            },
           },
-          () => console.log("333333", res.thirdSlider)
+          () => console.log("secondeee", this.state.secondSlider)
         );
       });
   }
+
   render() {
-    const { imgSrc } = this.state;
+    const { slider } = this.state;
 
     const settings = {
       dots: true,
@@ -85,7 +90,14 @@ class ThirdSlider extends Component {
     return (
       <div>
         <Slider {...settings}>
-          <Link to="#">
+          {slider.secondSlider.map((item, idx) => {
+            return (
+              <Link to="#" key={"item" + idx}>
+                <img src={item} alt="" />
+              </Link>
+            );
+          })}
+          {/* <Link to="#">
             <img src={imgSrc[0]} alt="" />
           </Link>
           <Link to="#">
@@ -96,7 +108,7 @@ class ThirdSlider extends Component {
           </Link>
           <Link to="#">
             <img src={imgSrc[3]} alt="" />
-          </Link>
+          </Link> */}
         </Slider>
       </div>
     );
