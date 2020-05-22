@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "frip_id": 98,
+      "catch_phrase": "도예 공방에서 세상에서 단 하나뿐인",
+      "title": "[널위한선물] 도예 공방 원데이 / 도자기 그릇 만들기 (예약가능)",
+      "location": "성동/광진구",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/1610_Gongbang_01_1477457672181",
+      "price": 32000,
+      "faked_price": 35000,
+      "new": true,
+      "startdate": "2016-10-25T15:00:00Z",
+      "enddate": "2020-12-30T15:00:00Z",
+      "grade": "2.50000",
+      "total": 63
+    },
+    {
+      "frip_id": 99,
+      "catch_phrase": "홈카페에 어울리는 레트로 유리컵",
+      "title": "예쁜 유리컵 드로잉 클래스 (예약 가능)",
+      "location": "종로/중구",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1574750686154_88096",
+      "price": 50000,
+      "faked_price": null,
+      "new": false,
+      "startdate": "2019-05-15T15:00:00Z",
+      "enddate": "2020-12-30T15:00:00Z",
+      "grade": "2.62500",
+      "total": 63
+    },
+    {
+      "frip_id": 100,
+      "catch_phrase": "가족이랑 프립하고 에너지 받자!",
+      "title": "[가정의달] 물고기 도자기 접시 만들기 (예약 가능)",
+      "location": "마포/서대문구",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1588079813972_879379",
+      "price": 38000,
+      "faked_price": null,
+      "new": false,
+      "startdate": "2019-06-24T15:00:00Z",
+      "enddate": "2020-05-31T15:00:00Z",
+      "grade": "2.00000",
+      "total": 63
+    },
+    {
+      "frip_id": 101,
+      "catch_phrase": "내맘대로 만들기",
+      "title": "마블링 도자기 만들기 (예약 가능)",
+      "location": "강남/서초구",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/6CCB1798-9837-4C73-AD48-4B8A20D47F22_bbuwh2",
+      "price": 45000,
+      "faked_price": null,
+      "new": false,
+      "startdate": "2020-05-03T15:00:00Z",
+      "enddate": "2021-12-31T15:00:00Z",
+      "grade": "2.75000",
+      "total": 63
+    }
+  ]
+}

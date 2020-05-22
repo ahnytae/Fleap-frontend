@@ -19,6 +19,7 @@ export default class FilterModal extends Component {
         "가격 낮은순",
       ],
       labelKeys: ["당일 사용 가능만", "슈퍼호스트만"],
+      which: null,
     };
   }
 
@@ -52,15 +53,21 @@ export default class FilterModal extends Component {
         );
   };
   render() {
-    const { radio, checked, filterKeys, labelKeys } = this.state;
-    const { closed } = this.props;
+    const { radio, checked, filterKeys, labelKeys, which } = this.state;
+    const { closed, getFilter } = this.props;
 
     const RadioList = filterKeys.map((filter, idx) => {
       return (
         <RadioDiv idx={idx} radio={radio[idx]}>
           <span>{filter}</span>
           <StyledLabel>
-            <input type="radio" onClick={() => this.handleRadio(idx)} />
+            <input
+              type="radio"
+              onClick={() => {
+                this.handleRadio(idx);
+                this.setState({ which: idx });
+              }}
+            />
           </StyledLabel>
         </RadioDiv>
       );
@@ -94,7 +101,14 @@ export default class FilterModal extends Component {
             <div></div>
           </ModalBody>
           <ModalFooter>
-            <button>적용하기</button>
+            <button
+              onClick={() => {
+                getFilter(which);
+                closed();
+              }}
+            >
+              적용하기
+            </button>
           </ModalFooter>
         </ModalBox>
       </>
