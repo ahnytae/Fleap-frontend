@@ -1,94 +1,117 @@
 import React, { Component } from "react";
-import { Slide } from "react-slideshow-image";
-import styled from "styled-components";
+import Slider from "react-slick";
+import { withRouter, Link } from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const slideImages = [
-  "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/98466_banner_1543489552616",
-  "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/98466_banner_1543489230799",
-];
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "inherit",
+        color: "#ffff",
+        position: "absolute",
+        top: "50%",
+        right: "30px",
+      }}
+      onClick={onClick}
+    ></div>
+  );
+}
 
-const properties = {
-  duration: 1500,
-  transitionDuration: 500,
-  infinite: true,
-  indicators: true,
-  arrows: true,
-};
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "inherit",
+        position: "absolute",
+        top: "50%",
+        left: "30px",
+        zIndex: "1",
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
-class DetailSlider extends Component {
-  constructor(props) {
-    super(props);
+class MainSlider extends Component {
+  state = {
+    detail: [
+      {
+        image_url: [],
+      },
+    ],
+  };
 
-    this.state = {
-      detail: [],
-    };
-  }
-  componentDidMount = () => {
-    fetch("http://localhost:3000/data/detail.json")
+  componentDidMount() {
+    fetch("http://10.58.0.153:8000/frip/22")
       .then((res) => res.json())
       .then((res) => {
-        // console.log("firstly: ", res.detail);
         this.setState(
           {
             detail: res.detail,
           },
-          () => {
-            console.log("secondly: ", res.detail);
-          }
+          () => console.log("hotffff", res.detail)
         );
       });
-  };
+  }
+
   render() {
+    console.log("랜더 스테이트: ", this.state.detail);
+    const { detail } = this.state;
+
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      duration: 1500,
+      transitionDuration: 500,
+      infinite: true,
+      indicators: true,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
+    };
     return (
-      <SlideContainer>
-        <Slide {...properties}>
-          <div className="each-slide">
-            <MainImg>
-              <img
-                alt=""
-                src={this.state.detail[0] && this.state.detail[0].datail_img}
-              />
-            </MainImg>
-          </div>
-          <div className="each-slide">
-            <MainImg>
-              <img
-                alt=""
-                src={this.state.detail[0] && this.state.detail[0].datail_img2}
-              />
-            </MainImg>
-          </div>
-          <div className="each-slide">
-            <MainImg>
-              <img
-                alt=""
-                src={this.state.detail[0] && this.state.detail[0].datail_img3}
-              />
-            </MainImg>
-          </div>
-        </Slide>
-      </SlideContainer>
+      <div>
+        <Slider {...settings}>
+          {detail[0].image_url.map((item, idx) => {
+            return <img src={item} alt="" />;
+          })}
+
+          {/* <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link>
+          <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link>
+          <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link>
+          <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link>
+          <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link>
+          <Link to="#">
+            <img src={detail.detail_img} alt="" />
+          </Link> */}
+        </Slider>
+      </div>
     );
   }
 }
-
-export default DetailSlider;
-
-const SlideContainer = styled.div`
-  margin-bottom: 40px;
-  width: 560px;
-  height: 420px;
-  background-size: 560px 420px;
-  background-repeat: no-repeat;
-  cursor: pointer;
-`;
-
-const MainImg = styled.div`
-  img {
-    width: 560px;
-    height: 420px;
-    background-size: 560px 420px;
-    background-repeat: no-repeat;
-    cursor: pointer;
-  }
-`;
+export default MainSlider;
