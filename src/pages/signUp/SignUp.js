@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Auth, { isValidation, isPw } from "../signIn/Auth";
+// import Auth, { isEmail, isPw } from "../signIn/Auth";
 import styled from "styled-components";
 
 const pwCheckText = () => {
@@ -17,46 +17,21 @@ const repwCheckText = () => {
 
 class SignUp extends Component {
   state = {
-    idValueLength: 0,
-    pwValueLength: 0,
-    rePwValueLength: 0,
-    idValue: "",
-    pwValue: "",
+    email: "",
+    password: "",
+    rePassword: "",
     idActive: false,
-    checked: false,
-    rePwOverlap: false,
+    // checked: false,
+    // rePwOverlap: false,
   };
 
-  onChangeId = (e) => {
-    if (isValidation(e.target.value)) {
-      this.setState(
-        {
-          idValueLength: e.target.value.length,
-          idValue: e.target.value,
-          idActive: true,
-        },
-        () => console.log("idvas ", this.state.idValue)
-      );
-    }
-  };
-
-  onChangePw = (e) => {
-    this.setState({
-      pwValueLength: e.target.value.length,
-      pwValue: e.target.value,
-    });
-  };
-
-  onChangeRePw = (e) => {
-    if (this.state.pwValue === this.state.rePwValue) {
-      this.setState({ rePwOverlap: !this.state.rePwOverlap });
-    }
+  onChangeHandler = (e) => {
     this.setState(
       {
-        rePwValueLength: e.target.value.length,
-        rePwValue: e.target.value,
+        [e.target.name]: e.target.value,
+        idActive: true,
       },
-      () => console.log("overlap: ", this.state.rePwVOverlap)
+      console.log(this.state)
     );
   };
 
@@ -69,17 +44,25 @@ class SignUp extends Component {
     );
   };
 
+  signinHandler = (e) => {
+    e.preventDefault();
+    fetch("http://10.58.1.144:8080/user/sign-up", {
+      method: "POST",
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    }).then((response) => {
+      if (response.status === 200) {
+        this.props.history.push("/main");
+      } else {
+        alert("아이디와 비밀번호가 맞지 않습니다.");
+      }
+    });
+  };
+
   render() {
-    const {
-      idValueLength,
-      pwValueLength,
-      rePwValueLength,
-      idActive,
-      rePwValue,
-      idValue,
-      pwValue,
-      checked,
-    } = this.state;
+    const { idActive, rePassword, email, password, checked } = this.state;
     return (
       <div className="EmailLogin">
         <EmailBox>
@@ -87,26 +70,29 @@ class SignUp extends Component {
           <form>
             <FormBox>
               <input
+                name="email"
                 type="id"
                 placeholder="이메일로 입력"
-                onChange={(e) => this.onChangeId(e)}
+                onChange={this.onChangeHandler}
               />
             </FormBox>
             <FormBox>
               <input
+                name="password"
                 type="password"
-                value={pwValue}
+                value={password}
                 placeholder="비밀번호 입력"
-                onChange={(e) => this.onChangePw(e)}
+                onChange={this.onChangeHandler}
               />
-              <div>{this.state.pwValueLength > 4 ? pwCheckText() : ""}</div>
+              <div>{this.state.pwValueLength ? pwCheckText() : ""}</div>
             </FormBox>
             <FormBox>
               <input
+                name="rePassword"
                 type="password"
-                value={rePwValue}
+                value={rePassword}
                 placeholder="비밀번호 확인"
-                onChange={(e) => this.onChangeRePw(e)}
+                onChange={this.onChangeHandler}
               />
               <div>
                 {this.state.rePwOverlap === false ? repwCheckText() : ""}
@@ -125,9 +111,10 @@ class SignUp extends Component {
             </Label>
             <LoginBtn
               idActive={idActive}
-              pwValueLength={pwValueLength}
-              rePwValueLength={rePwValueLength}
+              pwValueLength={password.length}
+              rePwValueLength={rePassword.length}
               checked={checked}
+              onClick={(e) => this.signinHandler(e)}
             >
               가입하기
             </LoginBtn>
@@ -197,18 +184,18 @@ const LoginBtn = styled.button`
   line-height: 13px;
   background-color: rgb(51, 151, 255);
   text-align: center;
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
   color: white;
   font-size: 13px;
   padding: 0px 13px;
   border-radius: 5px;
-  pointer-events: none;
-  border: none;
+  /* pointer-events: none; */
 
   background-color: ${(props) =>
-    // props.idValueLength >= 3 &&
-    props.pwValueLength >= 1 && props.rePwValueLength >= 1 && props.checked
-      ? props.backgroundColor
+    props.emailLength >= 1 && props.password.Length >= 1
+      ? // props.rePassword.Length >= 1 &&
+        // props.checked === true
+        props.backgroundColor
       : "rgb(221, 221, 221)"};
 `;
 

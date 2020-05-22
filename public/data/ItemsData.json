@@ -1,0 +1,32 @@
+{
+  "hotFrip": [
+    {
+      "local": "서초구 외 1 지역",
+      "imgSrc": "https://res.cloudinary.com/frientrip/image/upload/ar_75:56,c_fill,dpr_2.0,f_auto,g_auto,q_auto,w_310/product_banner_1589244430452_980319",
+      "subTitle": "텃밭에서 직접 수확하는 체험",
+      "title": "직접 딴 허브로 허브오일 만들기",
+      "price": "35,000원"
+    },
+    {
+      "local": "서초구 외 1 지역",
+      "imgSrc": "https://res.cloudinary.com/frientrip/image/upload/ar_75:56,c_fill,dpr_2.0,f_auto,g_auto,q_auto,w_310/20200425_235841_f6daf9",
+      "subTitle": "세상에 단 하나뿐인",
+      "title": "[DIY키트/무료배송] 내 아이의 귀염뽀짝 신발만들기",
+      "price": "50,000원"
+    },
+    {
+      "local": "성동구 외 1 지역",
+      "imgSrc": "https://res.cloudinary.com/frientrip/image/upload/ar_75:56,c_fill,dpr_2.0,f_auto,g_auto,q_auto,w_310/product_banner_1588725665377_969763",
+      "subTitle": "가족이랑 프립하고 에너지 받자!",
+      "title": "[가정의달] 초코품은 백설기 & 앙버터샌드",
+      "price": "48,000원"
+    },
+    {
+      "local": "양양",
+      "imgSrc": "https://res.cloudinary.com/frientrip/image/upload/ar_75:56,c_fill,dpr_2.0,f_auto,g_auto,q_auto,w_310/product_banner_1551174409977_658106",
+      "subTitle": "#우린뭔가 #달라달라 with서프오션",
+      "title": "[여성대원][앙렉스x서핑캠프] 더 특.별.한 1박 2일",
+      "price": "165,000원"
+    }
+  ]
+}
