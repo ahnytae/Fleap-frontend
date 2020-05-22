@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 class SecondItems extends Component {
@@ -59,7 +59,6 @@ const Container = styled.div`
   flex-flow: column nowrap;
   margin: 0px auto;
   padding: 0px 20px;
-
   img {
     width: 930px;
   }
@@ -67,23 +66,19 @@ const Container = styled.div`
 
 const Category = styled.div`
   margin-bottom: 40px;
-
   ul {
     margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
   }
-
   h2 {
     margin-bottom: 39px;
   }
-
   li {
     width: 86px;
     border-radius: 50%;
     text-align: center;
   }
-
   p {
     margin-top: 12px;
   }
@@ -105,7 +100,6 @@ const HotFrip = styled(Category)`
     border-radius: 5px;
     border-style: none;
   }
-
   span {
     height: 10px;
     color: white;
@@ -115,19 +109,16 @@ const HotFrip = styled(Category)`
     text-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
     margin: 2px 0px 0px 2px;
   }
-
   div {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
     line-height: 18px;
     font-size: 14px;
-
     h2 {
       margin-bottom: 0px;
     }
   }
-
   li {
     margin-right: 10px;
     width: calc(25% - 7.5px);
@@ -135,7 +126,6 @@ const HotFrip = styled(Category)`
     text-align: left;
     position: relative;
   }
-
   p {
     &:nth-child(2) {
       margin-top: 14px;
@@ -146,7 +136,6 @@ const HotFrip = styled(Category)`
       line-height: 14px;
       color: rgb(155, 155, 155);
     }
-
     &:nth-child(3) {
       margin-top: 10px;
       height: auto;
@@ -158,23 +147,19 @@ const HotFrip = styled(Category)`
       font-weight: 500;
       text-overflow: ellipsis;
     }
-
     &:nth-child(4) {
       margin-top: 14px;
       line-height: 14px;
       font-size: 14px;
     }
   }
-
   /* new 로고 */
   img:nth-child(6) {
     width: 30px;
     margin-top: 16px;
     float: left;
   }
-
   /* 별 이미지 */
-
   img:nth-child(7) {
     width: 16px;
     margin: 16px 2px 0 -30px;
@@ -208,6 +193,4 @@ const Score = styled(SubTitle)`
   font-size: 11px;
   font-weight: 400;
   display: inline-block;
-  /* float: left; */
-  /* line-height: 25px; */
 `;

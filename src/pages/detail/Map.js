@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import styled from "styled-components";
-
 class Map extends React.Component {
   constructor(props) {
     super(props);
