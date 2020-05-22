@@ -33,7 +33,6 @@ function Nav() {
     "기업복지 신청",
   ];
 
-
   return (
     <Wrapper
       style={{
