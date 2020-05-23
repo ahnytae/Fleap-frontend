@@ -9,7 +9,6 @@ IMP.init("imp89785568");
 class Payment extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       select: true,
       payMethod: {
@@ -39,7 +38,7 @@ class Payment extends Component {
       },
       () => {
         fetch(
-          `http://10.58.0.153:8000/frip/purchase/${this.props.match.params.id}`,
+          `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -76,7 +75,7 @@ class Payment extends Component {
         buyer_tel: "010-1234-5678",
         buyer_addr: "서울특별시 강남구 삼성동",
         buyer_postcode: "123-456",
-        m_redirect_url: "http://localhost:3000/myfrip",
+        m_redirect_url: "http://13.59.219.151:8000/myfrip",
       },
       function (rsp) {
         let msg;
@@ -87,7 +86,7 @@ class Payment extends Component {
           msg += "결제 금액 : " + rsp.paid_amount;
           msg += "카드 승인번호 : " + rsp.apply_num;
 
-          fetch(`http://10.58.0.153:8000/frip/purchase/98`, {
+          fetch(`http://13.59.219.151:8000/frip/purchase/98`, {
             method: "POST",
             mode: "cors",
             credentials: "same-origin",
@@ -103,7 +102,7 @@ class Payment extends Component {
             }),
           }).then((res) => {
             setTimeout(() => {
-              this.props.history.push("/");
+              this.props.history.push("/myfrip");
               window.location.reload();
             }, 3000);
           });
@@ -144,15 +143,7 @@ class Payment extends Component {
   };
 
   render() {
-    const {
-      select,
-      payMethod,
-      tncCheck,
-      fripDetail,
-      fripPrice,
-      detail,
-      data,
-    } = this.state;
+    const { select, payMethod, tncCheck, detail, data } = this.state;
 
     return (
       <>
