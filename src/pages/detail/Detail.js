@@ -111,6 +111,35 @@ class Detail extends Component {
   };
 
   render() {
+    let optionArr = [],
+      child_optionArr = [];
+
+    if (this.state.optionGroupCount && this.state.childOptionGroupCount) {
+      for (
+        let i = 1;
+        i <
+        this.state.detail.choice.option.length / this.state.optionGroupCount;
+        i++
+      ) {
+        optionArr.push(
+          this.state.detail.choice.option[
+            this.state.Oclicked * this.state.optionGroupCount + i
+          ]
+        );
+      }
+      for (
+        let i = 1;
+        i <
+        this.state.detail.choice.option.length / this.state.optionGroupCount;
+        i++
+      ) {
+        child_optionArr.push(
+          this.state.detail.choice.child_option[
+            this.state.Oclicked * this.state.childOptionGroupCount + i
+          ]
+        );
+      }
+    }
     console.log("clickedData", this.state.clickedData);
 
     const tempStyle = {
@@ -478,7 +507,7 @@ class Detail extends Component {
             </Content>
           </Detailshape>
         </DetailPage>
-        {this.state.optionGroupCount && this.state.childOptionGroupCount ? (
+        {this.state.optionGroupCount || this.state.childOptionGroupCount ? (
           <OptionsWrap>
             {this.state.detail.choice.itinerary.length === 0 ? (
               ""
