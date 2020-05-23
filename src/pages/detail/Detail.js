@@ -4,6 +4,7 @@ import Down from "../../images/down.png";
 import Upward from "../../images/upward.png";
 import KakaoMap from "./Map";
 import OptionWrap from "./OptionWrap";
+import OptionChoice from "./OptionChoice";
 import styled from "styled-components";
 
 class Detail extends Component {
@@ -28,7 +29,7 @@ class Detail extends Component {
 
   componentDidMount() {
     //fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
-    fetch(`http://13.59.219.151:8000/frip/23`)
+    fetch(`http://13.59.219.151:8000/frip/1`)
       .then((res) => {
         console.log("firstly: ", res);
         return res.json();
@@ -517,6 +518,10 @@ class Detail extends Component {
             ) : (
               ""
             )}
+            <OptionChoice />
+            <OptionJoin>
+              <OptionData onClick={() => this.pushData()}>참여하기</OptionData>
+            </OptionJoin>
           </OptionsWrap>
         )}
       </Product>
@@ -1139,4 +1144,28 @@ const OptionAttend = styled.div`
     height: 100px;
     cursor: pointer;
   }
+`;
+
+const OptionJoin = styled.div`
+  position: relative;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  margin-top: auto;
+  padding: 80px 0px;
+`;
+
+const OptionData = styled.button`
+  width: 100%;
+  height: 50px;
+  line-height: 13px;
+  background-color: rgb(51, 151, 255);
+  text-align: center;
+  cursor: not-allowed;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 0px 13px;
+  border-radius: 5px;
 `;
