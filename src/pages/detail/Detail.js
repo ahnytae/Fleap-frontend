@@ -3,8 +3,210 @@ import DetailSlider from "../../components/slider/components/detail/DetailSlider
 import Down from "../../images/down.png";
 import Upward from "../../images/upward.png";
 import KakaoMap from "./Map";
+import OptionWrap from "./OptionWrap";
 
 import styled from "styled-components";
+
+const choice = {
+  itinerary: [
+    {
+      id: 51,
+      start_date: "2020-05-22T21:45:00",
+      end_date: "2020-05-24T09:00:00",
+      max_quantity: 8,
+    },
+    {
+      id: 52,
+      start_date: "2020-05-29T21:45:00",
+      end_date: "2020-05-31T09:00:00",
+      max_quantity: 8,
+    },
+    {
+      id: 53,
+      start_date: "2020-06-05T21:45:00",
+      end_date: "2020-06-07T09:00:00",
+      max_quantity: 8,
+    },
+    {
+      id: 54,
+      start_date: "2020-06-12T21:45:00",
+      end_date: "2020-06-14T09:00:00",
+      max_quantity: 8,
+    },
+  ],
+  option: [
+    {
+      id: 105,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 106,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 107,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 108,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 109,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 110,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 111,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 112,
+      title: "기본 옵션",
+      content: null,
+      max_quantity: null,
+      price: null,
+      base_price: null,
+      option_type: "option",
+    },
+  ],
+  child_option: [
+    {
+      id: 21,
+      title: "강습 진행 여부",
+      content: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 22,
+      title: "참가비(1인)",
+      content: null,
+      price: 165000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 23,
+      title: "참가비(1인)+슈트",
+      content: null,
+      price: 175000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 24,
+      title: "참가비(1인)+슈트+초보강습",
+      content: null,
+      price: 205000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 25,
+      title: "강습 진행 여부",
+      content: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 26,
+      title: "참가비(1인)",
+      content: null,
+      price: 165000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 27,
+      title: "참가비(1인)+슈트",
+      content: null,
+      price: 175000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 28,
+      title: "참가비(1인)+슈트+초보강습",
+      content: null,
+      price: 205000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 29,
+      title: "강습 진행 여부",
+      content: null,
+      price: null,
+      base_price: null,
+      option_type: "optionGroup",
+    },
+    {
+      id: 30,
+      title: "참가비(1인)",
+      content: null,
+      price: 165000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 31,
+      title: "참가비(1인)+슈트",
+      content: null,
+      price: 175000,
+      base_price: null,
+      option_type: "option",
+    },
+    {
+      id: 32,
+      title: "참가비(1인)+슈트+초보강습",
+      content: null,
+      price: 205000,
+      base_price: null,
+      option_type: "option",
+    },
+  ],
+};
 
 class Detail extends Component {
   constructor(props) {
@@ -13,6 +215,8 @@ class Detail extends Component {
     this.state = {
       clickbutton: [false, false, false],
       detail: false,
+      Iclicked: false,
+      Oclicked: false,
     };
   }
 
@@ -25,13 +229,13 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch("http://10.58.0.153:8000/frip/99")
+    fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
       .then((res) => {
         console.log("firstly: ", res);
         return res.json();
       })
       .then((res) => {
-        console.log("ddddddzzz ", res);
+        console.log("ddddddzzz ", res.detail[0]);
         this.setState(
           {
             detail: res.detail[0],
@@ -42,7 +246,7 @@ class Detail extends Component {
         );
       });
 
-    this.getData();
+    // this.getData();
   }
 
   getData() {
@@ -70,8 +274,20 @@ class Detail extends Component {
       });
   };
 
+  idxChange = (idx) => {
+    this.setState({
+      Iclicked: idx,
+    });
+  };
+
+  idxOChange = (idx) => {
+    this.setState({
+      Oclicked: idx,
+    });
+  };
+
   render() {
-    console.log(this.props.match);
+    console.log(this.state.detail.child_option);
     // console.log("thi", this.state.data);
     // console.log(
     //   "detail",
@@ -443,44 +659,66 @@ class Detail extends Component {
             </Content>
           </Detailshape>
         </DetailPage>
+        {this.state.detail && (
+          <OptionsWrap>
+            {this.state.detail.choice.itinerary.length === 0 ? (
+              ""
+            ) : (
+              <OptionWrap
+                title="일정"
+                data={this.state.detail.choice.itinerary}
+                option={this.state.detail.choice.option}
+                idxChange={this.idxChange}
+                isOpen={false}
+              />
+            )}
 
-        <Option>
-          <OptionAll>
-            <OptionProperty>
-              <OptionName>
-                옵션 선택
-                <OptionCal> 달력에서 보기</OptionCal>
-              </OptionName>
-            </OptionProperty>
-            <OptionTopButton>
-              <OptionTopName>
-                <OptionTopClick>
-                  <OptionClickName>
-                    <OptionSchedule
-                      onClick={() => {
-                        this.handleClick(0);
-                      }}
-                    >
-                      일정{" "}
-                      <img
-                        alt=""
-                        src={this.state.clickbutton[0] ? Down : Upward}
-                      ></img>{" "}
-                    </OptionSchedule>
-                    <QuestionContent
-                      style={{
-                        display: this.state.clickbutton[0] ? "block" : "none",
-                      }}
-                    ></QuestionContent>
-                  </OptionClickName>
-                </OptionTopClick>
-              </OptionTopName>
-            </OptionTopButton>
-          </OptionAll>
-          <OptionAttend>
-            <button onClick={() => this.pushData()} />
-          </OptionAttend>
-        </Option>
+            {this.state.Iclicked !== false ? (
+              <OptionWrap
+                title="기본 옵션"
+                data={[
+                  this.state.detail.choice.option[this.state.Iclicked * 2 + 1],
+                ]}
+                isOpen={true}
+                idxOChange={this.idxOChange}
+              />
+            ) : (
+              ""
+            )}
+
+            {this.state.detail.choice.itinerary.length !== 0 ||
+            this.state.detail.choice.option.length === 0 ? (
+              ""
+            ) : (
+              <OptionWrap
+                title="기본 옵션"
+                data={this.state.detail.choice.option}
+                isOpen={false}
+                notMore
+              />
+            )}
+
+            {/* child_option */}
+            {this.state.detail.choice.child_option.length !== 0 &&
+            this.state.Oclicked !== false ? (
+              <OptionWrap
+                title={this.state.detail.choice.child_option[0].title}
+                data={[
+                  this.state.detail.choice.child_option[
+                    this.state.Oclicked * 4 + 1
+                  ],
+                  this.state.detail.choice.child_option[
+                    this.state.Oclicked * 4 + 2
+                  ],
+                  choice.child_option[this.state.Oclicked * 4 + 3],
+                ]}
+                isOpen={true}
+              />
+            ) : (
+              ""
+            )}
+          </OptionsWrap>
+        )}
       </Product>
     );
   }
@@ -986,15 +1224,11 @@ const QuestionContent = styled.div`
   }
 `;
 
-const Option = styled.div`
+const OptionsWrap = styled.div`
   margin-top: 35px;
-  -webkit-box-flex: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
   width: 370px;
-  height: auto;
   border-left: 1px solid rgb(238, 238, 238);
+  padding: 0px 30px;
 `;
 
 const OptionAll = styled.div`
