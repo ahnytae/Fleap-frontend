@@ -49,7 +49,6 @@ const OptionWrap = ({
   const [isClicked, setCliked] = useState(isOpen);
 
   const 이게마지막선택이니 = (item) => {
-    console.log("eachItem", item);
     if (item.price) {
       setClickedData(item);
     }
