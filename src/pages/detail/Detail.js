@@ -7,207 +7,6 @@ import OptionWrap from "./OptionWrap";
 
 import styled from "styled-components";
 
-const choice = {
-  itinerary: [
-    {
-      id: 51,
-      start_date: "2020-05-22T21:45:00",
-      end_date: "2020-05-24T09:00:00",
-      max_quantity: 8,
-    },
-    {
-      id: 52,
-      start_date: "2020-05-29T21:45:00",
-      end_date: "2020-05-31T09:00:00",
-      max_quantity: 8,
-    },
-    {
-      id: 53,
-      start_date: "2020-06-05T21:45:00",
-      end_date: "2020-06-07T09:00:00",
-      max_quantity: 8,
-    },
-    {
-      id: 54,
-      start_date: "2020-06-12T21:45:00",
-      end_date: "2020-06-14T09:00:00",
-      max_quantity: 8,
-    },
-  ],
-  option: [
-    {
-      id: 105,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 106,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 107,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 108,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 109,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 110,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 111,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 112,
-      title: "기본 옵션",
-      content: null,
-      max_quantity: null,
-      price: null,
-      base_price: null,
-      option_type: "option",
-    },
-  ],
-  child_option: [
-    {
-      id: 21,
-      title: "강습 진행 여부",
-      content: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 22,
-      title: "참가비(1인)",
-      content: null,
-      price: 165000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 23,
-      title: "참가비(1인)+슈트",
-      content: null,
-      price: 175000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 24,
-      title: "참가비(1인)+슈트+초보강습",
-      content: null,
-      price: 205000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 25,
-      title: "강습 진행 여부",
-      content: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 26,
-      title: "참가비(1인)",
-      content: null,
-      price: 165000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 27,
-      title: "참가비(1인)+슈트",
-      content: null,
-      price: 175000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 28,
-      title: "참가비(1인)+슈트+초보강습",
-      content: null,
-      price: 205000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 29,
-      title: "강습 진행 여부",
-      content: null,
-      price: null,
-      base_price: null,
-      option_type: "optionGroup",
-    },
-    {
-      id: 30,
-      title: "참가비(1인)",
-      content: null,
-      price: 165000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 31,
-      title: "참가비(1인)+슈트",
-      content: null,
-      price: 175000,
-      base_price: null,
-      option_type: "option",
-    },
-    {
-      id: 32,
-      title: "참가비(1인)+슈트+초보강습",
-      content: null,
-      price: 205000,
-      base_price: null,
-      option_type: "option",
-    },
-  ],
-};
-
 class Detail extends Component {
   constructor(props) {
     super(props);
@@ -344,11 +143,11 @@ class Detail extends Component {
                           <PriceText> 원</PriceText>
                         </PriceNum>
                       </div>
-                      <DiscountPrice>
-                        {this.state.detail &&
-                          this.state.detail.discount_percentage}
-                        %
-                      </DiscountPrice>
+                      {this.state.detail.discount_percentage && (
+                        <DiscountPrice>
+                          {this.state.detail.discount_percentage + "%"}
+                        </DiscountPrice>
+                      )}
                     </Price>
                   </TitleSubstance>
                   <Explain>
@@ -710,7 +509,9 @@ class Detail extends Component {
                   this.state.detail.choice.child_option[
                     this.state.Oclicked * 4 + 2
                   ],
-                  choice.child_option[this.state.Oclicked * 4 + 3],
+                  this.state.detail.choice.child_option[
+                    this.state.Oclicked * 4 + 3
+                  ],
                 ]}
                 isOpen={true}
               />
