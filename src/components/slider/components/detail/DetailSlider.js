@@ -52,7 +52,7 @@ class MainSlider extends Component {
   };
 
   componentDidMount() {
-    fetch("http://10.58.0.153:8000/frip/22")
+    fetch("http://13.59.219.151:8000/frip/1")
       .then((res) => res.json())
       .then((res) => {
         this.setState(

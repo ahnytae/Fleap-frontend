@@ -4,7 +4,6 @@ import Down from "../../images/down.png";
 import Upward from "../../images/upward.png";
 import KakaoMap from "./Map";
 import OptionWrap from "./OptionWrap";
-
 import styled from "styled-components";
 
 class Detail extends Component {
@@ -28,7 +27,8 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
+    //fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
+    fetch(`http://13.59.219.151:8000/frip/23`)
       .then((res) => {
         console.log("firstly: ", res);
         return res.json();
@@ -40,11 +40,10 @@ class Detail extends Component {
             detail: res.detail[0],
           },
           () => {
-            console.log("seoaaandly: ", res);
+            console.log("seoaaandly : ", res);
           }
         );
       });
-
     // this.getData();
   }
 
