@@ -16,6 +16,9 @@ class Detail extends Component {
       detail: false,
       Iclicked: false,
       Oclicked: false,
+      clickedData: false,
+      optionGroupCount: false,
+      childOptionGroupCount: false,
     };
   }
 
@@ -30,17 +33,36 @@ class Detail extends Component {
   componentDidMount() {
     fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
       .then((res) => {
-        console.log("firstly: ", res);
         return res.json();
       })
       .then((res) => {
-        console.log("ddddddzzz ", res.detail[0]);
         this.setState(
           {
             detail: res.detail[0],
           },
           () => {
-            console.log("seoaaandly: ", res);
+            this.setState({
+              optionGroupCount:
+                this.state.detail.choice.option.length /
+                this.state.detail.choice.option
+                  .map((item) => {
+                    if (item.option_type === "optionGroup") {
+                      return 1;
+                    }
+                  })
+                  .filter((item) => item === 1).length,
+            });
+            this.setState({
+              childOptionGroupCount:
+                this.state.detail.choice.child_option.length /
+                this.state.detail.choice.child_option
+                  .map((item) => {
+                    if (item.option_type === "optionGroup") {
+                      return 1;
+                    }
+                  })
+                  .filter((item) => item === 1).length,
+            });
           }
         );
       });
@@ -53,12 +75,15 @@ class Detail extends Component {
     fetch(`http://10.58.0.153:8000/frip/${ID}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "res");
         this.setState({
           detail: res.detail[0],
         });
       });
   }
+
+  setClickedData = (getOptions) => {
+    this.setState({ clickedData: getOptions });
+  };
 
   pushData = () => {
     console.log(this.state.detail);
@@ -86,12 +111,8 @@ class Detail extends Component {
   };
 
   render() {
-    console.log(this.state.detail.child_option);
-    // console.log("thi", this.state.data);
-    // console.log(
-    //   "detail",
-    //   this.state.detail[0] && this.state.detail[0].catch_phrase
-    // );
+    console.log("clickedData", this.state.clickedData);
+
     const tempStyle = {
       opacity: 1,
       display: "block",
@@ -99,7 +120,6 @@ class Detail extends Component {
 
     return (
       <Product>
-        {console.log("aaaaaaaaaaaa", this.state.detail)}
         <DetailPage style={tempStyle}>
           <Detailshape>
             <Content>
@@ -458,7 +478,7 @@ class Detail extends Component {
             </Content>
           </Detailshape>
         </DetailPage>
-        {this.state.detail && (
+        {this.state.optionGroupCount && this.state.childOptionGroupCount ? (
           <OptionsWrap>
             {this.state.detail.choice.itinerary.length === 0 ? (
               ""
@@ -468,7 +488,8 @@ class Detail extends Component {
                 data={this.state.detail.choice.itinerary}
                 option={this.state.detail.choice.option}
                 idxChange={this.idxChange}
-                isOpen={false}
+                setClickedData={this.setClickedData}
+                isOpen={true}
               />
             )}
 
@@ -476,9 +497,12 @@ class Detail extends Component {
               <OptionWrap
                 title="기본 옵션"
                 data={[
-                  this.state.detail.choice.option[this.state.Iclicked * 2 + 1],
+                  this.state.detail.choice.option[
+                    this.state.Iclicked * this.state.optionGroupCount + 1
+                  ],
                 ]}
                 isOpen={true}
+                setClickedData={this.setClickedData}
                 idxOChange={this.idxOChange}
               />
             ) : (
@@ -493,32 +517,35 @@ class Detail extends Component {
                 title="기본 옵션"
                 data={this.state.detail.choice.option}
                 isOpen={false}
+                setClickedData={this.setClickedData}
                 notMore
               />
             )}
 
-            {/* child_option */}
             {this.state.detail.choice.child_option.length !== 0 &&
             this.state.Oclicked !== false ? (
               <OptionWrap
                 title={this.state.detail.choice.child_option[0].title}
                 data={[
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 1
+                    this.state.Oclicked * this.state.childOptionGroupCount + 1
                   ],
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 2
+                    this.state.Oclicked * this.state.childOptionGroupCount + 2
                   ],
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 3
+                    this.state.Oclicked * this.state.childOptionGroupCount + 3
                   ],
                 ]}
+                setClickedData={this.setClickedData}
                 isOpen={true}
               />
             ) : (
               ""
             )}
           </OptionsWrap>
+        ) : (
+          ""
         )}
       </Product>
     );

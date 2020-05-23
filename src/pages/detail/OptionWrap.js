@@ -44,8 +44,16 @@ const OptionWrap = ({
   isOpen,
   idxOChange,
   notMore,
+  setClickedData,
 }) => {
   const [isClicked, setCliked] = useState(isOpen);
+
+  const 이게마지막선택이니 = (item) => {
+    console.log("eachItem", item);
+    if (item.price) {
+      setClickedData(item);
+    }
+  };
 
   return (
     <>
@@ -64,6 +72,8 @@ const OptionWrap = ({
             <HiddenOptions
               onClick={() => {
                 idxChange(idx);
+                이게마지막선택이니(eachItem);
+                setCliked(false);
               }}
             >
               <p>{trans(eachItem.start_date)}</p>
@@ -78,7 +88,15 @@ const OptionWrap = ({
         ? isClicked &&
           data.map((eachItem, idx) =>
             eachItem.option_type === "option" ? (
-              <DefalutOpt onClick={() => (notMore ? "" : idxOChange(idx))}>
+              <DefalutOpt
+                onClick={() => {
+                  if (!notMore) {
+                    idxOChange(idx);
+                    이게마지막선택이니(eachItem);
+                  }
+                  setCliked(false);
+                }}
+              >
                 <Left>
                   <span>{eachItem.title}</span>
                   <p>{eachItem.content}</p>
@@ -97,7 +115,12 @@ const OptionWrap = ({
         ? isClicked &&
           data.map((eachItem, idx) =>
             eachItem.option_type === "option" ? (
-              <DefalutOpt>
+              <DefalutOpt
+                onClick={() => {
+                  이게마지막선택이니(eachItem);
+                  setCliked(false);
+                }}
+              >
                 <Left>
                   <span>{eachItem.title}</span>
                   <p>{eachItem.content}</p>
