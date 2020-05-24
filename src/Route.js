@@ -18,6 +18,7 @@ import MyLikes from "./pages/myPage/MyLikes";
 import MyFrip from "./pages/myPage/MyFrip";
 import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
+import SearchPage from "./components/nav/SearchPage";
 import GlobalStyles from "./styles/GlobalStyles";
 import SignInEntryPage from "./pages/signIn/SignInEntryPage";
 import SignUpEntryPage from "./pages/signUp/SignUpEntryPage";
@@ -63,9 +64,11 @@ class Routes extends React.Component {
             <Route exact path="/signinpage" component={SignIn} />
             <Route exact path="/signuppage" component={SignUp} />
             <Route exact path="/singinentry" component={SignUpEntry} />
+
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/payment/:id" component={Payment} />
+            <Route exact path="/frip/search/:id" component={SearchPage} />
           </Switch>
           <Footer />
         </Router>

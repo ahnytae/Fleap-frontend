@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import New from "../../images/New";
-import Star from "../../images/Star";
+// import New from "../../images/New";
+// import Star from "../../images/Star";
 import styled from "styled-components";
 
 class Items extends Component {
@@ -45,13 +45,13 @@ class Items extends Component {
                       </Prices>
                       {data.grade && (
                         <StyledDiv>
-                          <Star />
+                          {/* <Star /> */}
                           <Score>{data.grade.slice(0, 4)}</Score>
                         </StyledDiv>
                       )}
                       {data.new && (
                         <NewContainer grade={data.grade}>
-                          <New />
+                          {/* <New /> */}
                         </NewContainer>
                       )}
                     </Link>
@@ -118,7 +118,6 @@ const Category = styled.div`
     display: flex;
     flex-wrap: wrap;
   }
-
   li {
     width: 86px;
     border-radius: 50%;
@@ -128,12 +127,10 @@ const Category = styled.div`
     }
   }
 `;
-
 const Mainimg = styled.img`
   width: 226px;
   height: 169px;
 `;
-
 const HotFrip = styled(Category)`
   button {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E");
@@ -150,7 +147,6 @@ const HotFrip = styled(Category)`
     border-radius: 5px;
     border-style: none;
   }
-
   li {
     margin-right: 10px;
     width: calc(25% - 7.5px);
@@ -159,7 +155,6 @@ const HotFrip = styled(Category)`
     position: relative;
   }
 `;
-
 const Title = styled.div`
   margin-top: 10px;
   height: auto;
@@ -168,15 +163,13 @@ const Title = styled.div`
   font-size: 14px;
   word-break: keep-all;
   overflow-wrap: break-word;
-  font-weight: 600;
+  font-weight: bold;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
-
 const Prices = styled.div`
   margin-top: 14px;
 `;
-
 const PriceDiv = styled.div`
   display: inline-block;
   font-size: 14px;
@@ -191,7 +184,6 @@ const FakedPrice = styled.div`
   font-size: 12px;
   text-decoration: line-through;
 `;
-
 const StyledDiv = styled.div`
   display: inline-flex;
   align-items: center;
@@ -202,7 +194,6 @@ const StyledDiv = styled.div`
     margin-right: 2px;
   }
 `;
-
 const LocalText = styled.div`
   position: absolute;
   left: 0px;
@@ -222,7 +213,6 @@ const LocalText = styled.div`
     margin: 2px 0px 0px 2px;
   }
 `;
-
 const SubTitle = styled.p`
   margin-top: 14px;
   font-size: 12px;
@@ -232,7 +222,6 @@ const SubTitle = styled.p`
   color: rgb(155, 155, 155);
   overflow: hidden;
 `;
-
 const Score = styled.p`
   font-size: 11px;
   font-weight: 400;
