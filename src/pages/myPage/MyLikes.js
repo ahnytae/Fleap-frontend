@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import NoLikes from "../../images/NoLikes";
-import styled from "styled-components";
+import Items from "../../components/item/Items";
+import styled, { css } from "styled-components";
 
 class MyLikes extends Component {
   constructor() {
     super();
     this.state = {
-      myLikes: {},
+      myProfile: {},
       myNrg: 0,
+      myLikes: {},
     };
   }
 
@@ -17,23 +19,35 @@ class MyLikes extends Component {
       .then((res) => res.json())
       .then((res) => {
         this.setState({
-          myLikes: res.my_page,
+          myProfile: res.my_page,
           myNrg: res.my_page.energy.toLocaleString(),
+        });
+      });
+    fetch("http://13.59.219.151:8000/user/interestfrip", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          myLikes: res.data,
         });
       });
   };
 
   render() {
-    const { myLikes, myNrg } = this.state;
+    const { myProfile, myNrg, myLikes } = this.state;
 
     return (
       <Container>
         <Header>
           <HeaderLeft>
-            <ProfilePic pic={myLikes.profile_url}></ProfilePic>
+            <ProfilePic pic={myProfile.profile_url}></ProfilePic>
             <ProfileDes>
               <Name>
-                <span>{myLikes.name}</span>
+                <span>{myProfile.name}</span>
                 <button>설정</button>
               </Name>
               <div>#관심사 설정하러 가기</div>
@@ -65,10 +79,22 @@ class MyLikes extends Component {
               <div>프립</div>
               <div>호스트</div>
             </FripHeader>
-            <Frips>
-              <NoLikes />
-              <div>아직 좋아한 프립이 없어요.</div>
-              <div>관심있는 프립의 하트를 눌러주세요!</div>
+            <Frips like={myLikes[0]}>
+              {myLikes[0] ? (
+                <Items
+                  like={true}
+                  data={myLikes}
+                  goTo={(id) => {
+                    this.goTo(id);
+                  }}
+                />
+              ) : (
+                <Nothing>
+                  <NoLikes />
+                  <div>아직 좋아한 프립이 없어요.</div>
+                  <div>관심있는 프립의 하트를 눌러주세요!</div>
+                </Nothing>
+              )}
             </Frips>
           </FripContainer>
         </Main>
@@ -81,7 +107,7 @@ export default withRouter(MyLikes);
 
 const Container = styled.div`
   width: 930px;
-  height: 728.6px;
+  height: 100%;
   margin: 0 auto;
 `;
 
@@ -230,7 +256,7 @@ const Coupon = styled.div`
 `;
 
 const Main = styled.main`
-  height: 372px;
+  height: 100%;
   margin: 60px 0;
   display: flex;
 `;
@@ -283,7 +309,21 @@ const FripHeader = styled.div`
 `;
 
 const Frips = styled.div`
-  height: 312px;
+  height: 100%;
+  display: flex;
+  ${(props) =>
+    props.like
+      ? css`
+          flex-wrap: row wrap;
+        `
+      : css`
+          padding: 93.4px 0px;
+          justify-content: center;
+          align-items: center;
+        `}
+`;
+
+const Nothing = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

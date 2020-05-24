@@ -25,7 +25,7 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    fetch("http://10.58.0.153:8000/frip/99")
+    fetch("http://13.59.219.151:8000/frip/99")
       .then((res) => {
         console.log("firstly: ", res);
         return res.json();
@@ -47,7 +47,7 @@ class Detail extends Component {
 
   getData() {
     const ID = this.props.match.params.id;
-    fetch(`http://10.58.0.153:8000/frip/${ID}`)
+    fetch(`http://13.59.219.151:8000/frip/${ID}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res, "res");
