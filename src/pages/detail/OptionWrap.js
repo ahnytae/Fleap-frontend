@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NewWindow from "./NewWindow";
 import styled from "styled-components";
 
 //2020-05-22T10:30:00

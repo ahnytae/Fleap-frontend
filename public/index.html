@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link
-      rel="icon"
-      href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIsAAAB5CAMAAAA+nSLfAAAAbFBMVEVHcEwJYb4CdfAObdQ0lvxbpPSHwf0ATJyCv/1Mm/OHwf2Hwf0AdO8Yf+6Hwf1VpvsAcupts/0oh+kYg/eHwf1Fl/IAdfAzl/8zl/8zl/8AdfAATJwATJwATJwAdfCHwf0zl/8CU6k8nP8XgvNi/PvHAAAAHXRSTlMA+cLo8CB1wPEQvEPzRdzv5uzjZ5owpcWFpYRz7Le30nkAAANuSURBVHjazZeLlqowDEUHKdiCoKio4x3aqP//j9fXjA9AmjalPR/A2is5m8DXF0HyNPkKJLVSpQiEJVNKpWGg5OqSMLZUXlmyEFBSdUvuH0XwO0vpn2WtfpOGUdxruAjA59+swyiu8u+1KF9YsnDG4tXrhL+xlGEU17PXeQvFn9dlm8WX16nqSu31ECn/XnePxYvXSQ+KD6+zPpbxvc57URRPAvDZk9ep+pQ8AJ+9eL1WnzNifesBlDHPUjbEMt5gcjWcJACfR65vqnQyitcJ12IpQ/B5xPrmmihjeJ3psrg/S6nSj2OvRYlgycIZi2OvExSKW68zHItLr3MkikuvSyyLO69ThY+j30jBDVgceb1WJskD8PnPaxGAzw69zg1RXPxGlqYs9F6nyjzE9RWVBQux19/ALWBI61sDHC1YSM/SFgCqMAZTwCU2WyLzWrAryzGE+u7glsq/1wm7s9hsqaTy+Z7j0Xd9C3ik8uz19onFZksEZ2n1jAJH7tFrwV5YYO7R6x28xbwy88LSZ2jFcEucyQWRz7aV4Scp5Z7KZ6vKVPKSmaDy2QJmLm/ZUPn82FJlsJ9baiqfDStTyUcmZD4bwTD5nBWZzw8Y7aGcXlDkQhAWF9ffuXzPnsxnHAw/tVDkzOQssc8sGsegPRRDr3cAdjDVSXanIPNZ8zJxJvsyIThEGJjeoRh4XQNYwPBPJOiztAVzmA/rMfF6BWAKw+dyOAltcXtg5icNFEx9dwBmMHokGK8TBkYw2iRS/3PzG8AABkGi73UBgIfBkWh7vUWzMIYk0fV6hSaJDk2MZtH53BS44sIyai7Bw0yIfWbxobknQsMUNh+W7yD3kfzCzJAsCzKfl9Ghec1hRlvfwhTkCrMg9ZoZg5g0eGPl81tHWonI6vvZZ7aMD81QcA2emPisxWFQmhXuw/KMEWly4EvT+xvZOkRLLAZ+T/shn9kZwogCv6ee38jJGSCOIgsGE586vf53fsRPQxX9l3CH14KOA1fhDq+nDXV0R9PyumgcJDY7S1MXLJpC7dvFdRKtd03itLhPo4mR9XU2Fs1FPXmd/DROM7ioheviPo8m0vW6aNxnoDZ/Xk+bxjvNZoTiape4duwzhmYy6lgGNnX2OmlGziGe9Xk9bcZP9/tm5YXlTLPoOpH11FPiyWs24j+fK+Rihv0d2gAAAABJRU5ErkJggg=="
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=258595de341f902b4eea164adbc0dac3"></script> -->
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIsAAAB5CAMAAAA+nSLfAAAAbFBMVEVHcEwJYb4CdfAObdQ0lvxbpPSHwf0ATJyCv/1Mm/OHwf2Hwf0AdO8Yf+6Hwf1VpvsAcupts/0oh+kYg/eHwf1Fl/IAdfAzl/8zl/8zl/8AdfAATJwATJwATJwAdfCHwf0zl/8CU6k8nP8XgvNi/PvHAAAAHXRSTlMA+cLo8CB1wPEQvEPzRdzv5uzjZ5owpcWFpYRz7Le30nkAAANuSURBVHjazZeLlqowDEUHKdiCoKio4x3aqP//j9fXjA9AmjalPR/A2is5m8DXF0HyNPkKJLVSpQiEJVNKpWGg5OqSMLZUXlmyEFBSdUvuH0XwO0vpn2WtfpOGUdxruAjA59+swyiu8u+1KF9YsnDG4tXrhL+xlGEU17PXeQvFn9dlm8WX16nqSu31ECn/XnePxYvXSQ+KD6+zPpbxvc57URRPAvDZk9ep+pQ8AJ+9eL1WnzNifesBlDHPUjbEMt5gcjWcJACfR65vqnQyitcJ12IpQ/B5xPrmmihjeJ3psrg/S6nSj2OvRYlgycIZi2OvExSKW68zHItLr3MkikuvSyyLO69ThY+j30jBDVgceb1WJskD8PnPaxGAzw69zg1RXPxGlqYs9F6nyjzE9RWVBQux19/ALWBI61sDHC1YSM/SFgCqMAZTwCU2WyLzWrAryzGE+u7glsq/1wm7s9hsqaTy+Z7j0Xd9C3ik8uz19onFZksEZ2n1jAJH7tFrwV5YYO7R6x28xbwy88LSZ2jFcEucyQWRz7aV4Scp5Z7KZ6vKVPKSmaDy2QJmLm/ZUPn82FJlsJ9baiqfDStTyUcmZD4bwTD5nBWZzw8Y7aGcXlDkQhAWF9ffuXzPnsxnHAw/tVDkzOQssc8sGsegPRRDr3cAdjDVSXanIPNZ8zJxJvsyIThEGJjeoRh4XQNYwPBPJOiztAVzmA/rMfF6BWAKw+dyOAltcXtg5icNFEx9dwBmMHokGK8TBkYw2iRS/3PzG8AABkGi73UBgIfBkWh7vUWzMIYk0fV6hSaJDk2MZtH53BS44sIyai7Bw0yIfWbxobknQsMUNh+W7yD3kfzCzJAsCzKfl9Ghec1hRlvfwhTkCrMg9ZoZg5g0eGPl81tHWonI6vvZZ7aMD81QcA2emPisxWFQmhXuw/KMEWly4EvT+xvZOkRLLAZ+T/shn9kZwogCv6ee38jJGSCOIgsGE586vf53fsRPQxX9l3CH14KOA1fhDq+nDXV0R9PyumgcJDY7S1MXLJpC7dvFdRKtd03itLhPo4mR9XU2Fs1FPXmd/DROM7ioheviPo8m0vW6aNxnoDZ/Xk+bxjvNZoTiape4duwzhmYy6lgGNnX2OmlGziGe9Xk9bcZP9/tm5YXlTLPoOpH11FPiyWs24j+fK+Rihv0d2gAAAABJRU5ErkJggg==" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=258595de341f902b4eea164adbc0dac3&libraries=services,clusterer,drawing"
-    ></script>
+  <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=258595de341f902b4eea164adbc0dac3"></script> -->
 
-    <script src="//developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-      Kakao.init("258595de341f902b4eea164adbc0dac3");
-    </script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=258595de341f902b4eea164adbc0dac3&libraries=services,clusterer,drawing">
+  </script>
 
-    <!--
+  <script src="//developers.kakao.com/sdk/js/kakao.js"></script>
+  <script>
+    Kakao.init("258595de341f902b4eea164adbc0dac3");
+  </script>
+
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -40,25 +35,17 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-    ></script>
+  <title>Fleap</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-    <script
-      type="text/javascript"
-      src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"
-    />
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css" />
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -68,5 +55,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

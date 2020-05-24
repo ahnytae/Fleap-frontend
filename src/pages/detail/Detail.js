@@ -4,7 +4,8 @@ import Down from "../../images/down.png";
 import Upward from "../../images/upward.png";
 import KakaoMap from "./Map";
 import OptionWrap from "./OptionWrap";
-import OptionChoice from "./OptionChoice";
+import NewWindow from "./NewWindow";
+
 import styled from "styled-components";
 
 class Detail extends Component {
@@ -16,6 +17,9 @@ class Detail extends Component {
       detail: false,
       Iclicked: false,
       Oclicked: false,
+      clickedData: false,
+      optionGroupCount: false,
+      childOptionGroupCount: false,
     };
   }
 
@@ -28,23 +32,43 @@ class Detail extends Component {
   };
 
   componentDidMount() {
-    //fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
-    fetch(`http://13.59.219.151:8000/frip/1`)
+    // fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
+    fetch("http://13.59.219.151:8000/frip/1")
       .then((res) => {
-        console.log("firstly: ", res);
         return res.json();
       })
       .then((res) => {
-        console.log("ddddddzzz ", res.detail[0]);
         this.setState(
           {
             detail: res.detail[0],
           },
           () => {
-            console.log("seoaaandly : ", res);
+            this.setState({
+              optionGroupCount:
+                this.state.detail.choice.option.length /
+                this.state.detail.choice.option
+                  .map((item) => {
+                    if (item.option_type === "optionGroup") {
+                      return 1;
+                    }
+                  })
+                  .filter((item) => item === 1).length,
+            });
+            this.setState({
+              childOptionGroupCount:
+                this.state.detail.choice.child_option.length /
+                this.state.detail.choice.child_option
+                  .map((item) => {
+                    if (item.option_type === "optionGroup") {
+                      return 1;
+                    }
+                  })
+                  .filter((item) => item === 1).length,
+            });
           }
         );
       });
+
     // this.getData();
   }
 
@@ -53,12 +77,15 @@ class Detail extends Component {
     fetch(`http://10.58.0.153:8000/frip/${ID}`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res, "res");
         this.setState({
           detail: res.detail[0],
         });
       });
   }
+
+  setClickedData = (getOptions) => {
+    this.setState({ clickedData: getOptions });
+  };
 
   pushData = () => {
     console.log(this.state.detail);
@@ -69,6 +96,7 @@ class Detail extends Component {
           id: this.state.detail.id,
           price: this.state.detail.choice.option[1].price,
           optionId: this.state.detail.choice.option[1].id,
+          title: this.state.detail.choice.option[1].title,
         },
       });
   };
@@ -86,12 +114,37 @@ class Detail extends Component {
   };
 
   render() {
-    console.log(this.state.detail.child_option);
-    // console.log("thi", this.state.data);
-    // console.log(
-    //   "detail",
-    //   this.state.detail[0] && this.state.detail[0].catch_phrase
-    // );
+    let optionArr = [],
+      child_optionArr = [];
+
+    if (this.state.optionGroupCount && this.state.childOptionGroupCount) {
+      for (
+        let i = 1;
+        i <
+        this.state.detail.choice.option.length / this.state.optionGroupCount;
+        i++
+      ) {
+        optionArr.push(
+          this.state.detail.choice.option[
+            this.state.Oclicked * this.state.optionGroupCount + i
+          ]
+        );
+      }
+      for (
+        let i = 1;
+        i <
+        this.state.detail.choice.option.length / this.state.optionGroupCount;
+        i++
+      ) {
+        child_optionArr.push(
+          this.state.detail.choice.child_option[
+            this.state.Oclicked * this.state.childOptionGroupCount + i
+          ]
+        );
+      }
+    }
+    console.log("clickedData", this.state.clickedData);
+
     const tempStyle = {
       opacity: 1,
       display: "block",
@@ -99,7 +152,6 @@ class Detail extends Component {
 
     return (
       <Product>
-        {console.log("aaaaaaaaaaaa", this.state.detail)}
         <DetailPage style={tempStyle}>
           <Detailshape>
             <Content>
@@ -458,7 +510,7 @@ class Detail extends Component {
             </Content>
           </Detailshape>
         </DetailPage>
-        {this.state.detail && (
+        {this.state.optionGroupCount || this.state.childOptionGroupCount ? (
           <OptionsWrap>
             {this.state.detail.choice.itinerary.length === 0 ? (
               ""
@@ -468,7 +520,8 @@ class Detail extends Component {
                 data={this.state.detail.choice.itinerary}
                 option={this.state.detail.choice.option}
                 idxChange={this.idxChange}
-                isOpen={false}
+                setClickedData={this.setClickedData}
+                isOpen={true}
               />
             )}
 
@@ -476,9 +529,12 @@ class Detail extends Component {
               <OptionWrap
                 title="기본 옵션"
                 data={[
-                  this.state.detail.choice.option[this.state.Iclicked * 2 + 1],
+                  this.state.detail.choice.option[
+                    this.state.Iclicked * this.state.optionGroupCount + 1
+                  ],
                 ]}
                 isOpen={true}
+                setClickedData={this.setClickedData}
                 idxOChange={this.idxOChange}
               />
             ) : (
@@ -493,36 +549,41 @@ class Detail extends Component {
                 title="기본 옵션"
                 data={this.state.detail.choice.option}
                 isOpen={false}
+                setClickedData={this.setClickedData}
                 notMore
               />
             )}
 
-            {/* child_option */}
             {this.state.detail.choice.child_option.length !== 0 &&
             this.state.Oclicked !== false ? (
               <OptionWrap
                 title={this.state.detail.choice.child_option[0].title}
                 data={[
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 1
+                    this.state.Oclicked * this.state.childOptionGroupCount + 1
                   ],
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 2
+                    this.state.Oclicked * this.state.childOptionGroupCount + 2
                   ],
                   this.state.detail.choice.child_option[
-                    this.state.Oclicked * 4 + 3
+                    this.state.Oclicked * this.state.childOptionGroupCount + 3
                   ],
                 ]}
+                setClickedData={this.setClickedData}
                 isOpen={true}
               />
             ) : (
               ""
             )}
-            <OptionChoice />
+            {this.state.clickedData && (
+              <NewWindow data={this.state.clickedData} />
+            )}
             <OptionJoin>
               <OptionData onClick={() => this.pushData()}>참여하기</OptionData>
             </OptionJoin>
           </OptionsWrap>
+        ) : (
+          ""
         )}
       </Product>
     );
@@ -629,11 +690,9 @@ const TitleExplain = styled.h1`
 
 const TitleImg = styled.div`
   white-space: nowrap;
-
   * {
     margin-right: 20px;
   }
-
   button,
   input,
   select,
@@ -720,7 +779,6 @@ const ExplainImoji = styled.div`
   line-height: 18px;
   font-size: 12px;
   margin-top: 15px;
-
   ${Icon} {
     -webkit-box-flex: 0;
     flex-grow: 0;
@@ -830,7 +888,6 @@ const HostItem = styled.div`
 
 const HostProfile = styled.a`
   text-align: center;
-
   width: 100% !important;
   height: 40px !important;
   line-height: 13px;
@@ -850,7 +907,6 @@ const HostReview = styled.div`
   line-height: 1.8;
   font-size: 14px;
   border-bottom: 1px solid rgb(238, 238, 238);
-
   h4 {
     line-height: 24px;
     font-size: 18px;
@@ -893,7 +949,6 @@ const HostReviewDate = styled.div`
   margin-top: 10px;
   margin-left: 6px;
   line-height: 10px;
-
   font-size: 10px;
 `;
 
@@ -951,7 +1006,6 @@ const HostReviewContentName = styled.div`
   font-size: 10px;
   padding: 0px;
   border-radius: 5px;
-
   img {
     margin-left: 2px;
   }
@@ -1024,7 +1078,6 @@ const QuestionContent = styled.div`
     visibility: visible;
     transition: visibility 0.3s ease;
     letter-spacing: -0.025em;
-
     margin-top: 20px;
   }
 `;
@@ -1084,7 +1137,6 @@ const OptionTopButton = styled.div`
 
 const OptionTopName = styled.div`
   position: relative;
-
   width: 100%;
   height: 60px;
   line-height: 22px;
@@ -1097,7 +1149,6 @@ const OptionTopName = styled.div`
 
 const OptionTopClick = styled.div`
   display: flex;
-
   justify-content: center;
   flex-flow: column nowrap;
   padding: 14px 16px;
@@ -1155,7 +1206,6 @@ const OptionJoin = styled.div`
   margin-top: auto;
   padding: 80px 0px;
 `;
-
 const OptionData = styled.button`
   width: 100%;
   height: 50px;
