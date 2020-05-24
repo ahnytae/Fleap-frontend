@@ -126,7 +126,12 @@ class Daily extends Component {
       () => {
         ["hot", "pick", "new"].map((tag) => {
           return fetch(
-            `http://13.59.219.151:8000/frip/daily?fid=1&limit=4&tag=${tag}`
+            `http://13.59.219.151:8000/frip/daily?fid=1&limit=4&tag=${tag}`,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
           )
             .then((res) => res.json())
             .then((res) => {
@@ -203,7 +208,12 @@ class Daily extends Component {
       () => {
         ["hot", "pick", "new"].map((tag) => {
           return fetch(
-            `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`
+            `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
           )
             .then((res) => res.json())
             .then((res) => {
@@ -236,7 +246,12 @@ class Daily extends Component {
       },
       () => {
         fetch(
-          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {
@@ -304,7 +319,12 @@ class Daily extends Component {
         fetch(
           `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&offset=${
             (num - 1) * 20
-          }`
+          }`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {
@@ -338,7 +358,12 @@ class Daily extends Component {
           ? (queryString = `${fid}`)
           : (queryString = `${fid}&sid=${sid}`);
         fetch(
-          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {
@@ -392,7 +417,12 @@ class Daily extends Component {
           queryString = `${fid}&sid=${sid}&tid=${tid}`;
         }
         fetch(
-          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {
@@ -434,7 +464,12 @@ class Daily extends Component {
       },
       () => {
         fetch(
-          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&${where}`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&${where}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {
@@ -442,7 +477,6 @@ class Daily extends Component {
             this.setState({
               data: res.data,
               region: res.region_data,
-              loading: false,
             });
           });
       }
@@ -481,7 +515,12 @@ class Daily extends Component {
         }
 
         fetch(
-          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         )
           .then((res) => res.json())
           .then((res) => {

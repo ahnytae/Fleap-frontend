@@ -25,7 +25,11 @@ class Main extends Component {
         loading: true,
       },
       () => {
-        fetch("http://localhost:3000/data/MainData.json")
+        fetch("http://localhost:3000/data/MainData.json", {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
           .then((res) => res.json())
           .then((res) => {
             this.setState(

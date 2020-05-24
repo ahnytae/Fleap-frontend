@@ -46,7 +46,7 @@ class SignUp extends Component {
 
   signinHandler = (e) => {
     e.preventDefault();
-    fetch("http://10.58.1.144:8080/user/sign-up", {
+    fetch("http://10.58.3.84:8080/user/sign-up", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
@@ -190,13 +190,6 @@ const LoginBtn = styled.button`
   padding: 0px 13px;
   border-radius: 5px;
   /* pointer-events: none; */
-
-  background-color: ${(props) =>
-    props.emailLength >= 1 && props.password.Length >= 1
-      ? // props.rePassword.Length >= 1 &&
-        // props.checked === true
-        props.backgroundColor
-      : "rgb(221, 221, 221)"};
 `;
 
 const Label = styled.div`
