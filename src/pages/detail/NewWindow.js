@@ -1,39 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 function NewWindow({ data }) {
   const [nope, setNope] = useState(false);
   const [closeState, setCloseState] = useState(false);
-  const [count, setNumber] = useState(1);
-
-  console.log("Hi", data * count);
-
+  const [count, setCount] = useState(1);
+  console.log("Hi", data.price);
   const decrease = () => {
     if (count <= 1) {
       setNope(true);
       return;
     }
     setNope(false);
-    setNumber(count - 1);
+    setCount(count - 1);
   };
-
   const increase = () => {
-    if (count > 5) {
+    if (count >= 5) {
       setNope(true);
       return;
     }
     setNope(false);
-    setNumber(count + 1);
+    setCount(count + 1);
+    data.price = data.price * count;
   };
-
-  // const price = (num) => {
-  //   setNumber(number * data.price);
-  // };
-
   const closeBtn = () => {
     setCloseState(!closeState);
   };
-
   return (
     <>
       <Wrapper
@@ -52,7 +43,7 @@ function NewWindow({ data }) {
         </FirstLine>
         {/* <p>참가비 (1인)</p> */}
         <LastLine>
-          <span>{count * data.price}원</span>
+          <span>{data.price}원</span>
           <Btn>
             <button
               onClick={decrease}
@@ -82,7 +73,6 @@ function NewWindow({ data }) {
   );
 }
 export default NewWindow;
-
 const Wrapper = styled.div`
   display: block;
   width: 310px;
@@ -97,11 +87,9 @@ const Wrapper = styled.div`
     display: inline-block;
   }
 `;
-
 const FirstLine = styled.div`
   margin-bottom: 12px;
 `;
-
 const LastLine = styled.div`
   margin-top: 28px;
   display: flex;
@@ -112,7 +100,6 @@ const LastLine = styled.div`
     color: #3497ff;
   }
 `;
-
 const Btn = styled.div`
   display: flex;
   cursor: pointer;
@@ -131,7 +118,6 @@ const Btn = styled.div`
     text-align: center;
     align-self: center;
   }
-
   button {
     border-style: none;
   }

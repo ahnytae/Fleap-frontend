@@ -94,9 +94,9 @@ class Detail extends Component {
         pathname: `/payment/${this.state.detail.id}`,
         state: {
           id: this.state.detail.id,
-          price: this.state.detail.choice.option[1].price,
-          optionId: this.state.detail.choice.option[1].id,
-          title: this.state.detail.choice.option[1].title,
+          price: this.state.detail.choice.option[0].price,
+          optionId: this.state.detail.choice.option[0].id,
+          ticket: this.state.detail.ticket,
         },
       });
   };
@@ -207,8 +207,9 @@ class Detail extends Component {
                       <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBmaWxsPScjRjY2JyBkPSdNMTIuMjQyIDYuMTI5bC0uNTU1LS41NTVDOS44NCAzLjcyNyA2Ljg0MSAzLjQyOCA0LjgyOCA1LjA5MWE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0IDcuNDAybDcuMDcxIDcuMDdhMSAxIDAgMCAwIDEuNDE1IDBsNy4wNy03LjA3YTUuMDAxIDUuMDAxIDAgMCAwLS4zNjQtNy40MDJjLTIuMDEzLTEuNjYzLTUuMDEyLTEuMzY0LTYuODU5LjQ4M2wtLjU1NS41NTV6Jy8+IDwvZz4gPC9zdmc+" />
                       <Like>
                         {" "}
-                        {this.state.detail && this.state.detail.liked} 명이
-                        좋아한 프립
+                        {this.state.detail &&
+                          this.state.detail.like_number}{" "}
+                        명이 좋아한 프립
                       </Like>
                     </ExplainImoji>
                     <ExplainImoji>
