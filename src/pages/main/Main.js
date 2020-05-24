@@ -16,25 +16,34 @@ class Main extends Component {
     hotFripHandMade: [],
     hotFripNewFrip: [],
     hostBanner: [],
+    loading: false,
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/data/MainData.json")
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState(
-          {
-            category: res.category,
-            hotFrip: res.hotFrip,
-            hotFripSpecialSale: res.hotFripSpecialSale,
-            hotFripSuperHost: res.hotFripSuperHost,
-            hotFripHandMade: res.hotFripHandMade,
-            hotFripNewFrip: res.hotFripNewFrip,
-            hostBanner: res.hostBanner,
-          },
-          () => console.log("howBanner", res.hostBanner)
-        );
-      });
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        fetch("http://localhost:3000/data/MainData.json")
+          .then((res) => res.json())
+          .then((res) => {
+            this.setState(
+              {
+                category: res.category,
+                hotFrip: res.hotFrip,
+                hotFripSpecialSale: res.hotFripSpecialSale,
+                hotFripSuperHost: res.hotFripSuperHost,
+                hotFripHandMade: res.hotFripHandMade,
+                hotFripNewFrip: res.hotFripNewFrip,
+                hostBanner: res.hostBanner,
+                loading: false,
+              },
+              () => console.log("howBanner", res.hostBanner)
+            );
+          });
+      }
+    );
   }
 
   render() {
@@ -46,177 +55,214 @@ class Main extends Component {
       hotFripHandMade,
       hotFripNewFrip,
       hostBanner,
+      loading,
     } = this.state;
 
     return (
       <Wrapper>
-        <Container>
-          <SliderBox>
-            <MainSlider />
-          </SliderBox>
-          <Category>
-            <h2>인기있는 카테고리</h2>
-            <ul>
-              {category.map((item, idx) => {
-                return (
-                  <li key={`${item}+`}>
-                    <Link to="#">
-                      <img src={item.imgSrc} alt="" />
-                      <p>{item.name}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </Category>
-          <HotFrip>
-            <div>
-              <h2>지금 뜨는 프립</h2>
-              <Link to="#">전체보기</Link>
-            </div>
-            <ul>
-              {hotFrip.map((names, idx) => {
-                return (
-                  <li>
-                    <Link to="#">
-                      <LocalText>
-                        <span>{hotFrip[idx].local}</span>
-                        <button></button>
-                      </LocalText>
-                      <img src={hotFrip[idx].imgSrc} alt="" />
-                      <SubTitle>{hotFrip[idx].subTitle}</SubTitle>
-                      <p>{hotFrip[idx].title}</p>
-                      <p>{hotFrip[idx].price}</p>
-                      <p>{hotFrip[idx].newLogo}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </HotFrip>
-          <SliderBox>
-            <SecondSlider />
-          </SliderBox>
-          <HotFrip>
-            <div>
-              <h2>⚡프립특가, 놓치지마세요!</h2>
-              <a href="/#">전체보기</a>
-            </div>
-            <ul>
-              {hotFripSpecialSale.map((names, idx) => {
-                return (
-                  <li>
-                    <Link to="#">
-                      <LocalText>
-                        <span>{hotFripSpecialSale[idx].local}</span>
-                        <button></button>
-                      </LocalText>
-                      <img src={hotFripSpecialSale[idx].imgSrc} alt="" />
-                      <SubTitle>{hotFripSpecialSale[idx].subTitle}</SubTitle>
-                      <p>{hotFripSpecialSale[idx].title}</p>
-                      <p>{hotFripSpecialSale[idx].price}</p>
-                      <p>{hotFripSpecialSale[idx].newLogo}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </HotFrip>
-          <HotFrip>
+        {loading ? (
+          <LoadingDiv>
+            <div />
+          </LoadingDiv>
+        ) : (
+          <Container>
+            <SliderBox>
+              <MainSlider />
+            </SliderBox>
             <Category>
-              <h2>기획전</h2>
+              <h2>인기있는 카테고리</h2>
+              <ul>
+                {category.map((item, idx) => {
+                  return (
+                    <li key={`${item}+`}>
+                      <Link to="#">
+                        <img src={item.imgSrc} alt="" />
+                        <p>{item.name}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </Category>
-          </HotFrip>
-          <SliderBox>
-            <ThirdSlider />
-          </SliderBox>
-          <HotFrip>
-            <div>
-              <h2>이달의 슈퍼호스트 🥇</h2>
-              <Link to="/#">전체보기</Link>
-            </div>
-            <ul>
-              {hotFripSuperHost.map((names, idx) => {
-                return (
-                  <li>
-                    <Link to="#">
-                      <LocalText>
-                        <span>{hotFripSuperHost[idx].local}</span>
-                        <button></button>
-                      </LocalText>
-                      <img src={hotFripSuperHost[idx].imgSrc} alt="" />
-                      <SubTitle>{hotFripSuperHost[idx].subTitle}</SubTitle>
-                      <p>{hotFripSuperHost[idx].title}</p>
-                      <p>{hotFripSuperHost[idx].price}</p>
-                      <p>{hotFripSuperHost[idx].newLogo}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </HotFrip>
-          <HotFrip>
-            <div>
-              <h2>내 손으로 만드는 재미 🙌</h2>
-              <Link to="/#">전체보기</Link>
-            </div>
-            <ul>
-              {hotFripHandMade.map((names, idx) => {
-                return (
-                  <li>
-                    <Link to="#">
-                      <LocalText>
-                        <span>{hotFripHandMade[idx].local}</span>
-                        <button></button>
-                      </LocalText>
-                      <img src={hotFripHandMade[idx].imgSrc} alt="" />
-                      <SubTitle>{hotFripHandMade[idx].subTitle}</SubTitle>
-                      <p>{hotFripHandMade[idx].title}</p>
-                      <p>{hotFripHandMade[idx].price}</p>
-                      <p>{hotFripHandMade[idx].newLogo}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </HotFrip>
-          <HotFrip>
-            <div>
-              <h2>신규 프립</h2>
-              <Link to="/#">전체보기</Link>
-            </div>
-            <ul>
-              {hotFripNewFrip.map((names, idx) => {
-                return (
-                  <li>
-                    <Link to="#">
-                      <LocalText>
-                        <span>{hotFripNewFrip[idx].local}</span>
-                        <button></button>
-                      </LocalText>
-                      <img src={hotFripNewFrip[idx].imgSrc} alt="" />
-                      <SubTitle>{hotFripNewFrip[idx].subTitle}</SubTitle>
-                      <p>{hotFripNewFrip[idx].title}</p>
-                      <p>{hotFripNewFrip[idx].price}</p>
-                      <p>{hotFripNewFrip[idx].newLogo}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </HotFrip>
-          <SliderBox>
-            <Link to="#">
-              <img src={hostBanner} alt="" />
-            </Link>
-          </SliderBox>
-        </Container>
+            <HotFrip>
+              <div>
+                <h2>지금 뜨는 프립</h2>
+                <Link to="#">전체보기</Link>
+              </div>
+              <ul>
+                {hotFrip.map((names, idx) => {
+                  return (
+                    <li>
+                      <Link to="#">
+                        <LocalText>
+                          <span>{hotFrip[idx].local}</span>
+                          <button></button>
+                        </LocalText>
+                        <img src={hotFrip[idx].imgSrc} alt="" />
+                        <SubTitle>{hotFrip[idx].subTitle}</SubTitle>
+                        <p>{hotFrip[idx].title}</p>
+                        <p>{hotFrip[idx].price}</p>
+                        <p>{hotFrip[idx].newLogo}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </HotFrip>
+            <SliderBox>
+              <SecondSlider />
+            </SliderBox>
+            <HotFrip>
+              <div>
+                <h2>⚡프립특가, 놓치지마세요!</h2>
+                <a href="/#">전체보기</a>
+              </div>
+              <ul>
+                {hotFripSpecialSale.map((names, idx) => {
+                  return (
+                    <li>
+                      <Link to="#">
+                        <LocalText>
+                          <span>{hotFripSpecialSale[idx].local}</span>
+                          <button></button>
+                        </LocalText>
+                        <img src={hotFripSpecialSale[idx].imgSrc} alt="" />
+                        <SubTitle>{hotFripSpecialSale[idx].subTitle}</SubTitle>
+                        <p>{hotFripSpecialSale[idx].title}</p>
+                        <p>{hotFripSpecialSale[idx].price}</p>
+                        <p>{hotFripSpecialSale[idx].newLogo}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </HotFrip>
+            <HotFrip>
+              <Category>
+                <h2>기획전</h2>
+              </Category>
+            </HotFrip>
+            <SliderBox>
+              <ThirdSlider />
+            </SliderBox>
+            <HotFrip>
+              <div>
+                <h2>이달의 슈퍼호스트 🥇</h2>
+                <Link to="/#">전체보기</Link>
+              </div>
+              <ul>
+                {hotFripSuperHost.map((names, idx) => {
+                  return (
+                    <li>
+                      <Link to="#">
+                        <LocalText>
+                          <span>{hotFripSuperHost[idx].local}</span>
+                          <button></button>
+                        </LocalText>
+                        <img src={hotFripSuperHost[idx].imgSrc} alt="" />
+                        <SubTitle>{hotFripSuperHost[idx].subTitle}</SubTitle>
+                        <p>{hotFripSuperHost[idx].title}</p>
+                        <p>{hotFripSuperHost[idx].price}</p>
+                        <p>{hotFripSuperHost[idx].newLogo}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </HotFrip>
+            <HotFrip>
+              <div>
+                <h2>내 손으로 만드는 재미 🙌</h2>
+                <Link to="/#">전체보기</Link>
+              </div>
+              <ul>
+                {hotFripHandMade.map((names, idx) => {
+                  return (
+                    <li>
+                      <Link to="#">
+                        <LocalText>
+                          <span>{hotFripHandMade[idx].local}</span>
+                          <button></button>
+                        </LocalText>
+                        <img src={hotFripHandMade[idx].imgSrc} alt="" />
+                        <SubTitle>{hotFripHandMade[idx].subTitle}</SubTitle>
+                        <p>{hotFripHandMade[idx].title}</p>
+                        <p>{hotFripHandMade[idx].price}</p>
+                        <p>{hotFripHandMade[idx].newLogo}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </HotFrip>
+            <HotFrip>
+              <div>
+                <h2>신규 프립</h2>
+                <Link to="/#">전체보기</Link>
+              </div>
+              <ul>
+                {hotFripNewFrip.map((names, idx) => {
+                  return (
+                    <li>
+                      <Link to="#">
+                        <LocalText>
+                          <span>{hotFripNewFrip[idx].local}</span>
+                          <button></button>
+                        </LocalText>
+                        <img src={hotFripNewFrip[idx].imgSrc} alt="" />
+                        <SubTitle>{hotFripNewFrip[idx].subTitle}</SubTitle>
+                        <p>{hotFripNewFrip[idx].title}</p>
+                        <p>{hotFripNewFrip[idx].price}</p>
+                        <p>{hotFripNewFrip[idx].newLogo}</p>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </HotFrip>
+            <SliderBox>
+              <Link to="#">
+                <img src={hostBanner} alt="" />
+              </Link>
+            </SliderBox>
+          </Container>
+        )}
       </Wrapper>
     );
   }
 }
 
 export default withRouter(Main);
+
+const LoadingDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  div {
+    height: 50px;
+    width: 200px;
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/wecode_gray_logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: black;
+    position: absolute;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    animation: 1s linear 0s infinite normal none running linArrow;
+    @keyframes linArrow {
+      0% {
+        margin-top: -30px;
+        opacity: 100%;
+      }
+      100% {
+        margin-top: 30px;
+        opacity: 0%;
+      }
+    }
+  }
+`;
 
 const Wrapper = styled.div`
   img {

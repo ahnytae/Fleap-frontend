@@ -11,7 +11,7 @@ class SearchPage extends Component {
   }
   componentDidMount = () => {
     fetch(
-      `http://13.59.219.151:8000/frip/search?keyword=${this.props.match.params.id}`
+      `http://10.58.3.84:8080/frip/search?keyword=${this.props.match.params.id}`
     )
       .then((res) => res.json())
       .then((res) => {

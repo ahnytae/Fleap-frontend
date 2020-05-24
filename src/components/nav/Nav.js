@@ -500,7 +500,7 @@ const DisableWindow = styled.div`
         font-weight: bold;
       }
     }
-  
+  }
 `;
 
 const liveKeyword = styled.div`

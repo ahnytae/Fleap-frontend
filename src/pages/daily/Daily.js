@@ -94,6 +94,7 @@ class Daily extends Component {
       whichRegion: null,
       locationName: "",
       whichFilter: null,
+      loading: false,
     };
   }
 
@@ -118,25 +119,36 @@ class Daily extends Component {
     //     console.log("데이터 잘 나옴", res.data[0].total);
     //     this.setState({ hotData: res.data });
     //   });
-
-    ["hot", "pick", "new"].map((tag) => {
-      return fetch(
-        `http://10.58.5.115:8000/frip/daily?fid=1&limit=4&tag=${tag}`
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(`첫 ${tag} 데이터 잘 나옴`, res.data, res.region_data);
-          this.setState(
-            {
-              [`${tag}Data`]: res.data,
-              region: res.region_data,
-            },
-            () => {
-              console.log(this.state[`${tag}Data`], "first");
-            }
-          );
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        ["hot", "pick", "new"].map((tag) => {
+          return fetch(
+            `http://13.59.219.151:8000/frip/daily?fid=1&limit=4&tag=${tag}`
+          )
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(
+                `첫 ${tag} 데이터 잘 나옴`,
+                res.data,
+                res.region_data
+              );
+              this.setState(
+                {
+                  [`${tag}Data`]: res.data,
+                  region: res.region_data,
+                  loading: false,
+                },
+                () => {
+                  console.log(this.state[`${tag}Data`], "first");
+                }
+              );
+            });
         });
-    });
+      }
+    );
   };
 
   handleClick = (category, idx, str) => {
@@ -184,46 +196,64 @@ class Daily extends Component {
   };
 
   hotPickNew = (queryString) => {
-    ["hot", "pick", "new"].map((tag) => {
-      return fetch(
-        `http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(
-            `update ${tag} 데이터 잘 나옴`,
-            res.data,
-            res.region_data,
-            queryString
-          );
-          this.setState(
-            {
-              [`${tag}Data`]: res.data,
-              region: res.region_data,
-            },
-            () => {
-              console.log(this.state[`${tag}Data`], "update");
-            }
-          );
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        ["hot", "pick", "new"].map((tag) => {
+          return fetch(
+            `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`
+          )
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(
+                `update ${tag} 데이터 잘 나옴`,
+                res.data,
+                res.region_data,
+                queryString
+              );
+              this.setState(
+                {
+                  [`${tag}Data`]: res.data,
+                  region: res.region_data,
+                  loading: false,
+                },
+                () => {
+                  console.log(this.state[`${tag}Data`], "update");
+                }
+              );
+            });
         });
-    });
+      }
+    );
   };
 
   showAll = (queryString) => {
-    fetch(`http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20`)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(
-          "update all 데이터 잘 나옴",
-          res.data,
-          res.region_data,
-          queryString
-        );
-        this.setState({
-          data: res.data,
-          region: res.region_data,
-        });
-      });
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        fetch(
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              "update all 데이터 잘 나옴",
+              res.data,
+              res.region_data,
+              queryString
+            );
+            this.setState({
+              data: res.data,
+              region: res.region_data,
+              loading: false,
+            });
+          });
+      }
+    );
   };
 
   noScroll = () => {
@@ -266,31 +296,40 @@ class Daily extends Component {
     } else {
       queryString = `${fid}&sid=${sid}&tid=${tid}`;
     }
-    fetch(
-      `http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20&offset=${
-        (num - 1) * 20
-      }`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(
-          "pagination 데이터 잘 나옴",
-          (num - 1) * 20,
-          res.data,
-          queryString
-        );
-        this.setState({
-          data: res.data,
-          region: res.region_data,
-          activePage: num,
-        });
-      });
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        fetch(
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&offset=${
+            (num - 1) * 20
+          }`
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(
+              "pagination 데이터 잘 나옴",
+              (num - 1) * 20,
+              res.data,
+              queryString
+            );
+            this.setState({
+              data: res.data,
+              region: res.region_data,
+              activePage: num,
+              loading: false,
+            });
+          });
+      }
+    );
   };
 
   override = () => {
     this.setState(
       {
         override: true,
+        loading: true,
       },
       () => {
         const { fid, sid } = this.state;
@@ -298,13 +337,16 @@ class Daily extends Component {
         sid == null
           ? (queryString = `${fid}`)
           : (queryString = `${fid}&sid=${sid}`);
-        fetch(`http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20`)
+        fetch(
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20`
+        )
           .then((res) => res.json())
           .then((res) => {
             console.log("전체보기 데이터 잘 나옴", res.data, queryString);
             this.setState({
               data: res.data,
               region: res.region_data,
+              loading: false,
             });
           });
       }
@@ -336,6 +378,7 @@ class Daily extends Component {
       {
         fromDate: from,
         toDate: to,
+        loading: true,
       },
       () => {
         const { fromDate, toDate } = this.state;
@@ -349,7 +392,7 @@ class Daily extends Component {
           queryString = `${fid}&sid=${sid}&tid=${tid}`;
         }
         fetch(
-          `http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -357,6 +400,7 @@ class Daily extends Component {
             this.setState({
               data: res.data,
               region: res.region_data,
+              loading: false,
             });
           });
       }
@@ -384,17 +428,25 @@ class Daily extends Component {
       ? (where = `province=${province}`)
       : (where = `location=${whichRegion}`);
 
-    fetch(
-      `http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20&${where}`
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("어디 데이터 잘 나옴", res.data, queryString, where);
-        this.setState({
-          data: res.data,
-          region: res.region_data,
-        });
-      });
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        fetch(
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&${where}`
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log("어디 데이터 잘 나옴", res.data, queryString, where);
+            this.setState({
+              data: res.data,
+              region: res.region_data,
+              loading: false,
+            });
+          });
+      }
+    );
   };
 
   getFilter = (which) => {
@@ -415,6 +467,7 @@ class Daily extends Component {
     this.setState(
       {
         whichFilter: realWhich,
+        loading: true,
       },
       () => {
         let queryString;
@@ -428,7 +481,7 @@ class Daily extends Component {
         }
 
         fetch(
-          `http://10.58.5.115:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`
+          `http://13.59.219.151:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`
         )
           .then((res) => res.json())
           .then((res) => {
@@ -441,6 +494,7 @@ class Daily extends Component {
             this.setState({
               data: res.data,
               region: res.region_data,
+              loading: false,
             });
           });
       }
@@ -471,6 +525,7 @@ class Daily extends Component {
       whichRegion,
       locationName,
       whichFilter,
+      loading,
     } = this.state;
 
     return (
@@ -582,45 +637,59 @@ class Daily extends Component {
               </button>
             </FilterContainer>
           </Filter>
-          {tid || override || fromDate || province || whichRegion || whichFilter
-            ? Array(1)
-                .fill()
-                .map((el, idx) => {
-                  return (
-                    <Items
-                      idx={idx}
-                      data={data}
-                      goTo={(id) => {
-                        this.goTo(id);
-                      }}
-                    />
-                  );
-                })
-            : Array(3)
-                .fill()
-                .map((el, idx) => {
-                  let realData;
-                  let categ;
-                  if (idx === 0) {
-                    realData = hotData;
-                    categ = `인기 ${str}`;
-                  } else if (idx === 1) {
-                    realData = pickData;
-                    categ = `금주의 PICK`;
-                  } else if (idx === 2) {
-                    realData = newData;
-                    categ = `신규 ${str}`;
-                  }
-                  return (
-                    <Items
-                      categ={categ}
-                      data={realData}
-                      goTo={(id) => {
-                        this.goTo(id);
-                      }}
-                    />
-                  );
-                })}
+          {loading ? (
+            <LoadingDiv>
+              <div />
+            </LoadingDiv>
+          ) : (
+            <>
+              {tid ||
+              override ||
+              fromDate ||
+              province ||
+              whichRegion ||
+              whichFilter
+                ? Array(1)
+                    .fill()
+                    .map((el, idx) => {
+                      return (
+                        <Items
+                          idx={idx}
+                          data={data}
+                          goTo={(id) => {
+                            this.goTo(id);
+                          }}
+                        />
+                      );
+                    })
+                : Array(3)
+                    .fill()
+                    .map((el, idx) => {
+                      let realData;
+                      let categ;
+                      if (idx === 0) {
+                        realData = hotData;
+                        categ = `인기 ${str}`;
+                      } else if (idx === 1) {
+                        realData = pickData;
+                        categ = `금주의 PICK`;
+                      } else if (idx === 2) {
+                        realData = newData;
+                        categ = `신규 ${str}`;
+                      }
+                      return (
+                        <Items
+                          categ={categ}
+                          data={realData}
+                          goTo={(id) => {
+                            this.goTo(id);
+                          }}
+                        />
+                      );
+                    })}
+            </>
+          )}
+
           {tid ||
           override ||
           fromDate ||
@@ -690,6 +759,36 @@ class Daily extends Component {
 }
 
 export default withRouter(Daily);
+
+const LoadingDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  div {
+    height: 50px;
+    width: 200px;
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/wecode_gray_logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: black;
+    position: absolute;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    animation: 1s linear 0s infinite normal none running linArrow;
+    @keyframes linArrow {
+      0% {
+        margin-top: -30px;
+        opacity: 100%;
+      }
+      100% {
+        margin-top: 30px;
+        opacity: 0%;
+      }
+    }
+  }
+`;
 
 const DailyContainer = styled.div`
   header {
