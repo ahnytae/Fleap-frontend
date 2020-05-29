@@ -12,6 +12,26 @@ class Items extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const { whichOne } = this.state;
+    const { data } = this.props;
+    for (let i = 0; i < data.length; i++) {
+      data[i].like
+        ? this.setState({
+            whichOne: {
+              ...whichOne,
+              [i + 1]: true,
+            },
+          })
+        : this.setState({
+            whichOne: {
+              ...whichOne,
+              [i + 1]: false,
+            },
+          });
+    }
+  };
+
   ifLiked = (idx) => {
     const { whichOne } = this.state;
     const { data } = this.props;
@@ -52,7 +72,13 @@ class Items extends Component {
                     frip_id: fripId,
                   }),
                 })
-              : alert("로그인 바랍니다");
+              : fetch(`http://13.59.219.151:8000/user/like`, {
+                  method: "POST",
+                  headers: {},
+                  body: JSON.stringify({
+                    frip_id: fripId,
+                  }),
+                });
           }
         )
       : this.setState(
@@ -73,7 +99,13 @@ class Items extends Component {
                     frip_id: fripId,
                   }),
                 })
-              : alert("로그인 바랍니다");
+              : fetch(`http://13.59.219.151:8000/user/like`, {
+                  method: "POST",
+                  headers: {},
+                  body: JSON.stringify({
+                    frip_id: fripId,
+                  }),
+                });
           }
         );
   };
@@ -97,7 +129,7 @@ class Items extends Component {
             )}
             <ul>
               {data.map((data, idx) => {
-                this.ifLiked(idx);
+                // this.ifLiked(idx);
                 return (
                   <StyledLi
                     idx={idx + 1}
@@ -209,10 +241,12 @@ const Category = styled.div`
     }
   }
 `;
+
 const Mainimg = styled.img`
   width: 226px;
   height: 169px;
 `;
+
 const HotFrip = styled(Category)`
   li {
     margin-right: 10px;
