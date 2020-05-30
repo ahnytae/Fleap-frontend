@@ -211,7 +211,6 @@ const Uppertitle = styled.div`
     font-size: 18px;
     line-height: 22px;
     h2 {
-      border: 1px red solid;
       display: inline-block;
       margin-right: 8px;
       font-weight: bold;

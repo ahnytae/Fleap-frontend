@@ -43,6 +43,7 @@ class Detail extends Component {
             detail: res.detail[0],
           },
           () => {
+            console.log("thisisdata", this.state.detail);
             this.setState({
               optionGroupCount:
                 this.state.detail.choice.option.length /
@@ -160,7 +161,7 @@ class Detail extends Component {
             <Content>
               <ContentBox>
                 <Slide>
-                  <DetailSlider />
+                  <DetailSlider whichOne={this.props.match.params.id} />
                 </Slide>
                 <Title>
                   <TitleSubstance>
@@ -388,6 +389,7 @@ class Detail extends Component {
                 <KakaoMap
                   lat={this.state.detail && this.state.detail.venue.venue_lat}
                   lng={this.state.detail && this.state.detail.venue.venue_lng}
+                  whichOne={this.props.match.params.id}
                 />
               )}
 
@@ -582,7 +584,12 @@ class Detail extends Component {
               <NewWindow data={this.state.clickedData} />
             )}
             <OptionJoin>
-              <OptionData onClick={() => this.pushData()}>참여하기</OptionData>
+              <OptionData
+                onClick={() => this.pushData()}
+                last={this.state.clickedData}
+              >
+                참여하기
+              </OptionData>
             </OptionJoin>
           </OptionsWrap>
         ) : (
@@ -1214,8 +1221,9 @@ const OptionData = styled.button`
   height: 50px;
   line-height: 13px;
   background-color: rgb(51, 151, 255);
+  border: none;
   text-align: center;
-  cursor: not-allowed;
+  cursor: ${(props) => (props.last ? "" : "not-allowed")};
   color: white;
   font-size: 13px;
   font-weight: bold;
