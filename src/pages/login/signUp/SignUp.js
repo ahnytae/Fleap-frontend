@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import Auth, { isEmail, isPw } from "../signIn/Auth";
 import styled from "styled-components";
+// 최종판
 
 const pwCheckText = () => {
   return (
@@ -14,7 +15,7 @@ const pwCheckText = () => {
 const repwCheckText = () => {
   return <div>먼저 입력하신 비밀번호와 일치하지 않습니다</div>;
 };
-
+// lastlastg
 class SignUp extends Component {
   state = {
     email: "",
@@ -46,7 +47,7 @@ class SignUp extends Component {
 
   signinHandler = (e) => {
     e.preventDefault();
-    fetch("http://10.58.3.84:8080/user/sign-up", {
+    fetch("http://13.59.219.151:8000/user/sign-up", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
