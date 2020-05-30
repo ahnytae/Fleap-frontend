@@ -516,6 +516,10 @@ class Main extends Component {
       });
   }
 
+  goTo = (id) => {
+    this.props.history.push(`/detail/${id}`);
+  };
+
   render() {
     const {
       category,
@@ -563,6 +567,9 @@ class Main extends Component {
               data={hotFrip}
               topTitle="지금 뜨는 프립"
               moreLink="/nowhotfrip"
+              goTo={(id) => {
+                this.goTo(id);
+              }}
             />
 
             {/* 두번째 슬라이드 */}
@@ -575,6 +582,9 @@ class Main extends Component {
               data={hotFripSpecialSale}
               topTitle="⚡프립특가, 놓치지마세요!"
               moreLink="#"
+              goTo={(id) => {
+                this.goTo(id);
+              }}
             />
 
             {/* 기획전 title + 슬라이드*/}
@@ -588,17 +598,34 @@ class Main extends Component {
             </SliderBox>
 
             {/* 슈퍼호스트 */}
-            <Items data={superHost} topTitle="🥇6월, 슈퍼호스트" moreLink="#" />
+            <Items
+              data={superHost}
+              topTitle="🥇6월, 슈퍼호스트"
+              moreLink="#"
+              goTo={(id) => {
+                this.goTo(id);
+              }}
+            />
 
             {/* 내손으로 만드는 재미 */}
             <Items
               data={enjoy}
               topTitle="내 손으로 만드는 재미 🙌"
               moreLink="#"
+              goTo={(id) => {
+                this.goTo(id);
+              }}
             />
 
             {/* 신규프립 */}
-            <Items data={newFrip} topTitle="신규프립" moreLink="#" />
+            <Items
+              data={newFrip}
+              topTitle="신규프립"
+              moreLink="#"
+              goTo={(id) => {
+                this.goTo(id);
+              }}
+            />
 
             <SliderBox>
               <Link to="#">

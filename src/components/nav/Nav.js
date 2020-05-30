@@ -411,7 +411,7 @@ class Nav extends Component {
             <InformationBtn>
               <Link to="#">호스트 지원</Link>
               <span></span>
-              <Link to="/signin">
+              <Link to="/signinentrypage">
                 {localStorage.getItem("token") ? "프립 님" : "로그인"}
               </Link>
               <span></span>
