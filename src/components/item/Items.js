@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 // import New from "../../images/New";
 // import Star from "../../images/Star";
@@ -109,12 +110,42 @@ class Items extends Component {
           }
         );
   };
+=======
+import { withRouter, Link } from "react-router-dom";
+import New from "../../images/New";
+import Star from "../../images/Star";
+import styled from "styled-components";
+
+class Items extends Component {
+  state = {
+    likeClicked: 1,
+    nonClick: 2,
+  };
+
+  componentDidMount() {
+    // if (!localStorage.getItem("token")) {
+    //   alert("로그인을 해주세요");
+    //   return 0;
+    // }
+    fetch("http://10.58.5.115:8000/user/like ", {
+      method: "POST",
+      headers: {
+        Authentication: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        frip_id: 100,
+        like: 1,
+      }),
+    });
+  }
+>>>>>>> 4687004... final
 
   render() {
     const { whichOne } = this.state;
     const { categ, data, goTo, like } = this.props;
 
     return (
+<<<<<<< HEAD
       <Wrapper>
         <Container>
           <HotFrip>
@@ -198,6 +229,61 @@ const Container = styled.div`
   margin: 0px auto;
   padding: 0px 20px;
 `;
+=======
+      <HotFrip>
+        {this.props.categ && (
+          <Uppertitle>
+            <div>
+              <h2>{this.props.title}</h2>
+              <Link to="/#">전체보기</Link>
+            </div>
+            <Link to="/#">전체보기</Link>
+          </Uppertitle>
+        )}
+        <ul>
+          {this.props.data.map((data) => {
+            return (
+              <li>
+                <Link
+                  onClick={() => {
+                    this.props.goTo(this.props.data.frip_id);
+                  }}
+                >
+                  <LocalText>
+                    <span>{data.location}</span>
+                    <button onClick={this.like}></button>
+                  </LocalText>
+                  <Mainimg src={data.image} alt="" />
+                  <SubTitle>{data.catch_phrase}</SubTitle>
+                  <Title>{data.title}</Title>
+                  <Prices>
+                    <PriceDiv>{data.price}</PriceDiv>
+                    {data.faked_price && (
+                      <FakedPrice>{data.faked_price}</FakedPrice>
+                    )}
+                  </Prices>
+                  {data.grade && (
+                    <StyledDiv>
+                      <Star />
+                      <Score>{data.grade.slice(0, 4)}</Score>
+                    </StyledDiv>
+                  )}
+                  {data.new && (
+                    <NewContainer grade={data.grade}>
+                      <New />
+                    </NewContainer>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </HotFrip>
+    );
+  }
+}
+export default withRouter(Items);
+>>>>>>> 4687004... final
 
 const Uppertitle = styled.div`
   display: flex;
@@ -211,6 +297,7 @@ const Uppertitle = styled.div`
     font-size: 18px;
     line-height: 22px;
     h2 {
+      border: 1px red solid;
       display: inline-block;
       margin-right: 8px;
       font-weight: bold;
@@ -224,8 +311,10 @@ const Uppertitle = styled.div`
       font-weight: 300;
     }
   }
+  a {
+    float: right;
+  }
 `;
-
 const Category = styled.div`
   margin-bottom: 40px;
   ul {
@@ -241,13 +330,29 @@ const Category = styled.div`
     }
   }
 `;
-
 const Mainimg = styled.img`
   width: 226px;
   height: 169px;
 `;
-
 const HotFrip = styled(Category)`
+<<<<<<< HEAD
+=======
+  button {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E");
+    background-repeat: no-repeat;
+    background-color: red;
+    width: 24px;
+    height: 24px;
+    line-height: normal;
+    background-color: transparent;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0px;
+    border-radius: 5px;
+    border-style: none;
+  }
+>>>>>>> 4687004... final
   li {
     margin-right: 10px;
     margin-bottom: 31px;
@@ -255,6 +360,7 @@ const HotFrip = styled(Category)`
     position: relative;
   }
 `;
+<<<<<<< HEAD
 
 const LikeButton = styled.button`
   z-index: 100;
@@ -292,6 +398,8 @@ const StyledLi = styled.li`
   }
 `;
 
+=======
+>>>>>>> 4687004... final
 const Title = styled.div`
   margin-top: 10px;
   height: auto;
@@ -311,9 +419,7 @@ const PriceDiv = styled.div`
   display: inline-block;
   font-size: 14px;
   font-weight: 900;
-  line-height: 14px;
 `;
-
 const FakedPrice = styled.div`
   display: inline-block;
   margin-left: 4px;
@@ -364,10 +470,10 @@ const Score = styled.p`
   display: inline-block;
   color: rgb(155, 155, 155);
 `;
-
 const NewContainer = styled.div`
   display: inline-block;
   margin-top: 14px;
+  width: 30px;
   img {
     margin-left: ${(props) => (props.grade ? "6px" : "0")};
   }

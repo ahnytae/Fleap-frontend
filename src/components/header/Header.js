@@ -13,7 +13,7 @@ class Header extends Component {
       <HeaderContainer>
         <MenuTab>
           <MenuContainer>
-            <Link to="/">추천</Link>
+            <Link to="/main">추천</Link>
             <Link to="/daily">일상</Link>
             <a>여행</a>
           </MenuContainer>
@@ -42,16 +42,16 @@ const HeaderContainer = styled.header`
         font-size: 30px;
         text-decoration: none;
         color: inherit;
-        /* font-weight: bold;
-        &::after {
+        font-weight: bold;
+        /* &:after {
           content: "";
           display: block;
           width: 6px;
           height: 6px;
           background-color: rgb(51, 151, 255);
           margin: 12px auto 0px;
-          border-radius: 3px;
-        } */
+          border-radius: 3px; */
+        }
       }
     }
   }

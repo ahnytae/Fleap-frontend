@@ -21,6 +21,8 @@ import Nav from "./components/nav/Nav";
 import Footer from "./components/footer/Footer";
 import SearchPage from "./components/nav/SearchPage";
 import GlobalStyles from "./styles/GlobalStyles";
+import NowHotFrip from "./pages/main/NowHotFrip";
+import Surfing from "./pages/main/SurfingPage";
 
 class Routes extends React.Component {
   render() {
@@ -31,6 +33,9 @@ class Routes extends React.Component {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/main" component={Main} />
+            <Route exact path="/nowhotfrip" component={NowHotFrip} />
+            <Route exact path="/surfing" component={Surfing} />
+            <Route exact path="/search" component={SearchPage} />
             <Route exact path="/daily" component={Daily} />
             <Route exact path="/daily/act/outdoor" component={Outdoor} />
             <Route exact path="/daily/act/outdoor/mt" component={OutdoorMt} />

@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "frip_id": 31,
+      "catch_phrase": "1박 2일ㅣ잊지 못할 고고비치 서핑 캠프",
+      "title": "[프립버스] 고성! 생애 첫 서핑캠프",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/product_banner_1589449317773_666645",
+      "price": "140,000원",
+      "faked_price": 165000,
+      "new": true,
+      "grade": null,
+      "location": "고성"
+    },
+    {
+      "frip_id": 91,
+      "catch_phrase": "출구 없는 재미",
+      "title": "월드 제트보트",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_2.0,f_auto,g_auto,q_auto,r_0,w_930/Jeju_43_1_1477988279795",
+      "price": "15,000원",
+      "faked_price": null,
+      "new": true,
+      "grade": null,
+      "location": "서귀포시"
+    },
+    {
+      "frip_id": 47,
+      "catch_phrase": "[ 롱보드 최진 ]",
+      "title": "롱보드 댄싱 1:1 개인레슨 (예약 가능)",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_1.0,f_auto,g_auto,q_auto,r_0,w_930/8689CB4D-24A8-4232-BA03-7911C3AC0539_zgozpy",
+      "price": "60,000원",
+      "faked_price": null,
+      "new": true,
+      "grade": null,
+      "location": "수원"
+    },
+    {
+      "frip_id": 51,
+      "catch_phrase": "Enjoy your Life/YOLO",
+      "title": "COVID-19 WORKOUTS & DIET(코로나19운동&다이어트)(예약가능)",
+      "image": "https://res.cloudinary.com/frientrip/image/upload/ar_4:3,c_fill,dpr_1.0,f_auto,g_auto,q_auto,r_0,w_930/COVID-19_20_2_20_002__0_1_cl9ssn",
+      "price": "50,000원",
+      "faked_price": null,
+      "new": false,
+      "grade": 4.4,
+      "location": "용산구"
+    }
+  ]
+}
