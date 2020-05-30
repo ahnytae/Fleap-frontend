@@ -13,7 +13,7 @@ import MakeDiyCandle from "./pages/daily/learn/MakeDiyCandle";
 import SignIn from "./pages/login/signIn/SignIn";
 import SignUp from "./pages/login/signUp/SignUp";
 import SignInEntryPage from "./pages/login/signIn/SignInEntryPage";
-// import SignUpEntryPage from "./pages/login/SignUp/SignUpEntryPage";
+import SignUpEntryPage from "./pages/login/signUp/SignUpEntryPage";
 import Payment from "./pages/payment/Payment";
 import MyLikes from "./pages/myPage/MyLikes";
 import MyFrip from "./pages/myPage/MyFrip";
@@ -64,7 +64,7 @@ class Routes extends React.Component {
 
             {/* <Route exact path="/mypage" component={MyPage} /> */}
             <Route exact path="/signinentrypage" component={SignInEntryPage} />
-            {/* <Route exact path="/signupentrypage" component={SignUpEntryPage} /> */}
+            <Route exact path="/signupentrypage" component={SignUpEntryPage} />
             {/* <Route exact path="/singinentry" component={SignInEntryPage} /> */}
 
             <Route exact path="/signin" component={SignIn} />
