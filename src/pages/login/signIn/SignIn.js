@@ -129,6 +129,7 @@ const LoginBtn = styled.button`
   font-size: 13px;
   padding: 0px 13px;
   border-radius: 5px;
+  border-style:none;
   /* pointer-events: none; */
 
   /* background-color: ${(props) =>

@@ -4,15 +4,12 @@ import KakaoLogin from "../signUp/KakaoLogin";
 import Kakao from "kakaojs";
 import styled from "styled-components";
 
-// const kakaoAPI = "2de6e772194eae26385785ec39b020c6";
-// const kakaoURL = "http://localhost:3000";
-
 class SignInEntryPage extends Component {
   loginKakao = () => {
     Kakao.Auth.login({
       success: (authObj) => {
         console.log("응답합니다", authObj);
-        fetch(`http://10.58.0.153:8000/user/kakao`, {
+        fetch(`http://13.59.219.151:8000/user/kakao`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -41,13 +38,17 @@ class SignInEntryPage extends Component {
   //   // window.location.reload();
   // };
 
+  test = () => {
+    console.log("TEST!!!!!!");
+  };
+
   render() {
     return (
       <MainInner>
         <MainWrapper>
           <h1>로그인</h1>
           <btnWrapper>
-            <Link to="/signinpage">
+            <Link to="/signin">
               <div>이메일로 로그인</div>
             </Link>
             <div>
