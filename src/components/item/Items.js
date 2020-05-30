@@ -8,46 +8,75 @@ class Items extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      whichOne: {},
+      whichOne: {
+        // 1: false,
+        // 2: false,
+        // 3: false,
+        // 4: false,
+      },
     };
   }
 
-  componentDidMount = () => {
-    const { whichOne } = this.state;
-    const { data } = this.props;
-    for (let i = 0; i < data.length; i++) {
-      data[i].like
-        ? this.setState({
-            whichOne: {
-              ...whichOne,
-              [i + 1]: true,
-            },
-          })
-        : this.setState({
-            whichOne: {
-              ...whichOne,
-              [i + 1]: false,
-            },
-          });
-    }
-  };
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (prevProps.data !== this.props.data) {
+  //     const { whichOne } = this.state;
+  //     const { data } = this.props;
+  //     console.log("data잘 받아옴", data);
+  //     for (let i = 0; i < data.length; i++) {
+  //       console.log("like되어있나", data[i].like);
+  //       data[i].like
+  //         ? this.setState(
+  //             {
+  //               whichOne: {
+  //                 ...whichOne,
+  //                 [i + 1]: true,
+  //               },
+  //             },
+  //             () => {
+  //               console.log("liked ones", i, whichOne);
+  //             }
+  //           )
+  //         : this.setState(
+  //             {
+  //               whichOne: {
+  //                 ...whichOne,
+  //                 [i + 1]: false,
+  //               },
+  //             },
+  //             () => {
+  //               console.log("liked ones", i, whichOne);
+  //             }
+  //           );
+  //     }
+  //   }
+  // };
 
   ifLiked = (idx) => {
     const { whichOne } = this.state;
     const { data } = this.props;
     data[idx].like
-      ? this.setState({
-          whichOne: {
-            ...whichOne,
-            [idx + 1]: true,
+      ? this.setState(
+          {
+            whichOne: {
+              ...whichOne,
+              [idx + 1]: true,
+            },
           },
-        })
-      : this.setState({
-          whichOne: {
-            ...whichOne,
-            [idx + 1]: false,
+          () => {
+            console.log("liked ones", idx, whichOne);
+          }
+        )
+      : this.setState(
+          {
+            whichOne: {
+              ...whichOne,
+              [idx + 1]: false,
+            },
           },
-        });
+          () => {
+            console.log("liked ones", idx, whichOne);
+          }
+        );
   };
 
   like = (idx, fripId) => {
@@ -117,13 +146,10 @@ class Items extends Component {
             )}
             <ul>
               {data.map((data, idx) => {
+                console.log("이게 되야돼", data.like);
                 // this.ifLiked(idx);
                 return (
-                  <StyledLi
-                    idx={idx + 1}
-                    like={whichOne[idx + 1]}
-                    likePage={like}
-                  >
+                  <StyledLi idx={idx + 1} like={data.like} likePage={like}>
                     <LikeButton
                       onClick={() => this.like(idx + 1, data.frip_id)}
                       like={like}
