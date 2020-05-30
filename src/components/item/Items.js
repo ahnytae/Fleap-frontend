@@ -72,13 +72,7 @@ class Items extends Component {
                     frip_id: fripId,
                   }),
                 })
-              : fetch(`http://13.59.219.151:8000/user/like`, {
-                  method: "POST",
-                  headers: {},
-                  body: JSON.stringify({
-                    frip_id: fripId,
-                  }),
-                });
+              : alert("로그인 해주세요!");
           }
         )
       : this.setState(
@@ -99,13 +93,7 @@ class Items extends Component {
                     frip_id: fripId,
                   }),
                 })
-              : fetch(`http://13.59.219.151:8000/user/like`, {
-                  method: "POST",
-                  headers: {},
-                  body: JSON.stringify({
-                    frip_id: fripId,
-                  }),
-                });
+              : alert("로그인 해주세요!");
           }
         );
   };
