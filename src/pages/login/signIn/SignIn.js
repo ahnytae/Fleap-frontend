@@ -21,7 +21,7 @@ class SignIn extends Component {
 
   loginHandler = (e) => {
     e.preventDefault();
-    fetch("http://10.58.3.84:8080/user/sign-in", {
+    fetch("http://13.59.219.151:8000/user/sign-in", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,
@@ -89,6 +89,7 @@ const EmailBox = styled.div`
   flex-flow: column nowrap;
   padding: 40px 40px 60px;
   margin: 0 auto;
+  border-style: none;
 
   h1 {
     width: 100%;
@@ -118,6 +119,8 @@ const FormBox = styled.div`
   }
 `;
 
+// rgb(51, 151, 255)
+
 const LoginBtn = styled.button`
   width: 100%;
   height: 50px;
@@ -129,7 +132,7 @@ const LoginBtn = styled.button`
   font-size: 13px;
   padding: 0px 13px;
   border-radius: 5px;
-  border-style:none;
+  border-style: none;
   /* pointer-events: none; */
 
   /* background-color: ${(props) =>

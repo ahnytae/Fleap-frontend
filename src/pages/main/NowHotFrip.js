@@ -22,10 +22,9 @@ class NowHotFrip extends Component {
     return (
       <Wrapper>
         <Container>
-          <div>
-            <h2>지금 뜨는 프립</h2>
-          </div>
-          <Items data={hotFrip} />
+          <Uppertitle>
+            <Items data={hotFrip} topTitle="지금 뜨는 프립" />
+          </Uppertitle>
         </Container>
       </Wrapper>
     );
@@ -48,9 +47,9 @@ const Container = styled.div`
   flex-flow: column nowrap;
   margin: 0px auto;
   padding: 0px 20px;
+`;
 
-  h2 {
-    margin: 40px 0 30px 0;
-    font-size: 18px;
-  }
+const Uppertitle = styled.div`
+  margin: 40px 0 30px 0;
+  font-size: 18px;
 `;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import New from "../../images/New";
-// import Star from "../../images/Star";
+import New from "../../images/New/New";
+import Star from "../../images/Star/Star";
 import styled from "styled-components";
 
 class Items extends Component {
@@ -118,13 +118,20 @@ class Items extends Component {
       <Wrapper>
         <Container>
           <HotFrip>
-            {categ && (
+            {categ === true ? (
               <Uppertitle>
                 <div>
                   <h2>{categ}</h2>
                   {data[0] && <span>{data[0].total}</span>}
                 </div>
                 <Link to="/#">전체보기</Link>
+              </Uppertitle>
+            ) : (
+              <Uppertitle>
+                <div>
+                  <h2>{this.props.topTitle}</h2>
+                </div>
+                <Link to={this.props.moreLink}>전체보기</Link>
               </Uppertitle>
             )}
             <ul>
@@ -159,13 +166,13 @@ class Items extends Component {
                       </Prices>
                       {data.grade && (
                         <StyledDiv>
-                          {/* <Star /> */}
+                          <Star />
                           <Score>{data.grade.slice(0, 4)}</Score>
                         </StyledDiv>
                       )}
                       {data.new && (
                         <NewContainer grade={data.grade}>
-                          {/* <New /> */}
+                          <New />
                         </NewContainer>
                       )}
                     </Link>
