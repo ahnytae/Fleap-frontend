@@ -30,7 +30,7 @@ class Payment extends Component {
 
   componentDidMount = () => {
     const { detail } = this.state;
-    console.log(this.props.match.params.id);
+    console.log("여기입니다", this.props.match.params.id);
     console.log(this.props.location.state);
     this.setState(
       {
@@ -38,11 +38,14 @@ class Payment extends Component {
         fripPrice: this.props.location.state.price.toLocaleString(),
       },
       () => {
-        fetch(`http://13.59.219.151:8000/frip/purchase/23`, {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        })
+        fetch(
+          `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        )
           .then((res) => res.json())
           .then((res) => {
             console.log(res, "res");
@@ -84,21 +87,24 @@ class Payment extends Component {
           msg += "결제 금액 : " + rsp.paid_amount;
           msg += "카드 승인번호 : " + rsp.apply_num;
 
-          fetch(`http://13.59.219.151:8000/frip/purchase/98`, {
-            method: "POST",
-            mode: "cors",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: localStorage.getItem("token"),
-            },
-            body: JSON.stringify({
-              frip: detail.id,
-              option: detail.optionID,
-              payment_method: whichPay,
-              quantity: 1,
-            }),
-          }).then((res) => {
+          fetch(
+            `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
+            {
+              method: "POST",
+              mode: "cors",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem("token"),
+              },
+              body: JSON.stringify({
+                frip: detail.id,
+                option: detail.optionID,
+                payment_method: whichPay,
+                quantity: 1,
+              }),
+            }
+          ).then((res) => {
             setTimeout(() => {
               this.props.history.push("/myfrip");
               window.location.reload();
@@ -399,6 +405,7 @@ const FripImg = styled.div`
   width: 130px;
   height: 97px;
   background-image: url(${(props) => props.bgImg});
+  background-size: contain;
 `;
 
 const FripDesc = styled.div`

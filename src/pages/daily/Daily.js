@@ -113,12 +113,6 @@ class Daily extends Component {
   };
 
   firstData = () => {
-    // fetch("http://localhost:3000/data/dailyMock.json")
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log("데이터 잘 나옴", res.data[0].total);
-    //     this.setState({ hotData: res.data });
-    //   });
     this.setState(
       {
         loading: true,
