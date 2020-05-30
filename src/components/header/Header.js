@@ -51,7 +51,6 @@ const HeaderContainer = styled.header`
           background-color: rgb(51, 151, 255);
           margin: 12px auto 0px;
           border-radius: 3px; */
-        }
       }
     }
   }
