@@ -223,7 +223,7 @@ const Container = styled.div`
   min-height: 1px;
   flex-flow: column nowrap;
   margin: 0px auto;
-  padding: 0px 20px;
+  /* padding: 0px 20px; */
 `;
 
 const Uppertitle = styled.div`
