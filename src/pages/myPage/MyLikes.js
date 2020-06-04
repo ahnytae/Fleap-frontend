@@ -37,6 +37,10 @@ class MyLikes extends Component {
       });
   };
 
+  goTo = (id) => {
+    this.props.history.push(`/detail/${id}`);
+  };
+
   render() {
     const { myProfile, myNrg, myLikes } = this.state;
 
