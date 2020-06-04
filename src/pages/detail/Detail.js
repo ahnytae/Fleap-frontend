@@ -192,10 +192,12 @@ class Detail extends Component {
                     <Price>
                       <div>
                         <MainPrice>
-                          {this.state.detail && this.state.detail.faked_price}
+                          {this.state.detail.faked_price &&
+                            this.state.detail.faked_price.toLocaleString()}
                         </MainPrice>
                         <PriceNum>
-                          {this.state.detail && this.state.detail.price}
+                          {this.state.detail.price &&
+                            this.state.detail.price.toLocaleString()}
                           <PriceText> 원</PriceText>
                         </PriceNum>
                       </div>

@@ -103,8 +103,11 @@ const OptionWrap = ({
                   <p>{eachItem.content}</p>
                 </Left>
                 <Right>
-                  <span>{eachItem.base_price}</span>
-                  <p>{eachItem.price}</p>
+                  <span>
+                    {eachItem.base_price &&
+                      eachItem.base_price.toLocaleString()}
+                  </span>
+                  <p>{eachItem.price && eachItem.price.toLocaleString()}</p>
                 </Right>
               </DefalutOpt>
             ) : (
@@ -127,8 +130,11 @@ const OptionWrap = ({
                   <p>{eachItem.content}</p>
                 </Left>
                 <Right>
-                  <span>{eachItem.base_price}</span>
-                  <p>{eachItem.price}</p>
+                  <span>
+                    {eachItem.base_price &&
+                      eachItem.base_price.toLocaleString()}
+                  </span>
+                  <p>{eachItem.price && eachItem.price.toLocaleString()}</p>
                 </Right>
               </DefalutOpt>
             ) : (
