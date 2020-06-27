@@ -342,6 +342,15 @@ class Nav extends Component {
     );
   };
 
+  handleAlwaysFalse = () => {
+    this.setState(
+      {
+        btnShow: false,
+      },
+      () => console.log(this.state.btnShow)
+    );
+  };
+
   handleOnWindow = () => {
     this.setState({
       disableWindow: !this.state.disableWindow,
@@ -411,14 +420,16 @@ class Nav extends Component {
             <InformationBtn>
               <Link to="#">호스트 지원</Link>
               <span></span>
-              <Link to="/signinentrypage">
-                {localStorage.getItem("token") ? "프립 님" : "로그인"}
-              </Link>
+              {localStorage.getItem("token") ? (
+                <Link to="/mylikes">프립 님</Link>
+              ) : (
+                "로그인"
+              )}
               <span></span>
               <Link
                 to="#"
                 onClick={this.handleOnShow}
-                onBlur={this.handleOnShow}
+                onBlur={this.handleAlwaysFalse}
               >
                 고객센터
                 <img

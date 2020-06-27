@@ -20,6 +20,7 @@ class Detail extends Component {
       clickedData: false,
       optionGroupCount: false,
       childOptionGroupCount: false,
+      loading: false,
     };
   }
 
@@ -33,42 +34,56 @@ class Detail extends Component {
 
   componentDidMount() {
     console.log("asdf", this.state.clickedData);
-    fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        this.setState(
-          {
-            detail: res.detail[0],
-          },
-          () => {
-            console.log("thisisdata", this.state.detail);
-            this.setState({
-              optionGroupCount:
-                this.state.detail.choice.option.length /
-                this.state.detail.choice.option
-                  .map((item) => {
-                    if (item.option_type === "optionGroup") {
-                      return 1;
-                    }
-                  })
-                  .filter((item) => item === 1).length,
-            });
-            this.setState({
-              childOptionGroupCount:
-                this.state.detail.choice.child_option.length /
-                this.state.detail.choice.child_option
-                  .map((item) => {
-                    if (item.option_type === "optionGroup") {
-                      return 1;
-                    }
-                  })
-                  .filter((item) => item === 1).length,
-            });
-          }
-        );
-      });
+    this.setState(
+      {
+        loading: true,
+      },
+      () => {
+        fetch(`http://13.59.219.151:8000/frip/${this.props.match.params.id}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            this.setState(
+              {
+                detail: res.detail[0],
+              },
+              () => {
+                console.log("thisisdata", this.state.detail);
+                this.setState({
+                  optionGroupCount:
+                    this.state.detail.choice.option.length /
+                    this.state.detail.choice.option
+                      .map((item) => {
+                        if (item.option_type === "optionGroup") {
+                          return 1;
+                        }
+                      })
+                      .filter((item) => item === 1).length,
+                });
+                this.setState(
+                  {
+                    childOptionGroupCount:
+                      this.state.detail.choice.child_option.length /
+                      this.state.detail.choice.child_option
+                        .map((item) => {
+                          if (item.option_type === "optionGroup") {
+                            return 1;
+                          }
+                        })
+                        .filter((item) => item === 1).length,
+                  },
+                  () => {
+                    this.setState({
+                      loading: false,
+                    });
+                  }
+                );
+              }
+            );
+          });
+      }
+    );
 
     // this.getData();
   }
@@ -118,6 +133,8 @@ class Detail extends Component {
   };
 
   render() {
+    const { loading } = this.state;
+
     let optionArr = [],
       child_optionArr = [];
 
@@ -159,240 +176,254 @@ class Detail extends Component {
         <DetailPage style={tempStyle}>
           <Detailshape>
             <Content>
-              <ContentBox>
-                <Slide>
-                  <DetailSlider whichOne={this.props.match.params.id} />
-                </Slide>
-                <Title>
-                  <TitleSubstance>
-                    <FeedName>
-                      <FeedTitleName>
-                        <SubTitle>
-                          {this.state.detail && this.state.detail.catch_phrase}
-                        </SubTitle>
-                        <TitleExplain>
-                          {this.state.detail && this.state.detail.title}
-                        </TitleExplain>
-                      </FeedTitleName>
-                      <TitleImg>
-                        <ShareBtn>
-                          <img
-                            alt=""
-                            src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4gPHN2ZyB3aWR0aD0nMjRweCcgaGVpZ2h0PScyNHB4JyB2aWV3Qm94PScwIDAgMjQgMjQnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayc+IDwhLS0gR2VuZXJhdG9yOiBza2V0Y2h0b29sIDUzLjIgKDcyNjQzKSAtIGh0dHBzOi8vc2tldGNoYXBwLmNvbSAtLT4gPHRpdGxlPjk5RUQ5RDMxLUNEOTQtNEU5Qy05Q0Y2LTI4N0VBOEM1OUQ5NjwvdGl0bGU+IDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4gPGcgaWQ9J1N5bWJvbHMnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnPiA8ZyBpZD0naWNvbi8yNHB4L3NoYXJlX25hdmlfYmxhY2snIGZpbGwtcnVsZT0nbm9uemVybyc+IDxyZWN0IGlkPSdpY19hcmVhJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnPjwvcmVjdD4gPHBhdGggZD0nTTkuNzIzMDEzMDksOS4wNjk5MjYxMSBMMTMuMjAxMDgzMyw3LjI1NTc0NzU0IEMxMy4wNzA2MDk3LDYuODYwODIwNzQgMTMsNi40Mzg2NTYyNiAxMyw2IEMxMywzLjc5MDg2MSAxNC43OTA4NjEsMiAxNywyIEMxOS4yMDkxMzksMiAyMSwzLjc5MDg2MSAyMSw2IEMyMSw4LjIwOTEzOSAxOS4yMDkxMzksMTAgMTcsMTAgQzE1Ljk1NDk0MDgsMTAgMTUuMDAzNDg2OSw5LjU5OTIyNzc3IDE0LjI5MDk0NzMsOC45NDI5OTIyMiBMMTAuODA0NTcyMSwxMC43NjE1MDI3IEMxMC45MzE0Mjk0LDExLjE1MTQ2MzggMTEsMTEuNTY3NzI0MSAxMSwxMiBDMTEsMTIuNDg5MTYzNyAxMC45MTIxOTQsMTIuOTU3ODE5MyAxMC43NTE0ODM1LDEzLjM5MTA2NSBMMTQuMDgzMzE5NSwxNS4yNjI2NTE5IEMxNC44MTMwMTU5LDE0LjQ4NTQ1NjkgMTUuODQ5ODE1NywxNCAxNywxNCBDMTkuMjA5MTM5LDE0IDIxLDE1Ljc5MDg2MSAyMSwxOCBDMjEsMjAuMjA5MTM5IDE5LjIwOTEzOSwyMiAxNywyMiBDMTQuNzkwODYxLDIyIDEzLDIwLjIwOTEzOSAxMywxOCBDMTMsMTcuNjYwNjMxOSAxMy4wNDIyNjI4LDE3LjMzMTEzNDggMTMuMTIxODEyMiwxNy4wMTY0ODQ4IEw5LjYwMTE2NDQ5LDE1LjAzODgzNjkgQzguOTAxNzk3NDcsMTUuNjM4MDM4NyA3Ljk5MzE2OTAzLDE2IDcsMTYgQzQuNzkwODYxLDE2IDMsMTQuMjA5MTM5IDMsMTIgQzMsOS43OTA4NjEgNC43OTA4NjEsOCA3LDggQzguMDUxODk5MzUsOCA5LjAwODk2Mzk5LDguNDA2MDM1NjUgOS43MjMwMTMwOSw5LjA2OTkyNjExIFogTTcsMTQgQzguMTA0NTY5NSwxNCA5LDEzLjEwNDU2OTUgOSwxMiBDOSwxMC44OTU0MzA1IDguMTA0NTY5NSwxMCA3LDEwIEM1Ljg5NTQzMDUsMTAgNSwxMC44OTU0MzA1IDUsMTIgQzUsMTMuMTA0NTY5NSA1Ljg5NTQzMDUsMTQgNywxNCBaIE0xNyw4IEMxOC4xMDQ1Njk1LDggMTksNy4xMDQ1Njk1IDE5LDYgQzE5LDQuODk1NDMwNSAxOC4xMDQ1Njk1LDQgMTcsNCBDMTUuODk1NDMwNSw0IDE1LDQuODk1NDMwNSAxNSw2IEMxNSw3LjEwNDU2OTUgMTUuODk1NDMwNSw4IDE3LDggWiBNMTcsMjAgQzE4LjEwNDU2OTUsMjAgMTksMTkuMTA0NTY5NSAxOSwxOCBDMTksMTYuODk1NDMwNSAxOC4xMDQ1Njk1LDE2IDE3LDE2IEMxNS44OTU0MzA1LDE2IDE1LDE2Ljg5NTQzMDUgMTUsMTggQzE1LDE5LjEwNDU2OTUgMTUuODk1NDMwNSwyMCAxNywyMCBaJyBpZD0nQ29tYmluZWQtU2hhcGUnIGZpbGw9JyMwMDAwMDAnPjwvcGF0aD4gPC9nPiA8L2c+IDwvc3ZnPg=="
-                          ></img>
-                        </ShareBtn>
-                        <HeartBtn>
-                          <img
-                            alt=""
-                            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBzdHJva2U9JyMwMDAnIHN0cm9rZS13aWR0aD0nMicgZD0nTTEyLjI0MiA2LjEyOWwtLjU1NS0uNTU1QzkuODQgMy43MjcgNi44NDEgMy40MjggNC44MjggNS4wOTFhNS4wMDEgNS4wMDEgMCAwIDAtLjM2NCA3LjQwMmw3Ljc3OCA3Ljc3OCA3Ljc3OC03Ljc3OGE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0LTcuNDAyYy0yLjAxMy0xLjY2My01LjAxMi0xLjM2NC02Ljg1OS40ODNsLS41NTUuNTU1eicvPiA8L2c+IDwvc3ZnPg=="
-                          />
-                        </HeartBtn>
-                      </TitleImg>
-                    </FeedName>
-                    <Price>
-                      <div>
-                        <MainPrice>
-                          {this.state.detail.faked_price &&
-                            this.state.detail.faked_price.toLocaleString()}
-                        </MainPrice>
-                        <PriceNum>
-                          {this.state.detail.price &&
-                            this.state.detail.price.toLocaleString()}
-                          <PriceText> 원</PriceText>
-                        </PriceNum>
-                      </div>
-                      {this.state.detail.discount_percentage && (
-                        <DiscountPrice>
-                          {this.state.detail.discount_percentage + "%"}
-                        </DiscountPrice>
-                      )}
-                    </Price>
-                  </TitleSubstance>
-                  <Explain>
-                    <ExplainImoji>
-                      <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBmaWxsPScjRjY2JyBkPSdNMTIuMjQyIDYuMTI5bC0uNTU1LS41NTVDOS44NCAzLjcyNyA2Ljg0MSAzLjQyOCA0LjgyOCA1LjA5MWE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0IDcuNDAybDcuMDcxIDcuMDdhMSAxIDAgMCAwIDEuNDE1IDBsNy4wNy03LjA3YTUuMDAxIDUuMDAxIDAgMCAwLS4zNjQtNy40MDJjLTIuMDEzLTEuNjYzLTUuMDEyLTEuMzY0LTYuODU5LjQ4M2wtLjU1NS41NTV6Jy8+IDwvZz4gPC9zdmc+" />
-                      <Like>
-                        {" "}
-                        {this.state.detail && this.state.detail.liked} 명이
-                        좋아한 프립
-                      </Like>
-                    </ExplainImoji>
-                    <ExplainImoji>
-                      <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOCcgaGVpZ2h0PScxOCcgdmlld0JveD0nMCAwIDE4IDE4Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgxOHYxOEgweicvPiA8cmVjdCB3aWR0aD0nMTInIGhlaWdodD0nMTInIHg9JzMnIHk9JzMnIGZpbGw9JyMzMzk3RkYnIGZpbGwtcnVsZT0nbm9uemVybycgcng9JzEnLz4gPHBhdGggZmlsbD0nI0ZGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNNSA4aDh2NUg1eicvPiA8cGF0aCBmaWxsPScjMzM5N0ZGJyBmaWxsLXJ1bGU9J25vbnplcm8nIGQ9J001IDFoMnYySDV6TTExIDFoMnYyaC0yeicvPiA8L2c+IDwvc3ZnPg==" />
-                      <Like>
-                        {" "}
-                        유효기간 구매일로부터{" "}
-                        {this.state.detail && this.state.detail.duedate} 일
-                      </Like>
-                    </ExplainImoji>
-                    <ExplainImoji>
-                      <Icon src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAArCAMAAAAuY3oFAAAASFBMVEVHcEwAf/8Aff8Afv8AgP8Jgv8Phf8Aff8Bf/8NhP8Afv8Hgf8Af/8Df/8Afv8Aff8zl/////8rk/8djP/B3/9jr//r9P+UyP/2LrjhAAAAEHRSTlMARZxnBt/xGLntgtCPxFUtECF3nwAAARVJREFUOMuFlN0CwxAMhcNoBd06uu7933RqzL+dO3KaL0gK8BMjWihEJTRh0GqlaM3uZSzStQoziSEaPCiLLOtWhL1ly5I8eBN3Dv74fc/3rnjIwTbTN5jtW4ccxJ1DesCyD7VcEGrGBkNdBbhPhAyIzdav4zyPV7ZhSUF4P73eBUNk3z+DshwCVFoc0XCkPQVZjWc0nFmVsMwNC/A5gv8vUs+Pqf9fFOOzq+buwfXssfT13JPXQt9T0o7iVn57To0MKrQ+GaRwRwjqN9XVTnGu+OiIUfcOxN7z2RPt6IlytrF/BUm3CmJv9f+hhFSAFlIDakgLKCEdwHVbaYqXFbqKkD4gQfoASL+KESBCxgDfGpSScucDG1I6q3UhKQAAAAAASUVORK5CYII=" />
-                      <Like>
-                        {this.state.detail && this.state.detail.location}
-                      </Like>
-                    </ExplainImoji>
-                    <ExplainImoji>
-                      <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz4gPHBhdGggZmlsbD0nIzMzOTdGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNOCAxMi4xNmwtMy44NTIgMS44OTRhLjUuNSAwIDAgMS0uNzE1LS41MmwuNjEtNC4yNDgtMi45OTEtMy4wNzlhLjUuNSAwIDAgMSAuMjczLS44NGw0LjIzLS43MzNMNy41NTguODM4YS41LjUgMCAwIDEgLjg4NCAwbDIuMDAzIDMuNzk2IDQuMjMuNzMyYS41LjUgMCAwIDEgLjI3My44NDFsLTIuOTkyIDMuMDc5LjYxMSA0LjI0OGEuNS41IDAgMCAxLS43MTUuNTJMOCAxMi4xNnonLz4gPC9zdmc+" />
-                      <Like>
-                        프립 평점
-                        {this.state.detail && this.state.detail.review_average}
-                      </Like>
-                    </ExplainImoji>
-                  </Explain>
-
-                  <Host>
-                    <HostName>
-                      <HostName2>호스트</HostName2>
-                    </HostName>
-                    <HostInfoAll>
-                      <HostInfo>
-                        <HostImg>
-                          <img
-                            src={
-                              this.state.detail &&
-                              this.state.detail.host.host_image
-                            }
-                            alt=""
-                          ></img>
-                        </HostImg>
-                        <HostContent>
-                          <HostContent1>
-                            <HostContentName>
+              {loading ? (
+                <LoadingDiv>
+                  <div />
+                </LoadingDiv>
+              ) : (
+                <>
+                  <ContentBox>
+                    <Slide>
+                      <DetailSlider whichOne={this.props.match.params.id} />
+                    </Slide>
+                    <Title>
+                      <TitleSubstance>
+                        <FeedName>
+                          <FeedTitleName>
+                            <SubTitle>
                               {this.state.detail &&
-                                this.state.detail.host.host_name}
-                            </HostContentName>
-                            <HostIntro> 프립 11 | 좋아요 362 </HostIntro>
-                          </HostContent1>
-                        </HostContent>
-                      </HostInfo>
-                      <HostItem>
-                        {this.state.detail &&
-                          this.state.detail.host.description}
-                      </HostItem>
-                      <HostProfile>호스트 프로필</HostProfile>
-                      <HostIntro></HostIntro>
-
-                      <HostReview>
-                        <h4>호스트후기</h4>
-                      </HostReview>
-                      <HostReviewIntro>
-                        <HostReviewPic>
-                          <img
-                            src="https://k.kakaocdn.net/dn/blGCnn/btqCt7BjPLh/0JwZ3r9ClbHt1COk4O0GdK/img_110x110.jpg"
-                            alt=""
-                          ></img>
-                        </HostReviewPic>
-                        <HostReviewInfor>
-                          <HostReviewName>
+                                this.state.detail.catch_phrase}
+                            </SubTitle>
+                            <TitleExplain>
+                              {this.state.detail && this.state.detail.title}
+                            </TitleExplain>
+                          </FeedTitleName>
+                          <TitleImg>
+                            <ShareBtn>
+                              <img
+                                alt=""
+                                src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4gPHN2ZyB3aWR0aD0nMjRweCcgaGVpZ2h0PScyNHB4JyB2aWV3Qm94PScwIDAgMjQgMjQnIHZlcnNpb249JzEuMScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayc+IDwhLS0gR2VuZXJhdG9yOiBza2V0Y2h0b29sIDUzLjIgKDcyNjQzKSAtIGh0dHBzOi8vc2tldGNoYXBwLmNvbSAtLT4gPHRpdGxlPjk5RUQ5RDMxLUNEOTQtNEU5Qy05Q0Y2LTI4N0VBOEM1OUQ5NjwvdGl0bGU+IDxkZXNjPkNyZWF0ZWQgd2l0aCBza2V0Y2h0b29sLjwvZGVzYz4gPGcgaWQ9J1N5bWJvbHMnIHN0cm9rZT0nbm9uZScgc3Ryb2tlLXdpZHRoPScxJyBmaWxsPSdub25lJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnPiA8ZyBpZD0naWNvbi8yNHB4L3NoYXJlX25hdmlfYmxhY2snIGZpbGwtcnVsZT0nbm9uemVybyc+IDxyZWN0IGlkPSdpY19hcmVhJyB4PScwJyB5PScwJyB3aWR0aD0nMjQnIGhlaWdodD0nMjQnPjwvcmVjdD4gPHBhdGggZD0nTTkuNzIzMDEzMDksOS4wNjk5MjYxMSBMMTMuMjAxMDgzMyw3LjI1NTc0NzU0IEMxMy4wNzA2MDk3LDYuODYwODIwNzQgMTMsNi40Mzg2NTYyNiAxMyw2IEMxMywzLjc5MDg2MSAxNC43OTA4NjEsMiAxNywyIEMxOS4yMDkxMzksMiAyMSwzLjc5MDg2MSAyMSw2IEMyMSw4LjIwOTEzOSAxOS4yMDkxMzksMTAgMTcsMTAgQzE1Ljk1NDk0MDgsMTAgMTUuMDAzNDg2OSw5LjU5OTIyNzc3IDE0LjI5MDk0NzMsOC45NDI5OTIyMiBMMTAuODA0NTcyMSwxMC43NjE1MDI3IEMxMC45MzE0Mjk0LDExLjE1MTQ2MzggMTEsMTEuNTY3NzI0MSAxMSwxMiBDMTEsMTIuNDg5MTYzNyAxMC45MTIxOTQsMTIuOTU3ODE5MyAxMC43NTE0ODM1LDEzLjM5MTA2NSBMMTQuMDgzMzE5NSwxNS4yNjI2NTE5IEMxNC44MTMwMTU5LDE0LjQ4NTQ1NjkgMTUuODQ5ODE1NywxNCAxNywxNCBDMTkuMjA5MTM5LDE0IDIxLDE1Ljc5MDg2MSAyMSwxOCBDMjEsMjAuMjA5MTM5IDE5LjIwOTEzOSwyMiAxNywyMiBDMTQuNzkwODYxLDIyIDEzLDIwLjIwOTEzOSAxMywxOCBDMTMsMTcuNjYwNjMxOSAxMy4wNDIyNjI4LDE3LjMzMTEzNDggMTMuMTIxODEyMiwxNy4wMTY0ODQ4IEw5LjYwMTE2NDQ5LDE1LjAzODgzNjkgQzguOTAxNzk3NDcsMTUuNjM4MDM4NyA3Ljk5MzE2OTAzLDE2IDcsMTYgQzQuNzkwODYxLDE2IDMsMTQuMjA5MTM5IDMsMTIgQzMsOS43OTA4NjEgNC43OTA4NjEsOCA3LDggQzguMDUxODk5MzUsOCA5LjAwODk2Mzk5LDguNDA2MDM1NjUgOS43MjMwMTMwOSw5LjA2OTkyNjExIFogTTcsMTQgQzguMTA0NTY5NSwxNCA5LDEzLjEwNDU2OTUgOSwxMiBDOSwxMC44OTU0MzA1IDguMTA0NTY5NSwxMCA3LDEwIEM1Ljg5NTQzMDUsMTAgNSwxMC44OTU0MzA1IDUsMTIgQzUsMTMuMTA0NTY5NSA1Ljg5NTQzMDUsMTQgNywxNCBaIE0xNyw4IEMxOC4xMDQ1Njk1LDggMTksNy4xMDQ1Njk1IDE5LDYgQzE5LDQuODk1NDMwNSAxOC4xMDQ1Njk1LDQgMTcsNCBDMTUuODk1NDMwNSw0IDE1LDQuODk1NDMwNSAxNSw2IEMxNSw3LjEwNDU2OTUgMTUuODk1NDMwNSw4IDE3LDggWiBNMTcsMjAgQzE4LjEwNDU2OTUsMjAgMTksMTkuMTA0NTY5NSAxOSwxOCBDMTksMTYuODk1NDMwNSAxOC4xMDQ1Njk1LDE2IDE3LDE2IEMxNS44OTU0MzA1LDE2IDE1LDE2Ljg5NTQzMDUgMTUsMTggQzE1LDE5LjEwNDU2OTUgMTUuODk1NDMwNSwyMCAxNywyMCBaJyBpZD0nQ29tYmluZWQtU2hhcGUnIGZpbGw9JyMwMDAwMDAnPjwvcGF0aD4gPC9nPiA8L2c+IDwvc3ZnPg=="
+                              ></img>
+                            </ShareBtn>
+                            <HeartBtn>
+                              <img
+                                alt=""
+                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBzdHJva2U9JyMwMDAnIHN0cm9rZS13aWR0aD0nMicgZD0nTTEyLjI0MiA2LjEyOWwtLjU1NS0uNTU1QzkuODQgMy43MjcgNi44NDEgMy40MjggNC44MjggNS4wOTFhNS4wMDEgNS4wMDEgMCAwIDAtLjM2NCA3LjQwMmw3Ljc3OCA3Ljc3OCA3Ljc3OC03Ljc3OGE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0LTcuNDAyYy0yLjAxMy0xLjY2My01LjAxMi0xLjM2NC02Ljg1OS40ODNsLS41NTUuNTU1eicvPiA8L2c+IDwvc3ZnPg=="
+                              />
+                            </HeartBtn>
+                          </TitleImg>
+                        </FeedName>
+                        <Price>
+                          <div>
+                            <MainPrice>
+                              {this.state.detail.faked_price &&
+                                this.state.detail.faked_price.toLocaleString()}
+                            </MainPrice>
+                            <PriceNum>
+                              {this.state.detail.price &&
+                                this.state.detail.price.toLocaleString()}
+                              <PriceText> 원</PriceText>
+                            </PriceNum>
+                          </div>
+                          {this.state.detail.discount_percentage && (
+                            <DiscountPrice>
+                              {this.state.detail.discount_percentage + "%"}
+                            </DiscountPrice>
+                          )}
+                        </Price>
+                      </TitleSubstance>
+                      <Explain>
+                        <ExplainImoji>
+                          <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBmaWxsPScjRjY2JyBkPSdNMTIuMjQyIDYuMTI5bC0uNTU1LS41NTVDOS44NCAzLjcyNyA2Ljg0MSAzLjQyOCA0LjgyOCA1LjA5MWE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0IDcuNDAybDcuMDcxIDcuMDdhMSAxIDAgMCAwIDEuNDE1IDBsNy4wNy03LjA3YTUuMDAxIDUuMDAxIDAgMCAwLS4zNjQtNy40MDJjLTIuMDEzLTEuNjYzLTUuMDEyLTEuMzY0LTYuODU5LjQ4M2wtLjU1NS41NTV6Jy8+IDwvZz4gPC9zdmc+" />
+                          <Like>
+                            {" "}
+                            {this.state.detail && this.state.detail.liked} 명이
+                            좋아한 프립
+                          </Like>
+                        </ExplainImoji>
+                        <ExplainImoji>
+                          <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOCcgaGVpZ2h0PScxOCcgdmlld0JveD0nMCAwIDE4IDE4Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgxOHYxOEgweicvPiA8cmVjdCB3aWR0aD0nMTInIGhlaWdodD0nMTInIHg9JzMnIHk9JzMnIGZpbGw9JyMzMzk3RkYnIGZpbGwtcnVsZT0nbm9uemVybycgcng9JzEnLz4gPHBhdGggZmlsbD0nI0ZGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNNSA4aDh2NUg1eicvPiA8cGF0aCBmaWxsPScjMzM5N0ZGJyBmaWxsLXJ1bGU9J25vbnplcm8nIGQ9J001IDFoMnYySDV6TTExIDFoMnYyaC0yeicvPiA8L2c+IDwvc3ZnPg==" />
+                          <Like>
+                            {" "}
+                            유효기간 구매일로부터{" "}
+                            {this.state.detail && this.state.detail.duedate} 일
+                          </Like>
+                        </ExplainImoji>
+                        <ExplainImoji>
+                          <Icon src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAArCAMAAAAuY3oFAAAASFBMVEVHcEwAf/8Aff8Afv8AgP8Jgv8Phf8Aff8Bf/8NhP8Afv8Hgf8Af/8Df/8Afv8Aff8zl/////8rk/8djP/B3/9jr//r9P+UyP/2LrjhAAAAEHRSTlMARZxnBt/xGLntgtCPxFUtECF3nwAAARVJREFUOMuFlN0CwxAMhcNoBd06uu7933RqzL+dO3KaL0gK8BMjWihEJTRh0GqlaM3uZSzStQoziSEaPCiLLOtWhL1ly5I8eBN3Dv74fc/3rnjIwTbTN5jtW4ccxJ1DesCyD7VcEGrGBkNdBbhPhAyIzdav4zyPV7ZhSUF4P73eBUNk3z+DshwCVFoc0XCkPQVZjWc0nFmVsMwNC/A5gv8vUs+Pqf9fFOOzq+buwfXssfT13JPXQt9T0o7iVn57To0MKrQ+GaRwRwjqN9XVTnGu+OiIUfcOxN7z2RPt6IlytrF/BUm3CmJv9f+hhFSAFlIDakgLKCEdwHVbaYqXFbqKkD4gQfoASL+KESBCxgDfGpSScucDG1I6q3UhKQAAAAAASUVORK5CYII=" />
+                          <Like>
+                            {this.state.detail && this.state.detail.location}
+                          </Like>
+                        </ExplainImoji>
+                        <ExplainImoji>
+                          <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz4gPHBhdGggZmlsbD0nIzMzOTdGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNOCAxMi4xNmwtMy44NTIgMS44OTRhLjUuNSAwIDAgMS0uNzE1LS41MmwuNjEtNC4yNDgtMi45OTEtMy4wNzlhLjUuNSAwIDAgMSAuMjczLS44NGw0LjIzLS43MzNMNy41NTguODM4YS41LjUgMCAwIDEgLjg4NCAwbDIuMDAzIDMuNzk2IDQuMjMuNzMyYS41LjUgMCAwIDEgLjI3My44NDFsLTIuOTkyIDMuMDc5LjYxMSA0LjI0OGEuNS41IDAgMCAxLS43MTUuNTJMOCAxMi4xNnonLz4gPC9zdmc+" />
+                          <Like>
+                            프립 평점
                             {this.state.detail &&
-                              this.state.detail.review.length > 0 &&
-                              this.state.detail.review[0].user_name}
-                          </HostReviewName>
+                              this.state.detail.review_average}
+                          </Like>
+                        </ExplainImoji>
+                      </Explain>
 
-                          <HostReviewFlex>
-                            <HostReviewStar>
-                              {this.state.detail &&
-                                this.state.detail.review.length > 0 &&
-                                this.state.detail.review[0].grade}
-                            </HostReviewStar>
-                            <HostReviewDate>
-                              <span>
+                      <Host>
+                        <HostName>
+                          <HostName2>호스트</HostName2>
+                        </HostName>
+                        <HostInfoAll>
+                          <HostInfo>
+                            <HostImg>
+                              <img
+                                src={
+                                  this.state.detail &&
+                                  this.state.detail.host.host_image
+                                }
+                                alt=""
+                              ></img>
+                            </HostImg>
+                            <HostContent>
+                              <HostContent1>
+                                <HostContentName>
+                                  {this.state.detail &&
+                                    this.state.detail.host.host_name}
+                                </HostContentName>
+                                <HostIntro> 프립 11 | 좋아요 362 </HostIntro>
+                              </HostContent1>
+                            </HostContent>
+                          </HostInfo>
+                          <HostItem>
+                            {this.state.detail &&
+                              this.state.detail.host.description}
+                          </HostItem>
+                          <HostProfile>호스트 프로필</HostProfile>
+                          <HostIntro></HostIntro>
+
+                          <HostReview>
+                            <h4>호스트후기</h4>
+                          </HostReview>
+                          <HostReviewIntro>
+                            <HostReviewPic>
+                              <img
+                                src="https://k.kakaocdn.net/dn/blGCnn/btqCt7BjPLh/0JwZ3r9ClbHt1COk4O0GdK/img_110x110.jpg"
+                                alt=""
+                              ></img>
+                            </HostReviewPic>
+                            <HostReviewInfor>
+                              <HostReviewName>
                                 {this.state.detail &&
                                   this.state.detail.review.length > 0 &&
-                                  this.state.detail.review[0].created_at}
-                              </span>
-                            </HostReviewDate>
-                          </HostReviewFlex>
-                        </HostReviewInfor>
-                      </HostReviewIntro>
+                                  this.state.detail.review[0].user_name}
+                              </HostReviewName>
 
-                      <HostReviewContent>
-                        <span>
-                          {this.state.detail &&
-                            this.state.detail.review.length > 0 &&
-                            this.state.detail.review[0].content}
-                        </span>
-                      </HostReviewContent>
+                              <HostReviewFlex>
+                                <HostReviewStar>
+                                  {this.state.detail &&
+                                    this.state.detail.review.length > 0 &&
+                                    this.state.detail.review[0].grade}
+                                </HostReviewStar>
+                                <HostReviewDate>
+                                  <span>
+                                    {this.state.detail &&
+                                      this.state.detail.review.length > 0 &&
+                                      this.state.detail.review[0].created_at}
+                                  </span>
+                                </HostReviewDate>
+                              </HostReviewFlex>
+                            </HostReviewInfor>
+                          </HostReviewIntro>
 
-                      <HostReviewGrayName>
-                        <span>
-                          {this.state.detail &&
-                            this.state.detail.review.length > 0 &&
-                            this.state.detail.review[0].option}
-                        </span>
-                      </HostReviewGrayName>
-                      <HostReviewGrayNameTwo>이용권</HostReviewGrayNameTwo>
-                      <HostReviewHelp>
-                        <HostReviewContentName>
-                          도움이 됬어요 0
-                          <img
-                            alt=""
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h24v24H0z'/%3E %3Cpath fill='%23FFCD00' fill-rule='nonzero' d='M12 3h1v3h-1V3zm5.207 1.086l.707.707-2.121 2.121-.707-.707 2.121-2.121zm-10.121.707l.707-.707 2.121 2.121-.707.707-2.121-2.121z'/%3E %3Cpath fill='%23BBB' stroke='%23BBB' d='M4 22h4v-9H4z'/%3E %3Cpath stroke='%23BBB' d='M17.936 12h-3.958V9.388A1.38 1.38 0 0 0 12.6 8c-.497 0-.965.267-1.212.697L9 13H8v9h9.153a2 2 0 0 0 1.983-1.741l.783-6A2 2 0 0 0 17.936 12z'/%3E %3C/g%3E %3C/svg%3E"
-                          />
-                        </HostReviewContentName>
-                      </HostReviewHelp>
-                      <HostProfile> 393개 후기 모두 보기</HostProfile>
-                    </HostInfoAll>
-                  </Host>
-                </Title>
-                <HostReview>
-                  <h4> 소개</h4>
-                </HostReview>
-                <DetailData
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail && this.state.detail.content,
-                  }}
-                />
-              </ContentBox>
-              <Include>
-                <h4>포함 사항</h4>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail.include,
-                  }}
-                />
-                {/* {this.state.detail && this.state.detail.include} */}
-              </Include>
-              <Include>
-                <h4>불포함 사항</h4>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail && this.state.detail.exclude,
-                  }}
-                />
-              </Include>
-              <Material>
-                <h4>준비물</h4>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail && this.state.detail.material,
-                  }}
-                />
-              </Material>
-              <Include>
-                <h4>세부 일정</h4>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail && this.state.detail.schedule,
-                  }}
-                />
-              </Include>
-              <Include>
-                <h4>유의 사항</h4>{" "}
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.detail && this.state.detail.notice,
-                  }}
-                />
-              </Include>
+                          <HostReviewContent>
+                            <span>
+                              {this.state.detail &&
+                                this.state.detail.review.length > 0 &&
+                                this.state.detail.review[0].content}
+                            </span>
+                          </HostReviewContent>
 
-              <Place>진행 장소</Place>
-              {this.state.detail && (
-                <KakaoMap
-                  lat={this.state.detail && this.state.detail.venue.venue_lat}
-                  lng={this.state.detail && this.state.detail.venue.venue_lng}
-                  whichOne={this.props.match.params.id}
-                />
+                          <HostReviewGrayName>
+                            <span>
+                              {this.state.detail &&
+                                this.state.detail.review.length > 0 &&
+                                this.state.detail.review[0].option}
+                            </span>
+                          </HostReviewGrayName>
+                          <HostReviewGrayNameTwo>이용권</HostReviewGrayNameTwo>
+                          <HostReviewHelp>
+                            <HostReviewContentName>
+                              도움이 됬어요 0
+                              <img
+                                alt=""
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h24v24H0z'/%3E %3Cpath fill='%23FFCD00' fill-rule='nonzero' d='M12 3h1v3h-1V3zm5.207 1.086l.707.707-2.121 2.121-.707-.707 2.121-2.121zm-10.121.707l.707-.707 2.121 2.121-.707.707-2.121-2.121z'/%3E %3Cpath fill='%23BBB' stroke='%23BBB' d='M4 22h4v-9H4z'/%3E %3Cpath stroke='%23BBB' d='M17.936 12h-3.958V9.388A1.38 1.38 0 0 0 12.6 8c-.497 0-.965.267-1.212.697L9 13H8v9h9.153a2 2 0 0 0 1.983-1.741l.783-6A2 2 0 0 0 17.936 12z'/%3E %3C/g%3E %3C/svg%3E"
+                              />
+                            </HostReviewContentName>
+                          </HostReviewHelp>
+                          <HostProfile> 393개 후기 모두 보기</HostProfile>
+                        </HostInfoAll>
+                      </Host>
+                    </Title>
+                    <HostReview>
+                      <h4> 소개</h4>
+                    </HostReview>
+                    <DetailData
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail && this.state.detail.content,
+                      }}
+                    />
+                  </ContentBox>
+                  <Include>
+                    <h4>포함 사항</h4>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail.include,
+                      }}
+                    />
+                    {/* {this.state.detail && this.state.detail.include} */}
+                  </Include>
+                  <Include>
+                    <h4>불포함 사항</h4>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail && this.state.detail.exclude,
+                      }}
+                    />
+                  </Include>
+                  <Material>
+                    <h4>준비물</h4>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail && this.state.detail.material,
+                      }}
+                    />
+                  </Material>
+                  <Include>
+                    <h4>세부 일정</h4>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail && this.state.detail.schedule,
+                      }}
+                    />
+                  </Include>
+                  <Include>
+                    <h4>유의 사항</h4>{" "}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.detail && this.state.detail.notice,
+                      }}
+                    />
+                  </Include>
+
+                  <Place>진행 장소</Place>
+                  {this.state.detail && (
+                    <KakaoMap
+                      lat={
+                        this.state.detail && this.state.detail.venue.venue_lat
+                      }
+                      lng={
+                        this.state.detail && this.state.detail.venue.venue_lng
+                      }
+                      whichOne={this.props.match.params.id}
+                    />
+                  )}
+                </>
               )}
 
               {/* <Place>만나는 장소</Place>
@@ -603,6 +634,37 @@ class Detail extends Component {
 }
 
 export default Detail;
+
+const LoadingDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 990px;
+  div {
+    height: 50px;
+    width: 200px;
+    background-image: url("https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/logo/wecode_gray_logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: black;
+    position: absolute;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    animation: 1s linear 0s infinite normal none running linArrow;
+    @keyframes linArrow {
+      0% {
+        margin-top: -30px;
+        opacity: 100%;
+      }
+      100% {
+        margin-top: 30px;
+        opacity: 0%;
+      }
+    }
+  }
+`;
 
 const Product = styled.div`
   width: 100%;
