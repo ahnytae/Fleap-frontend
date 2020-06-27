@@ -37,36 +37,15 @@ class Routes extends React.Component {
             <Route exact path="/surfing" component={Surfing} />
             <Route exact path="/search" component={SearchPage} />
             <Route exact path="/daily" component={Daily} />
-            <Route exact path="/daily/act/outdoor" component={Outdoor} />
-            <Route exact path="/daily/act/outdoor/mt" component={OutdoorMt} />
-            <Route
-              exact
-              path="/daily/act/outdoor/surf"
-              component={OutdoorSurf}
-            />
-            <Route exact path="/daily/learn" component={LearnMain} />
-            <Route exact path="/daily/learn/makediy" component={MakeDiy} />
-            <Route
-              exact
-              path="/daily/learn/makediy/pot"
-              component={MakeDiyPot}
-            />
-            <Route
-              exact
-              path="/daily/learn/makediy/candle"
-              component={MakeDiyCandle}
-            />
             <Route exact path="/detail" component={Detail} />
             <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/mylikes" component={MyLikes} />
             <Route exact path="/myfrip" component={MyFrip} />
             <Route exact path="/payment" component={Payment} />
-
             {/* <Route exact path="/mypage" component={MyPage} /> */}
             <Route exact path="/signinentrypage" component={SignInEntryPage} />
             <Route exact path="/signupentrypage" component={SignUpEntryPage} />
             {/* <Route exact path="/singinentry" component={SignInEntryPage} /> */}
-
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/payment/:id" component={Payment} />
