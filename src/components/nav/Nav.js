@@ -357,6 +357,12 @@ class Nav extends Component {
     });
   };
 
+  handleWindowAlwaysFalse = () => {
+    this.setState({
+      disableWindow: false,
+    });
+  };
+
   handleSearch = (e) => {
     e.preventDefault();
     this.setState(
@@ -370,6 +376,8 @@ class Nav extends Component {
   handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
+
+      console.log("enter");
 
       if (this.state.serch.length <= 1) {
         alert("한글자 이상 입력");
@@ -408,11 +416,12 @@ class Nav extends Component {
                 />
                 <input
                   onClick={this.handleOnWindow}
-                  onBlur={this.handleOnWindow}
+                  onBlur={this.handleWindowAlwaysFalse}
                   onChange={this.handleSearch} //로그인 검색값
                   onKeyPress={this.handleEnter} // 검색 후 엔터
                   name="serch"
                   type="serch"
+                  value={disableWindow ? this.value : ""}
                   placeholder="하고싶은 액티비티를 검색해 보세요"
                 />
               </form>

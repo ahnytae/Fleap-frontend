@@ -54,7 +54,7 @@ class ThirdSlider extends Component {
   };
 
   componentDidMount() {
-    fetch("http://13.59.219.151:8000/frip?slider=True")
+    fetch("http://192.168.0.7:8000/frip?slider=True")
       .then((res) => res.json())
       .then((res) => {
         this.setState(

@@ -23,7 +23,7 @@ class MyLikes extends Component {
           myNrg: res.my_page.energy.toLocaleString(),
         });
       });
-    fetch("http://13.59.219.151:8000/user/interestfrip", {
+    fetch("http://192.168.0.7:8000/user/interestfrip", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),

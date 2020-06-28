@@ -21,7 +21,7 @@ class SignIn extends Component {
 
   loginHandler = (e) => {
     e.preventDefault();
-    fetch("http://13.59.219.151:8000/user/sign-in", {
+    fetch("http://192.168.0.7:8000/user/sign-in", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,

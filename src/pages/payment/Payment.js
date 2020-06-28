@@ -39,7 +39,7 @@ class Payment extends Component {
       },
       () => {
         fetch(
-          `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
+          `http://192.168.0.7:8000/frip/purchase/${this.props.match.params.id}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -76,7 +76,7 @@ class Payment extends Component {
         buyer_tel: "010-1234-5678",
         buyer_addr: "서울특별시 강남구 삼성동",
         buyer_postcode: "123-456",
-        m_redirect_url: "http://13.59.219.151:8000/myfrip",
+        m_redirect_url: "http://192.168.0.7:8000/myfrip",
       },
       function (rsp) {
         let msg;
@@ -88,7 +88,7 @@ class Payment extends Component {
           msg += "카드 승인번호 : " + rsp.apply_num;
 
           fetch(
-            `http://13.59.219.151:8000/frip/purchase/${this.props.match.params.id}`,
+            `http://192.168.0.7:8000/frip/purchase/${this.props.match.params.id}`,
             {
               method: "POST",
               mode: "cors",
