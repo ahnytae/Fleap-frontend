@@ -95,10 +95,7 @@ class Payment extends Component {
           msg += "카드 승인번호 : " + rsp.apply_num;
           
           alert(msg);
-          setTimeout(()=> {
-            this.goBack();
           
-          }, 3000)
               
         } else {
           msg = "결제에 실패하였습니다.";
