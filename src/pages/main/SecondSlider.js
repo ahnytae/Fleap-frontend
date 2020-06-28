@@ -91,9 +91,6 @@ class SecondSlider extends Component {
           <Link to="#">
             <img src={imgSrc[1]} alt="" />
           </Link>
-          <Link to="#">
-            <img src={imgSrc[2]} alt="" />
-          </Link>
         </Slider>
       </div>
     );

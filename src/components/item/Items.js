@@ -82,6 +82,7 @@ class Items extends Component {
   like = (idx, fripId) => {
     const { whichOne } = this.state;
     console.log(whichOne[idx]);
+    console.log(this.props.like, "hey");
     whichOne[idx]
       ? this.setState(
           {
@@ -93,7 +94,7 @@ class Items extends Component {
           () => {
             console.log("whichOne", whichOne);
             localStorage.getItem("token")
-              ? fetch(`http://13.59.219.151:8000/user/like`, {
+              ? fetch(`http://192.168.0.7:8000/user/like`, {
                   method: "POST",
                   headers: {
                     Authorization: localStorage.getItem("token"),
@@ -114,7 +115,7 @@ class Items extends Component {
           },
           () => {
             localStorage.getItem("token")
-              ? fetch(`http://13.59.219.151:8000/user/like`, {
+              ? fetch(`http://192.168.0.7:8000/user/like`, {
                   method: "POST",
                   headers: {
                     Authorization: localStorage.getItem("token"),
@@ -136,7 +137,7 @@ class Items extends Component {
       <Wrapper>
         <Container>
           <HotFrip>
-            {categ === true ? (
+            {categ ? (
               <Uppertitle>
                 <div>
                   <h2>{categ}</h2>
@@ -284,7 +285,7 @@ const HotFrip = styled(Category)`
 `;
 
 const LikeButton = styled.button`
-  z-index: 100;
+  z-index: 5;
   position: absolute;
   top: ${(props) => (props.like ? "8px" : "10px")};
   right: ${(props) => (props.like ? "28px" : "10px")};

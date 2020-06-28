@@ -471,7 +471,7 @@ class Main extends Component {
       });
 
     // 지금뜨는프립
-    fetch("http://13.59.219.151:8000/frip?tag=hotfrip&limit=4")
+    fetch("http://192.168.0.7:8000/frip?tag=hotfrip&limit=4")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -480,7 +480,7 @@ class Main extends Component {
       });
 
     // 프립특가 놓치지 마세요
-    fetch("http://13.59.219.151:8000/frip?tag=sale&limit=4")
+    fetch("http://192.168.0.7:8000/frip?tag=sale&limit=4")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -489,7 +489,7 @@ class Main extends Component {
       });
 
     // 5월 슈퍼호스트
-    fetch("http://13.59.219.151:8000/frip?tag=superhost&limit=4")
+    fetch("http://192.168.0.7:8000/frip?tag=superhost&limit=4")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -498,7 +498,7 @@ class Main extends Component {
       });
 
     //내손으로 만드는 재미
-    fetch("http://13.59.219.151:8000/frip?tag=enjoy&limit=4")
+    fetch("http://192.168.0.7:8000/frip?tag=enjoy&limit=4")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -507,7 +507,7 @@ class Main extends Component {
       });
 
     //신규 프립
-    fetch("http://13.59.219.151:8000/frip?tag=newfrip&limit=4")
+    fetch("http://192.168.0.7:8000/frip?tag=newfrip&limit=4")
       .then((res) => res.json())
       .then((res) => {
         this.setState({

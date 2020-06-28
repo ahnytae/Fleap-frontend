@@ -8,7 +8,7 @@ class NowHotFrip extends Component {
   };
 
   componentDidMount() {
-    fetch("http://13.59.219.151:8000/frip?tag=hotfrip&limit=20")
+    fetch("http://192.168.0.7:8000/frip?tag=hotfrip&limit=20")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
