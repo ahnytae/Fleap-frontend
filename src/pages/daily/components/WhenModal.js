@@ -160,7 +160,7 @@ const ModalOverlay = styled.div`
   bottom: 0px;
   left: 0px;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1;
+  z-index: 3;
 `;
 
 const ModalBox = styled.div`
@@ -171,7 +171,7 @@ const ModalBox = styled.div`
   width: 633px;
   height: 504px;
   background-color: white;
-  z-index: 2;
+  z-index: 5;
   border-radius: 5px;
 `;
 

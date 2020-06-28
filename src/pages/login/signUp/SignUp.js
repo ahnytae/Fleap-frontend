@@ -47,7 +47,7 @@ class SignUp extends Component {
 
   signinHandler = (e) => {
     e.preventDefault();
-    fetch("http://192.168.0.7:8000/user/sign-up", {
+    fetch("http://127.0.0.1:8000/user/sign-up", {
       method: "POST",
       body: JSON.stringify({
         email: this.state.email,

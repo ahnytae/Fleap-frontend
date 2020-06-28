@@ -23,7 +23,7 @@ class MyLikes extends Component {
           myNrg: res.my_page.energy.toLocaleString(),
         });
       });
-    fetch("http://192.168.0.7:8000/user/interestfrip", {
+    fetch("http://127.0.0.1:8000/user/interestfrip", {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -55,7 +55,6 @@ class MyLikes extends Component {
                 <button>설정</button>
               </Name>
               <div>#관심사 설정하러 가기</div>
-              <div>카카오 연동 계정</div>
             </ProfileDes>
           </HeaderLeft>
           <HeaderRight>
@@ -91,6 +90,7 @@ class MyLikes extends Component {
                   goTo={(id) => {
                     this.goTo(id);
                   }}
+                  myLike={true}
                 />
               ) : (
                 <Nothing>
