@@ -39,7 +39,7 @@ class Payment extends Component {
       },
       () => {
         fetch(
-          `http://192.168.0.7:8000/frip/purchase/${this.props.match.params.id}`,
+          `http://127.0.0.1:8000/frip/purchase/${this.props.match.params.id}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -62,6 +62,13 @@ class Payment extends Component {
     );
   };
 
+  goBack = () => {
+    console.log("dddd",this.props.history);
+    this.props.history.push("/");
+    window.location.reload();
+  }
+
+
   requestPay = () => {
     const { data, detail, whichPay, fripPrice } = this.state;
     IMP.request_pay(
@@ -76,7 +83,7 @@ class Payment extends Component {
         buyer_tel: "010-1234-5678",
         buyer_addr: "서울특별시 강남구 삼성동",
         buyer_postcode: "123-456",
-        m_redirect_url: "http://192.168.0.7:8000/myfrip",
+        m_redirect_url: "http://127.0.0.1:8000/myfrip",
       },
       function (rsp) {
         let msg;
@@ -86,35 +93,14 @@ class Payment extends Component {
           msg += "상점 거래ID : " + rsp.merchant_uid;
           msg += "결제 금액 : " + rsp.paid_amount;
           msg += "카드 승인번호 : " + rsp.apply_num;
-
-          fetch(
-            `http://192.168.0.7:8000/frip/purchase/${this.props.match.params.id}`,
-            {
-              method: "POST",
-              mode: "cors",
-              credentials: "same-origin",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem("token"),
-              },
-              body: JSON.stringify({
-                frip: detail.id,
-                option: detail.optionID,
-                payment_method: whichPay,
-                quantity: 1,
-              }),
-            }
-          ).then((res) => {
-            setTimeout(() => {
-              this.props.history.push("/myfrip");
-              window.location.reload();
-            }, 3000);
-          });
+          
+          alert(msg);
+          
+              
         } else {
           msg = "결제에 실패하였습니다.";
           msg += "에러내용 : " + rsp.error_msg;
         }
-        alert(msg);
       }
     );
   };

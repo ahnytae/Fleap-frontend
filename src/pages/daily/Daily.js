@@ -120,7 +120,7 @@ class Daily extends Component {
       () => {
         ["hot", "pick", "new"].map((tag) => {
           return fetch(
-            `http://192.168.0.7:8000/frip/daily?fid=1&limit=4&tag=${tag}`,
+            `http://127.0.0.1:8000/frip/daily?fid=1&limit=4&tag=${tag}`,
             {
               headers: {
                 Authorization: localStorage.getItem("token"),
@@ -202,7 +202,7 @@ class Daily extends Component {
       () => {
         ["hot", "pick", "new"].map((tag) => {
           return fetch(
-            `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`,
+            `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=4&tag=${tag}`,
             {
               headers: {
                 Authorization: localStorage.getItem("token"),
@@ -240,7 +240,7 @@ class Daily extends Component {
       },
       () => {
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20`,
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -311,7 +311,7 @@ class Daily extends Component {
       },
       () => {
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20&offset=${
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20&offset=${
             (num - 1) * 20
           }`,
           {
@@ -352,7 +352,7 @@ class Daily extends Component {
           ? (queryString = `${fid}`)
           : (queryString = `${fid}&sid=${sid}`);
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20`,
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -411,7 +411,7 @@ class Daily extends Component {
           queryString = `${fid}&sid=${sid}&tid=${tid}`;
         }
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`,
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20&startdate=${fromDate}&enddate=${toDate}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -458,7 +458,7 @@ class Daily extends Component {
       },
       () => {
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20&${where}`,
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20&${where}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -510,7 +510,7 @@ class Daily extends Component {
         }
 
         fetch(
-          `http://192.168.0.7:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`,
+          `http://127.0.0.1:8000/frip/daily?fid=${queryString}&limit=20&order_by=${whichFilter}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),

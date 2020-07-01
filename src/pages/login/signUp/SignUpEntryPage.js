@@ -1,8 +1,37 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
+import Kakao from "kakaojs";
+
 
 class SignUpEntryPage extends Component {
+  loginKakao = () => {
+    Kakao.Auth.login({
+      success: (authObj) => {
+        console.log("응답합니다", authObj);
+        fetch(`http://127.0.0.1:8000/user/kakao`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authObj.access_token,
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            localStorage.setItem("token", res.access_token);
+            //localStorage.setItem("nickname", res.nickname);
+            // console.log("로로로그그그인인이니aaaa", res);
+            this.props.history.push("/main");
+            window.location.reload();
+          });
+      },
+      fail: (err) => {
+        console.log(err);
+      },
+    });
+  };
+
+
   render() {
     return (
       <MainInner>
@@ -19,14 +48,17 @@ class SignUpEntryPage extends Component {
               />
               페이스북으로 시작하기
             </div>
-            <div>
+            <div onClick={this.loginKakao}>
               <img
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23000' d='M12 2.328C5.833 2.328.834 6.258.834 11.105c0 3.134 2.09 5.884 5.234 7.437-.171.588-1.1 3.783-1.136 4.034 0 0-.023.189.1.26.122.073.267.017.267.017.35-.05 4.073-2.656 4.718-3.109.643.091 1.306.138 1.983.138 6.167 0 11.166-3.93 11.166-8.777 0-4.848-4.999-8.777-11.166-8.777'/%3E %3Cpath fill='%23FFE812' d='M5.747 14.387a.63.63 0 0 1-.63-.626V9.865h-.985a.632.632 0 0 1-.618-.642c0-.354.277-.642.618-.642h3.23c.34 0 .618.288.618.642a.632.632 0 0 1-.619.642h-.984v3.896a.63.63 0 0 1-.63.626M10.18 12.082l-.637-1.863-.635 1.863h1.271zm1.179 2.305c-.266 0-.469-.111-.53-.29l-.315-.851H8.573l-.315.851c-.061.179-.264.29-.53.29a.946.946 0 0 1-.404-.09c-.176-.084-.344-.314-.151-.933l1.522-4.135c.108-.315.433-.639.848-.648.416.01.741.333.849.649l1.522 4.133c.193.62.025.85-.15.934a.948.948 0 0 1-.405.09zM13.031 14.387a.6.6 0 0 1-.584-.611V9.247c0-.367.28-.666.622-.666.344 0 .623.299.623.666v3.918h1.297a.6.6 0 0 1 .584.61.6.6 0 0 1-.584.612H13.03zM16.64 14.387c-.342 0-.62-.294-.62-.657V9.237c0-.362.278-.656.62-.656.34 0 .619.294.619.656v1.412l1.727-1.832a.467.467 0 0 1 .344-.146c.155 0 .31.07.426.193a.665.665 0 0 1 .182.417.53.53 0 0 1-.136.4l-1.412 1.496 1.525 2.142a.681.681 0 0 1-.122.92.59.59 0 0 1-.372.132.604.604 0 0 1-.495-.26l-1.452-2.042-.215.228v1.433c0 .363-.278.657-.62.657'/%3E %3C/g%3E %3C/svg%3E"
                 alt=""
               />
               카카오계정으로 시작하기
+
             </div>
+
           </btnWrapper>
+
           <Footer>
             <Link to="/signin">로그인</Link>
           </Footer>

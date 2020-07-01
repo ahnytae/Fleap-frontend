@@ -9,7 +9,7 @@ class SignInEntryPage extends Component {
     Kakao.Auth.login({
       success: (authObj) => {
         console.log("응답합니다", authObj);
-        fetch(`http://192.168.0.7:8000/user/kakao`, {
+        fetch(`http://127.0.0.1:8000/user/kakao`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

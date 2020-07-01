@@ -39,7 +39,7 @@ class Detail extends Component {
         loading: true,
       },
       () => {
-        fetch(`http://192.168.0.7:8000/frip/${this.props.match.params.id}`)
+        fetch(`http://127.0.0.1:8000/frip/${this.props.match.params.id}`)
           .then((res) => {
             return res.json();
           })
@@ -233,14 +233,20 @@ class Detail extends Component {
                         </Price>
                       </TitleSubstance>
                       <Explain>
-                        <ExplainImoji>
+                        
+                            {this.state.detail &&
+                              this.state.detail.like_number ? (
+                                <ExplainImoji>
                           <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgyNHYyNEgweicvPiA8cGF0aCBmaWxsPScjRjY2JyBkPSdNMTIuMjQyIDYuMTI5bC0uNTU1LS41NTVDOS44NCAzLjcyNyA2Ljg0MSAzLjQyOCA0LjgyOCA1LjA5MWE1LjAwMSA1LjAwMSAwIDAgMC0uMzY0IDcuNDAybDcuMDcxIDcuMDdhMSAxIDAgMCAwIDEuNDE1IDBsNy4wNy03LjA3YTUuMDAxIDUuMDAxIDAgMCAwLS4zNjQtNy40MDJjLTIuMDEzLTEuNjYzLTUuMDEyLTEuMzY0LTYuODU5LjQ4M2wtLjU1NS41NTV6Jy8+IDwvZz4gPC9zdmc+" />
                           <Like>
-                            {" "}
-                            {this.state.detail && this.state.detail.liked} 명이
-                            좋아한 프립
+                            {`${this.state.detail.like_number} 명이 좋아한 프립`}
                           </Like>
                         </ExplainImoji>
+                                
+                                
+                              ): (
+                                ""
+                              )}
                         <ExplainImoji>
                           <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxOCcgaGVpZ2h0PScxOCcgdmlld0JveD0nMCAwIDE4IDE4Jz4gPGcgZmlsbD0nbm9uZScgZmlsbC1ydWxlPSdldmVub2RkJz4gPHBhdGggZD0nTTAgMGgxOHYxOEgweicvPiA8cmVjdCB3aWR0aD0nMTInIGhlaWdodD0nMTInIHg9JzMnIHk9JzMnIGZpbGw9JyMzMzk3RkYnIGZpbGwtcnVsZT0nbm9uemVybycgcng9JzEnLz4gPHBhdGggZmlsbD0nI0ZGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNNSA4aDh2NUg1eicvPiA8cGF0aCBmaWxsPScjMzM5N0ZGJyBmaWxsLXJ1bGU9J25vbnplcm8nIGQ9J001IDFoMnYySDV6TTExIDFoMnYyaC0yeicvPiA8L2c+IDwvc3ZnPg==" />
                           <Like>
@@ -258,9 +264,12 @@ class Detail extends Component {
                         <ExplainImoji>
                           <Icon src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxNicgdmlld0JveD0nMCAwIDE2IDE2Jz4gPHBhdGggZmlsbD0nIzMzOTdGRicgZmlsbC1ydWxlPSdub256ZXJvJyBkPSdNOCAxMi4xNmwtMy44NTIgMS44OTRhLjUuNSAwIDAgMS0uNzE1LS41MmwuNjEtNC4yNDgtMi45OTEtMy4wNzlhLjUuNSAwIDAgMSAuMjczLS44NGw0LjIzLS43MzNMNy41NTguODM4YS41LjUgMCAwIDEgLjg4NCAwbDIuMDAzIDMuNzk2IDQuMjMuNzMyYS41LjUgMCAwIDEgLjI3My44NDFsLTIuOTkyIDMuMDc5LjYxMSA0LjI0OGEuNS41IDAgMCAxLS43MTUuNTJMOCAxMi4xNnonLz4gPC9zdmc+" />
                           <Like>
-                            프립 평점
                             {this.state.detail &&
-                              this.state.detail.review_average}
+                              this.state.detail.review_average ? (
+                                `${this.state.detail.review_average} 프립 평점`
+                              ): (
+                                `첫 후기 남기고 1,000 에너지 받아가세요!`
+                              )}
                           </Like>
                         </ExplainImoji>
                       </Explain>

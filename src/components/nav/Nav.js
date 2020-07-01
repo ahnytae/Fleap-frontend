@@ -432,7 +432,7 @@ class Nav extends Component {
               {localStorage.getItem("token") ? (
                 <Link to="/mylikes">프립 님</Link>
               ) : (
-                "로그인"
+                <Link to="/signinentrypage">로그인</Link>
               )}
               <span></span>
               <Link

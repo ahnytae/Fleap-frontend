@@ -9,12 +9,12 @@ class Surfing extends Component {
   };
 
   componentDidMount() {
-    fetch("http://192.168.0.7:8000/frip?event=surfing&limit=20")
+    fetch("http://127.0.0.1:8000/frip?event=surfing&limit=20")
       .then((res) => res.json())
       .then((res) => {
         this.setState({
           surfing: res.data,
-        });
+        }, ()=> {console.log(res.data)});
       });
   }
 
@@ -24,16 +24,18 @@ class Surfing extends Component {
       <Wrapper>
         <Container>
           <Headers />
-          <div>
-            <h2>지금 뜨는 프립</h2>
-          </div>
-          <Items data={surfing} />
+          < MainImg src = "//res.cloudinary.com/frientrip/image/upload/f_auto/웹_기획전내부배너_1860x744_1592886811876" />
+          <Items data={surfing} categ={"aht"}/>
         </Container>
       </Wrapper>
     );
   }
 }
 export default Surfing;
+
+const MainImg = styled.img`
+  padding-bottom: 25px;
+`;
 
 const Wrapper = styled.div`
   img {
