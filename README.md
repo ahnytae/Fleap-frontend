@@ -31,6 +31,10 @@ Frontend : **ReactJS, Styled-Component**
 
 ---
 
+# 리팩토링 대상 프로젝트이며 목표는
+- 함수형으로 전환
+- 커스텀훅 사용하여 중복되는 함수 줄이기
+
 ### 데모영상
 
 (https://www.youtube.com/watch?v=apfI_CPeKQg&feature=youtu.be)
